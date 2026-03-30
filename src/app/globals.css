@@ -1,36 +1,77 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors — Sweet Home Services */
-  --color-brand-teal-50: #e6f2f2;
-  --color-brand-teal-100: #b3d9d9;
-  --color-brand-teal-200: #80c0c0;
-  --color-brand-teal-300: #4da7a7;
-  --color-brand-teal-400: #268f8f;
-  --color-brand-teal-500: #1a6b6b;
-  --color-brand-teal-600: #165a5a;
-  --color-brand-teal-700: #124949;
-  --color-brand-teal-800: #0e3838;
-  --color-brand-teal-900: #0a2727;
+  /* ─── Brand Colors — Sweet Home Services ────────────────────────── */
+  --color-brand-teal-50:  #E6F3F3;
+  --color-brand-teal-100: #C0E1E1;
+  --color-brand-teal-200: #97CDCD;
+  --color-brand-teal-300: #6DB8B8;
+  --color-brand-teal-400: #4DA9A9;
+  --color-brand-teal-500: #1A6B6B;
+  --color-brand-teal-600: #155656;
+  --color-brand-teal-700: #104040;
+  --color-brand-teal-800: #0A2B2B;
+  --color-brand-teal-900: #051515;
 
-  --color-brand-amber-50: #fef6e8;
-  --color-brand-amber-100: #fce4b8;
-  --color-brand-amber-200: #f9d288;
-  --color-brand-amber-300: #f7c058;
-  --color-brand-amber-400: #f5a623;
-  --color-brand-amber-500: #e09010;
-  --color-brand-amber-600: #b8760d;
-  --color-brand-amber-700: #905c0a;
-  --color-brand-amber-800: #684307;
-  --color-brand-amber-900: #402a04;
+  --color-brand-amber-50:  #FEF8EE;
+  --color-brand-amber-100: #FDE8C3;
+  --color-brand-amber-200: #FBD48B;
+  --color-brand-amber-300: #F9C052;
+  --color-brand-amber-400: #F5A623;
+  --color-brand-amber-500: #D4881A;
+  --color-brand-amber-600: #B36B12;
+  --color-brand-amber-700: #925010;
+  --color-brand-amber-800: #71380A;
+  --color-brand-amber-900: #4A2200;
 
-  /* Semantic Tokens */
-  --color-primary: var(--color-brand-teal-500);
+  /* ─── Semantic Aliases ──────────────────────────────────────────── */
+  --color-primary:      var(--color-brand-teal-500);
   --color-primary-dark: var(--color-brand-teal-700);
-  --color-accent: var(--color-brand-amber-400);
-  --color-accent-dark: var(--color-brand-amber-600);
+  --color-accent:       var(--color-brand-amber-400);
+  --color-accent-dark:  var(--color-brand-amber-600);
 
-  /* Font Family */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* ─── Typography ─────────────────────────────────────────────────── */
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ─── Custom Shadows ─────────────────────────────────────────────── */
+  --shadow-brand: 0 4px 14px 0 rgb(26 107 107 / 0.30);
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-neutral-800 antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Focus visible ring using brand color */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-teal-500);
+    outline-offset: 3px;
+  }
+}
+
+/* ─── Utility Layer ──────────────────────────────────────────────── */
+@layer utilities {
+  .section-overline {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-brand-teal-500);
+  }
+
+  .shadow-brand {
+    box-shadow: var(--shadow-brand);
+  }
 }

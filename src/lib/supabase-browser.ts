@@ -1,0 +1,19 @@
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
+
+let _client: SupabaseClient | null = null;
+
+export function getSupabase(): SupabaseClient {
+  if (!_client) {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable");
+    }
+    if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      throw new Error("Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable");
+    }
+    _client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    );
+  }
+  return _client;
+}
