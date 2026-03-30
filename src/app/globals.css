@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors — Sweet Home Services */
+  --color-brand-teal-50: #e6f2f2;
+  --color-brand-teal-100: #b3d9d9;
+  --color-brand-teal-200: #80c0c0;
+  --color-brand-teal-300: #4da7a7;
+  --color-brand-teal-400: #268f8f;
+  --color-brand-teal-500: #1a6b6b;
+  --color-brand-teal-600: #165a5a;
+  --color-brand-teal-700: #124949;
+  --color-brand-teal-800: #0e3838;
+  --color-brand-teal-900: #0a2727;
+
+  --color-brand-amber-50: #fef6e8;
+  --color-brand-amber-100: #fce4b8;
+  --color-brand-amber-200: #f9d288;
+  --color-brand-amber-300: #f7c058;
+  --color-brand-amber-400: #f5a623;
+  --color-brand-amber-500: #e09010;
+  --color-brand-amber-600: #b8760d;
+  --color-brand-amber-700: #905c0a;
+  --color-brand-amber-800: #684307;
+  --color-brand-amber-900: #402a04;
+
+  /* Semantic Tokens */
+  --color-primary: var(--color-brand-teal-500);
+  --color-primary-dark: var(--color-brand-teal-700);
+  --color-accent: var(--color-brand-amber-400);
+  --color-accent-dark: var(--color-brand-amber-600);
+
+  /* Font Family */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
