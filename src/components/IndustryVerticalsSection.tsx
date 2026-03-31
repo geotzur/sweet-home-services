@@ -86,12 +86,12 @@ export default function IndustryVerticalsSection() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {industries.map((industry) => (
             <a
               key={industry.slug}
               href={`#industries/${industry.slug}`}
-              className="group rounded-xl p-5 flex flex-col gap-3 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border border-transparent hover:border-brand-teal-200"
+              className="group rounded-xl p-4 sm:p-5 flex flex-col gap-3 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border border-transparent hover:border-brand-teal-200"
               style={{ background: industry.color }}
             >
               <Image

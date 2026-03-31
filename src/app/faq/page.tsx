@@ -94,7 +94,7 @@ export default function FaqPage() {
               FAQ
             </p>
             <h1
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Frequently Asked Questions
@@ -162,7 +162,7 @@ export default function FaqPage() {
             </p>
             <a
               href="/contact"
-              className="inline-block rounded-xl px-8 py-4 font-semibold text-base transition-colors duration-150"
+              className="inline-flex items-center justify-center rounded-xl px-8 py-4 font-semibold text-base transition-colors duration-150 w-full sm:w-auto"
               style={{
                 fontFamily: "var(--font-heading)",
                 background: "#F5A623",

@@ -1,31 +1,39 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, type FormEvent } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { getSupabase } from "@/lib/supabase-browser";
 
-export const metadata: Metadata = {
-  title: "Contact — Sweet Home Services",
-  description:
-    "Get in touch with Sweet Home Services. Free consultation, no contracts. Let us help your local business get found on Google.",
-};
-
-/* ─── Business type options for the dropdown ─────────────────────── */
-const businessTypes = [
-  "Contractor / Home Services",
-  "Salon / Spa / Beauty",
-  "Medical / Dental",
-  "Restaurant / Food Service",
-  "Automotive / Repair",
-  "Legal / Professional Services",
-  "Real Estate",
-  "Fitness / Wellness",
-  "Other",
+/* ─── Plan options for the dropdown ────────────────────────────────── */
+const planOptions = [
+  "Not sure",
+  "Basic",
+  "Starter",
+  "Growth",
+  "Authority",
 ];
 
-/* ─── Trust badges data ──────────────────────────────────────────── */
+/* ─── Shared label / input styles ─────────────────────────────────── */
+const labelStyle: React.CSSProperties = {
+  fontFamily: "var(--font-heading)",
+  fontSize: "0.875rem",
+  fontWeight: 600,
+  color: "#1F2937",
+};
+
+const inputStyle: React.CSSProperties = {
+  fontFamily: "var(--font-sans)",
+  fontSize: "0.9375rem",
+  borderColor: "#D1D5DB",
+  color: "#1F2937",
+};
+
+/* ─── Trust badges ────────────────────────────────────────────────── */
 const trustBadges = [
   {
     title: "Free Consultation",
-    description: "No pressure, no commitment — just a friendly chat.",
+    description: "No pressure, no commitment \u2014 just a friendly chat.",
     icon: (
       <svg
         width="28"
@@ -98,22 +106,76 @@ const trustBadges = [
   },
 ];
 
-/* ─── Shared label styles ────────────────────────────────────────── */
-const labelStyle: React.CSSProperties = {
-  fontFamily: "var(--font-heading)",
-  fontSize: "0.875rem",
-  fontWeight: 600,
-  color: "#1F2937",
-};
-
-const inputStyle: React.CSSProperties = {
-  fontFamily: "var(--font-sans)",
-  fontSize: "0.9375rem",
-  borderColor: "#D1D5DB",
-  color: "#1F2937",
-};
+/* ─── Timeline steps ──────────────────────────────────────────────── */
+const timelineSteps = [
+  {
+    step: 1,
+    title: "We respond within 24 hours",
+    description:
+      "Our team reviews your message and gets back to you with next steps.",
+  },
+  {
+    step: 2,
+    title: "Quick discovery call",
+    description:
+      "A brief 15-minute call to understand your business, goals, and preferences.",
+  },
+  {
+    step: 3,
+    title: "Your site goes live in 48 hours",
+    description:
+      "We build and launch your custom website within two business days.",
+  },
+];
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    businessName: "",
+    message: "",
+    planInterest: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  function handleChange(
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError("");
+    setSubmitting(true);
+
+    try {
+      const supabase = getSupabase();
+      const { error: insertError } = await supabase.from("contacts").insert({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || null,
+        business_name: formData.businessName || null,
+        message: formData.message || null,
+        plan_interest: formData.planInterest || null,
+      });
+
+      if (insertError) throw insertError;
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <>
       <Navigation />
@@ -193,167 +255,265 @@ export default function ContactPage() {
                     Send Us a Message
                   </h3>
 
-                  <form action="#" method="POST" noValidate>
-                    <div className="grid sm:grid-cols-2 gap-5">
-                      {/* Name */}
-                      <div>
-                        <label
-                          htmlFor="contact-name"
-                          style={labelStyle}
-                          className="block mb-1.5"
-                        >
-                          Full Name <span style={{ color: "#EF4444" }}>*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="contact-name"
-                          name="name"
-                          autoComplete="name"
-                          required
-                          placeholder="Jane Smith"
-                          className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400"
-                          style={{
-                            ...inputStyle,
-                            outline: "none",
-                          }}
-                        />
-                      </div>
-
-                      {/* Email */}
-                      <div>
-                        <label
-                          htmlFor="contact-email"
-                          style={labelStyle}
-                          className="block mb-1.5"
-                        >
-                          Email Address{" "}
-                          <span style={{ color: "#EF4444" }}>*</span>
-                        </label>
-                        <input
-                          type="email"
-                          id="contact-email"
-                          name="email"
-                          autoComplete="email"
-                          required
-                          placeholder="jane@mybusiness.com"
-                          className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400"
-                          style={{
-                            ...inputStyle,
-                            outline: "none",
-                          }}
-                        />
-                      </div>
-
-                      {/* Phone */}
-                      <div>
-                        <label
-                          htmlFor="contact-phone"
-                          style={labelStyle}
-                          className="block mb-1.5"
-                        >
-                          Phone Number
-                        </label>
-                        <input
-                          type="tel"
-                          id="contact-phone"
-                          name="phone"
-                          autoComplete="tel"
-                          placeholder="(555) 123-4567"
-                          className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400"
-                          style={{
-                            ...inputStyle,
-                            outline: "none",
-                          }}
-                        />
-                      </div>
-
-                      {/* Business Type */}
-                      <div>
-                        <label
-                          htmlFor="contact-business-type"
-                          style={labelStyle}
-                          className="block mb-1.5"
-                        >
-                          Business Type{" "}
-                          <span style={{ color: "#EF4444" }}>*</span>
-                        </label>
-                        <select
-                          id="contact-business-type"
-                          name="businessType"
-                          required
-                          defaultValue=""
-                          className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 appearance-none bg-white"
-                          style={{
-                            ...inputStyle,
-                            outline: "none",
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "right 14px center",
-                            paddingRight: "40px",
-                          }}
-                        >
-                          <option value="" disabled>
-                            Select your industry...
-                          </option>
-                          {businessTypes.map((type) => (
-                            <option key={type} value={type}>
-                              {type}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-
-                      {/* Message — full width */}
-                      <div className="sm:col-span-2">
-                        <label
-                          htmlFor="contact-message"
-                          style={labelStyle}
-                          className="block mb-1.5"
-                        >
-                          Message
-                        </label>
-                        <textarea
-                          id="contact-message"
-                          name="message"
-                          rows={5}
-                          placeholder="Tell us a bit about your business and what you're looking for..."
-                          className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400 resize-vertical"
-                          style={{
-                            ...inputStyle,
-                            outline: "none",
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Submit button */}
-                    <div className="mt-6">
-                      <button
-                        type="submit"
-                        className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold text-white transition-all duration-150 w-full sm:w-auto"
-                        style={{
-                          fontFamily: "var(--font-heading)",
-                          background: "#1A6B6B",
-                          boxShadow: "0 4px 14px 0 rgb(26 107 107 / 0.30)",
-                        }}
+                  {/* ── Success state ── */}
+                  {submitted ? (
+                    <div className="text-center py-12">
+                      <div
+                        className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full"
+                        style={{ background: "#E6F3F3" }}
                       >
-                        Send Message
                         <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="currentColor"
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          fill="none"
                           aria-hidden="true"
                         >
-                          <path d="M1.5 1.5L14.5 8L1.5 14.5V9L10 8L1.5 7V1.5Z" />
+                          <path
+                            d="M10 16L14 20L22 12"
+                            stroke="#1A6B6B"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
+                      </div>
+                      <h4
+                        className="text-xl font-bold text-neutral-900 mb-2"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        Message Sent!
+                      </h4>
+                      <p
+                        className="text-neutral-600 mb-6"
+                        style={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "0.9375rem",
+                        }}
+                      >
+                        Thanks for reaching out. We&apos;ll get back to you
+                        within 24 hours.
+                      </p>
+                      <button
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            name: "",
+                            email: "",
+                            phone: "",
+                            businessName: "",
+                            message: "",
+                            planInterest: "",
+                          });
+                        }}
+                        className="text-sm font-medium transition-colors hover:underline"
+                        style={{
+                          fontFamily: "var(--font-heading)",
+                          color: "#1A6B6B",
+                        }}
+                      >
+                        Send another message
                       </button>
                     </div>
-                  </form>
+                  ) : (
+                    <form onSubmit={handleSubmit} noValidate>
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        {/* Name */}
+                        <div>
+                          <label
+                            htmlFor="contact-name"
+                            style={labelStyle}
+                            className="block mb-1.5"
+                          >
+                            Full Name{" "}
+                            <span style={{ color: "#EF4444" }}>*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="contact-name"
+                            name="name"
+                            autoComplete="name"
+                            required
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Jane Smith"
+                            className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400 focus:border-[#1A6B6B] focus:ring-2 focus:ring-[#1A6B6B]/20 focus:outline-none"
+                            style={inputStyle}
+                          />
+                        </div>
+
+                        {/* Email */}
+                        <div>
+                          <label
+                            htmlFor="contact-email"
+                            style={labelStyle}
+                            className="block mb-1.5"
+                          >
+                            Email Address{" "}
+                            <span style={{ color: "#EF4444" }}>*</span>
+                          </label>
+                          <input
+                            type="email"
+                            id="contact-email"
+                            name="email"
+                            autoComplete="email"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="jane@mybusiness.com"
+                            className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400 focus:border-[#1A6B6B] focus:ring-2 focus:ring-[#1A6B6B]/20 focus:outline-none"
+                            style={inputStyle}
+                          />
+                        </div>
+
+                        {/* Phone */}
+                        <div>
+                          <label
+                            htmlFor="contact-phone"
+                            style={labelStyle}
+                            className="block mb-1.5"
+                          >
+                            Phone Number
+                          </label>
+                          <input
+                            type="tel"
+                            id="contact-phone"
+                            name="phone"
+                            autoComplete="tel"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder="(555) 123-4567"
+                            className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400 focus:border-[#1A6B6B] focus:ring-2 focus:ring-[#1A6B6B]/20 focus:outline-none"
+                            style={inputStyle}
+                          />
+                        </div>
+
+                        {/* Business Name */}
+                        <div>
+                          <label
+                            htmlFor="contact-business"
+                            style={labelStyle}
+                            className="block mb-1.5"
+                          >
+                            Business Name
+                          </label>
+                          <input
+                            type="text"
+                            id="contact-business"
+                            name="businessName"
+                            autoComplete="organization"
+                            value={formData.businessName}
+                            onChange={handleChange}
+                            placeholder="Acme Plumbing Co."
+                            className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400 focus:border-[#1A6B6B] focus:ring-2 focus:ring-[#1A6B6B]/20 focus:outline-none"
+                            style={inputStyle}
+                          />
+                        </div>
+
+                        {/* Plan Interest */}
+                        <div className="sm:col-span-2">
+                          <label
+                            htmlFor="contact-plan"
+                            style={labelStyle}
+                            className="block mb-1.5"
+                          >
+                            Plan Interest
+                          </label>
+                          <select
+                            id="contact-plan"
+                            name="planInterest"
+                            value={formData.planInterest}
+                            onChange={handleChange}
+                            className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 appearance-none bg-white focus:border-[#1A6B6B] focus:ring-2 focus:ring-[#1A6B6B]/20 focus:outline-none"
+                            style={{
+                              ...inputStyle,
+                              backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+                              backgroundRepeat: "no-repeat",
+                              backgroundPosition: "right 14px center",
+                              paddingRight: "40px",
+                            }}
+                          >
+                            <option value="">Select a plan...</option>
+                            {planOptions.map((plan) => (
+                              <option key={plan} value={plan}>
+                                {plan}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        {/* Message -- full width */}
+                        <div className="sm:col-span-2">
+                          <label
+                            htmlFor="contact-message"
+                            style={labelStyle}
+                            className="block mb-1.5"
+                          >
+                            Message
+                          </label>
+                          <textarea
+                            id="contact-message"
+                            name="message"
+                            rows={5}
+                            value={formData.message}
+                            onChange={handleChange}
+                            placeholder="Tell us a bit about your business and what you're looking for..."
+                            className="w-full rounded-lg border px-4 py-3 transition-colors duration-150 placeholder:text-neutral-400 resize-vertical focus:border-[#1A6B6B] focus:ring-2 focus:ring-[#1A6B6B]/20 focus:outline-none"
+                            style={inputStyle}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Error message */}
+                      {error && (
+                        <div
+                          className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                          style={{ fontFamily: "var(--font-sans)" }}
+                        >
+                          {error}
+                        </div>
+                      )}
+
+                      {/* Submit button */}
+                      <div className="mt-6">
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold text-white transition-all duration-150 w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            background: "#1A6B6B",
+                            boxShadow:
+                              "0 4px 14px 0 rgb(26 107 107 / 0.30)",
+                          }}
+                        >
+                          {submitting ? (
+                            <>
+                              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                              Sending...
+                            </>
+                          ) : (
+                            <>
+                              Send Message
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path d="M1.5 1.5L14.5 8L1.5 14.5V9L10 8L1.5 7V1.5Z" />
+                              </svg>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </form>
+                  )}
                 </div>
               </div>
 
-              {/* ── Right column: Contact info + Map (2/5) ── */}
+              {/* ── Right column: Contact info + Timeline (2/5) ── */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Contact info card */}
                 <div
@@ -530,65 +690,74 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Map placeholder card */}
+                {/* What happens next? timeline */}
                 <div
-                  className="rounded-2xl border overflow-hidden"
+                  className="rounded-2xl border p-6 sm:p-8"
                   style={{
+                    background: "#FFFFFF",
                     borderColor: "#E5E7EB",
                     boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.04)",
                   }}
                 >
-                  <div
-                    className="relative flex items-center justify-center"
+                  <h3
+                    className="text-neutral-900 mb-6"
                     style={{
-                      background: "#E6F3F3",
-                      height: "200px",
+                      fontFamily: "var(--font-heading)",
+                      fontSize: "1.125rem",
+                      fontWeight: 700,
                     }}
-                    role="img"
-                    aria-label="Map showing service area across the United States"
                   >
-                    {/* Map illustration */}
-                    <svg
-                      width="120"
-                      height="80"
-                      viewBox="0 0 120 80"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      {/* Simplified US shape */}
-                      <path
-                        d="M10 30C10 30 15 20 30 18C45 16 55 22 65 20C75 18 85 15 95 20C105 25 110 30 110 35C110 40 108 50 100 55C92 60 80 58 70 60C60 62 50 58 40 55C30 52 20 50 15 45C10 40 10 35 10 30Z"
-                        fill="#1A6B6B"
-                        opacity="0.2"
-                        stroke="#1A6B6B"
-                        strokeWidth="1.5"
-                      />
-                      {/* Location pins */}
-                      <circle cx="35" cy="35" r="4" fill="#F5A623" />
-                      <circle cx="60" cy="30" r="4" fill="#F5A623" />
-                      <circle cx="85" cy="35" r="4" fill="#F5A623" />
-                      <circle cx="50" cy="45" r="4" fill="#1A6B6B" />
-                      <circle cx="75" cy="48" r="4" fill="#1A6B6B" />
-                      {/* Pulse ring on center pin */}
-                      <circle
-                        cx="60"
-                        cy="30"
-                        r="8"
-                        stroke="#F5A623"
-                        strokeWidth="1"
-                        opacity="0.4"
-                        fill="none"
-                      />
-                    </svg>
-                    <p
-                      className="absolute bottom-3 text-center w-full text-sm font-medium"
-                      style={{
-                        fontFamily: "var(--font-heading)",
-                        color: "#1A6B6B",
-                      }}
-                    >
-                      Serving local businesses nationwide
-                    </p>
+                    What happens next?
+                  </h3>
+
+                  <div className="space-y-0">
+                    {timelineSteps.map((item, idx) => (
+                      <div key={item.step} className="relative flex gap-4">
+                        {/* Vertical connector line */}
+                        {idx < timelineSteps.length - 1 && (
+                          <div
+                            className="absolute left-[15px] top-[32px] w-0.5"
+                            style={{
+                              background: "#D1E8E8",
+                              height: "calc(100% - 8px)",
+                            }}
+                          />
+                        )}
+
+                        {/* Step number circle */}
+                        <div
+                          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            background: "#1A6B6B",
+                          }}
+                        >
+                          {item.step}
+                        </div>
+
+                        {/* Content */}
+                        <div className="pb-6">
+                          <p
+                            className="text-neutral-900 font-semibold"
+                            style={{
+                              fontFamily: "var(--font-heading)",
+                              fontSize: "0.9375rem",
+                            }}
+                          >
+                            {item.title}
+                          </p>
+                          <p
+                            className="mt-1 text-neutral-500 leading-relaxed"
+                            style={{
+                              fontFamily: "var(--font-sans)",
+                              fontSize: "0.8125rem",
+                            }}
+                          >
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -715,7 +884,7 @@ export default function ContactPage() {
             </p>
             <a
               href="tel:+18005551234"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold transition-all duration-150"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold transition-all duration-150 w-full sm:w-auto"
               style={{
                 fontFamily: "var(--font-heading)",
                 background: "#F5A623",
@@ -737,37 +906,35 @@ export default function ContactPage() {
 
             {/* Trust strip */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-              {[
-                "No setup fees",
-                "No contracts",
-                "Cancel anytime",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="text-sm flex items-center gap-1.5"
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    color: "#97CDCD",
-                  }}
-                >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    aria-hidden="true"
+              {["No setup fees", "No contracts", "Cancel anytime"].map(
+                (item) => (
+                  <span
+                    key={item}
+                    className="text-sm flex items-center gap-1.5"
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      color: "#97CDCD",
+                    }}
                   >
-                    <path
-                      d="M3.5 7L6 9.5L10.5 4.5"
-                      stroke="#97CDCD"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  {item}
-                </span>
-              ))}
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M3.5 7L6 9.5L10.5 4.5"
+                        stroke="#97CDCD"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {item}
+                  </span>
+                ),
+              )}
             </div>
           </div>
         </section>

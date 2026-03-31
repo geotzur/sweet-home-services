@@ -24,11 +24,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sweet Home Services — Your Town. Found Online.",
     description:
-      "Done-for-you websites + SEO for local businesses. Starting at $149/mo.",
+      "Done-for-you websites + SEO for local businesses. Starting at $89/mo.",
     type: "website",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Sweet Home Services — Your Town. Found Online.",

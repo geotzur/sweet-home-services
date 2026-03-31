@@ -1,63 +1,38 @@
-import { partnersSection } from "@/data/partners";
+import Image from "next/image";
+
+const logos = [
+  { name: "Google", src: "/assets/logo-google-transparent.png" },
+  { name: "Semrush", src: "/assets/logo-semrush-transparent.png" },
+  { name: "Stripe", src: "/assets/logo-stripe-transparent.png" },
+  { name: "Vercel", src: "/assets/logo-vercel-transparent.png" },
+  { name: "Cloudflare", src: "/assets/logo-cloudflare-transparent.png" },
+];
 
 export default function PartnerLogosSection() {
   return (
-    <section
-      className="py-12 sm:py-16 bg-transparent"
-      aria-labelledby="partners-heading"
-    >
+    <section className="py-10 sm:py-14" aria-label="Trusted technology partners">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <p
-            className="text-xs font-bold uppercase tracking-widest mb-2"
-            style={{
-              fontFamily: "var(--font-heading)",
-              color: "#F5A623",
-            }}
-          >
-            {partnersSection.overline}
-          </p>
-          <h2
-            id="partners-heading"
-            className="text-xl sm:text-2xl font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-heading)", color: "#1F2937" }}
-          >
-            {partnersSection.headline}
-          </h2>
-          <p
-            className="mt-2 text-sm leading-relaxed max-w-lg mx-auto"
-            style={{ fontFamily: "var(--font-sans)", color: "#9CA3AF" }}
-          >
-            {partnersSection.subheadline}
-          </p>
-        </div>
+        <p
+          className="text-center mb-8 text-sm font-medium uppercase tracking-widest"
+          style={{ fontFamily: "var(--font-heading)", color: "#9CA3AF" }}
+        >
+          Powered by industry leaders
+        </p>
 
-        {/* Partner badges — horizontal scrolling on mobile, wrapped on desktop */}
-        <div className="flex flex-nowrap lg:flex-wrap justify-start lg:justify-center gap-3 overflow-x-auto pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide">
-          {partnersSection.partners.map((partner) => (
-            <a
-              key={partner.id}
-              href={partner.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-150 hover:shadow-md hover:-translate-y-0.5 border"
-              style={{
-                fontFamily: "var(--font-heading)",
-                backgroundColor: "#F9FAFB",
-                borderColor: "#E5E7EB",
-                color: "#374151",
-              }}
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14 sm:gap-y-8 md:gap-x-20">
+          {logos.map((logo) => (
+            <div
+              key={logo.name}
+              className="relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 w-[120px] h-[40px] sm:w-[156px] sm:h-[52px]"
             >
-              <span
-                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                style={{ backgroundColor: "#1A6B6B" }}
-                aria-hidden="true"
-              >
-                {partner.abbrev.charAt(0)}
-              </span>
-              {partner.name}
-            </a>
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 120px, 156px"
+              />
+            </div>
           ))}
         </div>
       </div>

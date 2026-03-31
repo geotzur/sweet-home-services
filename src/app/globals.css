@@ -116,4 +116,208 @@
     filter: blur(16px);
     opacity: 0.55;
   }
+
+  /* ─── Hero floating badges ────────────────────────────────────── */
+  .hero-float {
+    animation: heroFloat 4s ease-in-out infinite;
+  }
+  .hero-float-delayed {
+    animation: heroFloat 4s ease-in-out 1.5s infinite;
+  }
+
+  /* ─── Scroll-triggered fade-in ───────────────────────────────── */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  @supports not (animation-timeline: view()) {
+    .fade-in-up {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Variant without animation-timeline for explicit use */
+  .fade-in-up-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  @supports not (animation-timeline: view()) {
+    .fade-in-up-scroll {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ─── Social Proof: stat counter shimmer ──────────────────────── */
+  .stat-counter-value {
+    display: inline-block;
+    animation: statReveal 0.8s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+
+  @supports not (animation-timeline: view()) {
+    .stat-counter-value {
+      opacity: 1;
+      transform: none;
+      animation: statRevealFallback 0.8s ease-out both;
+    }
+  }
+
+  /* ─── Social Proof: pulsing live dot ──────────────────────────── */
+  .stat-pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #34D399;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .stat-pulse-dot::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    background: rgb(52 211 153 / 0.4);
+    animation: pulseRing 2s ease-out infinite;
+  }
+
+  /* ─── Footer CTA: animated particles ──────────────────────────── */
+  .cta-particle {
+    position: absolute;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  .cta-particle-1 {
+    width: 6px;
+    height: 6px;
+    top: 15%;
+    left: 10%;
+    animation: particleFloat 8s ease-in-out infinite;
+  }
+
+  .cta-particle-2 {
+    width: 4px;
+    height: 4px;
+    top: 60%;
+    left: 25%;
+    animation: particleFloat 10s ease-in-out infinite 1s;
+  }
+
+  .cta-particle-3 {
+    width: 8px;
+    height: 8px;
+    top: 30%;
+    right: 20%;
+    animation: particleFloat 7s ease-in-out infinite 2s;
+  }
+
+  .cta-particle-4 {
+    width: 5px;
+    height: 5px;
+    top: 70%;
+    right: 15%;
+    animation: particleFloat 9s ease-in-out infinite 3s;
+  }
+
+  .cta-particle-5 {
+    width: 3px;
+    height: 3px;
+    top: 45%;
+    left: 50%;
+    animation: particleFloat 11s ease-in-out infinite 0.5s;
+  }
+
+  .cta-particle-6 {
+    width: 6px;
+    height: 6px;
+    top: 80%;
+    left: 70%;
+    animation: particleFloat 8s ease-in-out infinite 4s;
+  }
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes statReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes statRevealFallback {
+  from {
+    opacity: 0.4;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(12px, -18px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-8px, -30px);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate(16px, -12px);
+    opacity: 0.5;
+  }
 }

@@ -223,10 +223,10 @@ export default function AboutPage() {
                 design with hyper-local SEO so your neighbors can actually find
                 you when they search.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/pricing"
-                  className="inline-flex items-center rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-brand transition-colors duration-150 hover:opacity-90"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3.5 text-sm font-semibold text-white shadow-brand transition-colors duration-150 hover:opacity-90 w-full sm:w-auto"
                   style={{
                     fontFamily: "var(--font-heading)",
                     backgroundColor: "#1A6B6B",
@@ -250,7 +250,7 @@ export default function AboutPage() {
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-150 border"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3.5 text-sm font-semibold transition-colors duration-150 border w-full sm:w-auto"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "#1A6B6B",
@@ -481,9 +481,9 @@ export default function AboutPage() {
             </div>
 
             {/* Comparison table */}
-            <div className="section-shell overflow-hidden rounded-2xl border shadow-sm" style={{ borderColor: "#E5E7EB" }}>
+            <div className="overflow-hidden rounded-2xl border shadow-sm -mx-4 sm:mx-0" style={{ borderColor: "#E5E7EB" }}>
               <div className="overflow-x-auto">
-                <table className="w-full text-left" role="table">
+                <table className="w-full text-left min-w-[540px]" role="table">
                   <thead>
                     <tr>
                       <th
@@ -723,7 +723,7 @@ export default function AboutPage() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/pricing"
-                className="inline-flex items-center rounded-lg px-8 py-3.5 text-sm font-semibold shadow-lg transition-colors duration-150 hover:opacity-90"
+                className="inline-flex items-center justify-center rounded-lg px-8 py-3.5 text-sm font-semibold shadow-lg transition-colors duration-150 hover:opacity-90 w-full sm:w-auto"
                 style={{
                   fontFamily: "var(--font-heading)",
                   backgroundColor: "#F5A623",
@@ -748,7 +748,7 @@ export default function AboutPage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center rounded-lg px-8 py-3.5 text-sm font-semibold transition-colors duration-150 border"
+                className="inline-flex items-center justify-center rounded-lg px-8 py-3.5 text-sm font-semibold transition-colors duration-150 border w-full sm:w-auto"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "#FFFFFF",

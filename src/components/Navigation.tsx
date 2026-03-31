@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,56 +32,34 @@ export default function Navigation() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
-            {/* Icon: house + wifi arcs */}
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              aria-hidden="true"
-            >
-              {/* House body */}
-              <path
-                d="M6 15L16 6L26 15V27H20V20H12V27H6V15Z"
-                fill="#1A6B6B"
-              />
-              {/* Roof ridge */}
-              <path d="M16 6L26 15" stroke="#1A6B6B" strokeWidth="0" />
-              {/* WiFi dot */}
-              <circle cx="16" cy="8" r="1.5" fill="#F5A623" />
-              {/* WiFi arc 1 */}
-              <path
-                d="M12.5 5.5C13.8 4.2 15.9 4.2 17.5 5.5"
-                stroke="#F5A623"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                fill="none"
-              />
-              {/* WiFi arc 2 */}
-              <path
-                d="M10.5 3.5C12.8 1.3 19.2 1.3 21.5 3.5"
-                stroke="#F5A623"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                fill="none"
-              />
-            </svg>
-            <span className="text-neutral-900 leading-tight" style={{ fontFamily: "var(--font-heading)" }}>
-              <span className="font-700 text-base block">Sweet Home</span>
-              <span className="font-400 text-[10px] tracking-widest uppercase text-brand-teal-600 block -mt-0.5">
-                Services
-              </span>
-            </span>
+          <Link href="/" className="flex items-center flex-shrink-0">
+            <Image
+              src={isScrolled ? "/assets/logo-header.png" : "/assets/logo-header-white.png"}
+              alt="Sweet Home Services"
+              width={200}
+              height={56}
+              className="h-12 w-auto sm:h-14"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-5 rounded-full border border-brand-teal-100 bg-white/75 px-4 py-2">
+          <nav
+            className={`hidden md:flex items-center gap-5 rounded-full px-4 py-2 transition-all duration-200 ${
+              isScrolled
+                ? "border border-brand-teal-100 bg-white/75"
+                : "border border-white/15 bg-white/8 backdrop-blur-sm"
+            }`}
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-neutral-700 hover:text-brand-teal-600 transition-colors duration-150"
+                className={`text-sm font-medium transition-colors duration-150 ${
+                  isScrolled
+                    ? "text-neutral-700 hover:text-brand-teal-600"
+                    : "text-white/80 hover:text-white"
+                }`}
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 {link.label}
@@ -92,24 +71,34 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-3">
             <a
               href="#pricing"
-              className="text-sm font-semibold text-brand-teal-600 hover:text-brand-teal-700 transition-colors"
+              className={`text-sm font-semibold transition-colors ${
+                isScrolled ? "text-brand-teal-600 hover:text-brand-teal-700" : "text-white/80 hover:text-white"
+              }`}
               style={{ fontFamily: "var(--font-heading)" }}
             >
               See Plans
             </a>
             <a
               href="#pricing"
-              className="rounded-lg bg-brand-teal-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-teal-600 transition-colors duration-150 shadow-brand"
-              style={{ fontFamily: "var(--font-heading)" }}
+              className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors duration-150"
+              style={{
+                fontFamily: "var(--font-heading)",
+                background: "linear-gradient(135deg, #F5A623 0%, #D4881A 100%)",
+                boxShadow: "0 2px 8px rgb(245 166 35 / 0.3)",
+              }}
             >
-              Get Started Free
+              Get Started
             </a>
           </div>
 
           {/* Mobile menu button */}
           <button
             type="button"
-            className="md:hidden rounded-md p-2 text-neutral-600 hover:bg-neutral-100 transition-colors"
+            className={`md:hidden rounded-md p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors ${
+              isScrolled
+                ? "text-neutral-600 hover:bg-neutral-100"
+                : "text-white hover:bg-white/10"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
@@ -143,7 +132,7 @@ export default function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                className="block py-2.5 text-sm font-medium text-neutral-700 hover:text-brand-teal-600"
+                className="block py-3 text-base font-medium text-neutral-700 hover:text-brand-teal-600"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -152,10 +141,11 @@ export default function Navigation() {
             <div className="pt-3 border-t border-neutral-100">
               <a
                 href="#pricing"
-                className="block w-full rounded-lg bg-brand-teal-500 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-brand-teal-600"
+                className="block w-full rounded-lg px-4 py-3 text-center text-sm font-semibold text-white"
+                style={{ background: "linear-gradient(135deg, #F5A623 0%, #D4881A 100%)" }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Get Started Free
+                Get Started
               </a>
             </div>
           </div>

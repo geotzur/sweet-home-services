@@ -13,6 +13,7 @@ export function getStripe(): Stripe {
 }
 
 export const PLAN_PRICE_MAP: Record<string, string | undefined> = {
+  basic: process.env.STRIPE_BASIC_PRICE_ID,
   starter: process.env.STRIPE_STARTER_PRICE_ID,
   growth: process.env.STRIPE_GROWTH_PRICE_ID,
   authority: process.env.STRIPE_AUTHORITY_PRICE_ID,

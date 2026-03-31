@@ -68,50 +68,16 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main footer grid */}
-        <div className="py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="py-10 sm:py-14 grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             {/* Logo */}
-            <div className="flex items-center gap-2.5 mb-4">
-              <svg
-                width="30"
-                height="30"
-                viewBox="0 0 32 32"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6 15L16 6L26 15V27H20V20H12V27H6V15Z"
-                  fill="#1A6B6B"
-                />
-                <circle cx="16" cy="8" r="1.5" fill="#F5A623" />
-                <path
-                  d="M12.5 5.5C13.8 4.2 15.9 4.2 17.5 5.5"
-                  stroke="#F5A623"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-                <path
-                  d="M10.5 3.5C12.8 1.3 19.2 1.3 21.5 3.5"
-                  stroke="#F5A623"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-              </svg>
-              <span
-                className="text-white leading-tight"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                <span className="font-bold text-sm block">Sweet Home</span>
-                <span
-                  className="font-normal text-[10px] tracking-widest uppercase block -mt-0.5"
-                  style={{ color: "#97CDCD" }}
-                >
-                  Services
-                </span>
-              </span>
+            <div className="mb-4">
+              <img
+                src="/assets/logo-main-white.png"
+                alt="Sweet Home Services"
+                className="h-14 w-auto"
+              />
             </div>
 
             <p
@@ -134,7 +100,7 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-colors"
                   style={{ background: "#1F2937", color: "#9CA3AF" }}
                 >
                   {s.icon}
@@ -152,12 +118,12 @@ export default function Footer() {
               >
                 {col.title}
               </p>
-              <ul className="space-y-2.5">
+              <ul className="space-y-3 sm:space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="transition-colors hover:text-white"
+                      className="transition-colors hover:text-white inline-block py-0.5"
                       style={{
                         fontFamily: "var(--font-sans)",
                         fontSize: "0.9375rem",

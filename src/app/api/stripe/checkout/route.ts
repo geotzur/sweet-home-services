@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe, PLAN_PRICE_MAP } from "@/lib/stripe";
 
-const VALID_PLANS = ["starter", "growth", "authority"] as const;
+const VALID_PLANS = ["basic", "starter", "growth", "authority"] as const;
 type Plan = (typeof VALID_PLANS)[number];
 
 export async function POST(request: NextRequest) {
@@ -13,11 +13,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = (await request.json()) as { planId?: string };
+    const body = (await request.json()) as { planId?: string; orderId?: string };
 
     if (!body.planId || !VALID_PLANS.includes(body.planId as Plan)) {
       return NextResponse.json(
-        { error: "Invalid planId. Must be one of: starter, growth, authority" },
+        { error: "Invalid planId. Must be one of: basic, starter, growth, authority" },
         { status: 400 },
       );
     }
@@ -38,7 +38,10 @@ export async function POST(request: NextRequest) {
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/pricing`,
-      metadata: { plan: body.planId },
+      metadata: {
+        plan: body.planId,
+        ...(body.orderId ? { order_id: body.orderId } : {}),
+      },
     });
 
     return NextResponse.json({ sessionUrl: session.url });

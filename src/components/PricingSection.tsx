@@ -2,6 +2,29 @@ import CheckoutButton from "./CheckoutButton";
 
 const plans = [
   {
+    id: "basic",
+    name: "Basic",
+    price: "$89",
+    tagline: "Get online. Get noticed.",
+    description: "A professional web presence for businesses just getting started — no frills, all essentials.",
+    cta: "Start with Basic",
+    featured: false,
+    features: [
+      "3-page professional website",
+      "Mobile-responsive design",
+      "Google Business Profile claim",
+      "Basic on-page SEO",
+      "SSL certificate + hosting included",
+      "Contact form + click-to-call",
+    ],
+    notIncluded: [
+      "Monthly SEO optimization",
+      "Blog content",
+      "Review management",
+      "Competitor tracking",
+    ],
+  },
+  {
     id: "starter",
     name: "Starter",
     price: "$149",
@@ -104,7 +127,7 @@ export default function PricingSection() {
         </div>
 
         {/* Pricing cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch">
           {plans.map((plan) => (
             <PricingCard key={plan.name} plan={plan} />
           ))}
@@ -115,24 +138,26 @@ export default function PricingSection() {
           className="mt-10 text-center text-neutral-500"
           style={{ fontFamily: "var(--font-sans)", fontSize: "0.875rem" }}
         >
-          All plans include hosting, SSL, and a dedicated account manager. Questions?{" "}
-          <a
-            href="#faq"
-            className="font-medium underline decoration-brand-teal-300 underline-offset-2"
-            style={{ color: "#1A6B6B" }}
-          >
-            See our FAQ
-          </a>{" "}
-          or{" "}
-          <a
-            href="#contact"
-            className="font-medium underline decoration-brand-teal-300 underline-offset-2"
-            style={{ color: "#1A6B6B" }}
-          >
-            chat with us
-          </a>
-          .
+          All plans include hosting, SSL, and a dedicated account manager.
         </p>
+
+        {/* Compare Plans link */}
+        <div className="mt-6 text-center">
+          <a
+            href="/pricing"
+            className="inline-flex items-center gap-2 rounded-lg border-2 px-5 py-2.5 text-sm font-semibold transition-all duration-150 hover:bg-brand-teal-50"
+            style={{
+              fontFamily: "var(--font-heading)",
+              borderColor: "#1A6B6B",
+              color: "#1A6B6B",
+            }}
+          >
+            Compare All Plans in Detail
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M3 8a.5.5 0 01.5-.5h7.293L8.146 4.854a.5.5 0 11.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L10.793 8.5H3.5A.5.5 0 013 8z" clipRule="evenodd" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -145,14 +170,13 @@ function PricingCard({ plan }: { plan: Plan }) {
 
   return (
     <div
-      className="relative flex flex-col rounded-2xl p-7"
+      className="relative flex flex-col rounded-2xl p-6 sm:p-7"
       style={{
         background: isFeatured ? "#1A6B6B" : "#FFFFFF",
         border: isFeatured ? "none" : "1px solid #E5E7EB",
         boxShadow: isFeatured
           ? "0 20px 40px -8px rgb(26 107 107 / 0.35)"
           : "0 4px 6px -1px rgb(0 0 0 / 0.07)",
-        transform: isFeatured ? "scale(1.02)" : "scale(1)",
       }}
     >
       {/* Popular badge */}

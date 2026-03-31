@@ -28,12 +28,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Partner logos — trusted tech stack */}
-          <div className="section-shell overflow-hidden">
-            <PartnerLogosSection />
-          </div>
-        </div>
+        {/* Partner logos — trusted tech stack */}
+        <PartnerLogosSection />
 
         {/* ④ How It Works — 3-step process */}
         <HowItWorksSection />

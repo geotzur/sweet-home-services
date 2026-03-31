@@ -71,20 +71,21 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
-  // Find user by email in Supabase auth
-  const {
-    data: { users },
-  } = await getSupabaseAdmin().auth.admin.listUsers();
-  const user = users.find((u) => u.email === email);
+  // Find user by email in profiles table
+  const { data: profile } = await getSupabaseAdmin()
+    .from("profiles")
+    .select("id")
+    .eq("email", email)
+    .single();
 
-  if (!user) {
+  if (!profile) {
     console.error("[stripe/webhook] No Supabase user found for email:", email);
     return;
   }
 
   const { error } = await getSupabaseAdmin().from("subscriptions").upsert(
     {
-      user_id: user.id,
+      user_id: profile.id,
       stripe_customer_id: customerId,
       stripe_subscription_id: subscriptionId,
       plan,
@@ -99,6 +100,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   console.log(`[stripe/webhook] Subscription activated: ${subscriptionId} (${plan})`);
+
+  // Link payment back to the onboarding order if present
+  const orderId = session.metadata?.order_id;
+  if (orderId) {
+    await getSupabaseAdmin().from("orders").update({
+      status: "paid",
+      stripe_session_id: session.id,
+      stripe_subscription_id: subscriptionId,
+    }).eq("id", orderId);
+  }
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {

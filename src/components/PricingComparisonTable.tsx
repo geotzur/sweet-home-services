@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 type CellValue = string | boolean | null;
 
 interface FeatureRow {
   label: string;
+  basic: CellValue;
   starter: CellValue;
   growth: CellValue;
   authority: CellValue;
@@ -18,6 +19,7 @@ interface FeatureCategory {
 }
 
 const tiers = [
+  { id: "basic", name: "Basic", price: "$89/mo", color: "#1A6B6B" },
   { id: "starter", name: "Starter", price: "$149/mo", color: "#1A6B6B" },
   { id: "growth", name: "Growth", price: "$299/mo", color: "#1A6B6B", featured: true },
   { id: "authority", name: "Authority", price: "$499/mo", color: "#1A6B6B" },
@@ -27,46 +29,48 @@ const categories: FeatureCategory[] = [
   {
     name: "Website & Design",
     features: [
-      { label: "Website pages", starter: "5 pages", growth: "Up to 15 pages", authority: "Unlimited" },
-      { label: "Mobile-first design", starter: true, growth: true, authority: true },
-      { label: "Custom branded design", starter: true, growth: true, authority: true },
-      { label: "SSL certificate + hosting", starter: true, growth: true, authority: true },
-      { label: "Monthly revisions", starter: "1 per month", growth: "Unlimited", authority: "Unlimited" },
+      { label: "Website pages", basic: "3 pages", starter: "5 pages", growth: "Up to 15 pages", authority: "Unlimited" },
+      { label: "Mobile-responsive design", basic: true, starter: true, growth: true, authority: true },
+      { label: "Custom branded design", basic: null, starter: true, growth: true, authority: true },
+      { label: "SSL certificate + hosting", basic: true, starter: true, growth: true, authority: true },
+      { label: "Contact form + click-to-call", basic: true, starter: true, growth: true, authority: true },
+      { label: "Monthly revisions", basic: null, starter: "1 per month", growth: "Unlimited", authority: "Unlimited" },
     ],
   },
   {
     name: "Local SEO",
     features: [
-      { label: "Google Business Profile setup", starter: true, growth: true, authority: true },
-      { label: "Local keyword optimization", starter: true, growth: true, authority: true },
-      { label: "Monthly keyword ranking report", starter: true, growth: true, authority: true },
-      { label: "Schema markup + rich snippets", starter: null, growth: true, authority: true },
-      { label: "Competitor rank tracking", starter: null, growth: true, authority: true },
-      { label: "Backlink building", starter: null, growth: null, authority: true },
+      { label: "Google Business Profile claim", basic: true, starter: true, growth: true, authority: true },
+      { label: "Basic on-page SEO", basic: true, starter: true, growth: true, authority: true },
+      { label: "Local keyword optimization", basic: null, starter: true, growth: true, authority: true },
+      { label: "Monthly keyword ranking report", basic: null, starter: true, growth: true, authority: true },
+      { label: "Schema markup + rich snippets", basic: null, starter: null, growth: true, authority: true },
+      { label: "Competitor rank tracking", basic: null, starter: null, growth: true, authority: true },
+      { label: "Backlink building", basic: null, starter: null, growth: null, authority: true },
     ],
   },
   {
     name: "Content",
     features: [
-      { label: "Copywriting (all pages)", starter: true, growth: true, authority: true },
-      { label: "Blog posts per month", starter: null, growth: "2 posts", authority: "4 posts" },
-      { label: "Review management + responses", starter: null, growth: true, authority: true },
-      { label: "Reputation campaigns", starter: null, growth: null, authority: true },
+      { label: "Copywriting (all pages)", basic: null, starter: true, growth: true, authority: true },
+      { label: "Blog posts per month", basic: null, starter: null, growth: "2 posts", authority: "4 posts" },
+      { label: "Review management + responses", basic: null, starter: null, growth: true, authority: true },
+      { label: "Reputation campaigns", basic: null, starter: null, growth: null, authority: true },
     ],
   },
   {
     name: "Analytics & Ads",
     features: [
-      { label: "Google Analytics dashboard", starter: null, growth: true, authority: true },
-      { label: "Google Ads management", starter: null, growth: null, authority: "Up to $1k/mo" },
+      { label: "Google Analytics dashboard", basic: null, starter: null, growth: true, authority: true },
+      { label: "Google Ads management", basic: null, starter: null, growth: null, authority: "Up to $1k/mo" },
     ],
   },
   {
     name: "Support",
     features: [
-      { label: "Dedicated account manager", starter: true, growth: true, authority: true },
-      { label: "Response time", starter: "2 business days", growth: "1 business day", authority: "Same day" },
-      { label: "Quarterly strategy call", starter: null, growth: null, authority: true },
+      { label: "Dedicated account manager", basic: null, starter: true, growth: true, authority: true },
+      { label: "Response time", basic: null, starter: "2 business days", growth: "1 business day", authority: "Same day" },
+      { label: "Quarterly strategy call", basic: null, starter: null, growth: null, authority: true },
     ],
   },
 ];
@@ -242,11 +246,11 @@ export default function PricingComparisonTable() {
 
             <tbody>
               {categories.map((cat) => (
-                <>
+                <React.Fragment key={`cat-${cat.name}`}>
                   {/* Category header row */}
-                  <tr key={`cat-${cat.name}`}>
+                  <tr>
                     <td
-                      colSpan={4}
+                      colSpan={5}
                       className="px-6 py-3 border-t"
                       style={{ background: "#F3F4F6", borderColor: "#E5E7EB" }}
                     >
@@ -294,6 +298,7 @@ export default function PricingComparisonTable() {
 
                         {/* Tier cells */}
                         {[
+                          { key: "basic", value: row.basic },
                           { key: "starter", value: row.starter },
                           { key: "growth", value: row.growth, featured: true },
                           { key: "authority", value: row.authority },
@@ -320,7 +325,7 @@ export default function PricingComparisonTable() {
                       </tr>
                     );
                   })}
-                </>
+                </React.Fragment>
               ))}
 
               {/* CTA row */}
@@ -453,7 +458,9 @@ export default function PricingComparisonTable() {
                         <ul className="space-y-2.5">
                           {cat.features.map((row) => {
                             const val =
-                              tier.id === "starter"
+                              tier.id === "basic"
+                                ? row.basic
+                                : tier.id === "starter"
                                 ? row.starter
                                 : tier.id === "growth"
                                 ? row.growth
