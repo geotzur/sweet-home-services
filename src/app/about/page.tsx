@@ -217,7 +217,7 @@ export default function AboutPage() {
                 className="mt-6 text-lg sm:text-xl leading-relaxed max-w-2xl"
                 style={{ fontFamily: "var(--font-sans)", color: "#6B7280" }}
               >
-                Most small businesses don't need a flashy website -- they need
+                Most small businesses don&apos;t need a flashy website — they need
                 customers walking through the door. We combine AI-powered web
                 design with hyper-local SEO so your neighbors can actually find
                 you when they search.
@@ -439,7 +439,7 @@ export default function AboutPage() {
                 className="mt-4 text-lg leading-relaxed"
                 style={{ fontFamily: "var(--font-sans)", color: "#6B7280" }}
               >
-                We're not a generic website builder. Everything we do is designed
+                We&apos;re not a generic website builder. Everything we do is designed
                 to help local service businesses attract more customers from their
                 own community.
               </p>
