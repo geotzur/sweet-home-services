@@ -165,7 +165,7 @@ function HeroIllustration() {
           <span className="w-3 h-3 rounded-full bg-yellow-400" />
           <span className="w-3 h-3 rounded-full bg-green-400" />
           <div className="ml-3 flex-1 rounded-full bg-white border border-neutral-200 px-3 py-1 text-xs text-neutral-500">
-            sweethomeservices.co/plumbers/austin-tx
+            sweethomeservices.org/plumbers/austin-tx
           </div>
         </div>
 

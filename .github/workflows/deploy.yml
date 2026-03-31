@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Vercel
+    name: Build & Deploy to Netlify
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,10 +29,13 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # Vercel auto-deploys from GitHub integration.
+      # Netlify auto-deploys from GitHub integration.
       # If using manual deploy instead, uncomment below:
-      # - name: Deploy to Vercel
-      #   run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+      # - name: Deploy to Netlify
+      #   uses: nwtgck/actions-netlify@v3
+      #   with:
+      #     publish-dir: .next
+      #     production-deploy: true
       #   env:
-      #     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      #     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
