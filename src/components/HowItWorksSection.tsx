@@ -76,10 +76,11 @@ export default function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24"
       aria-labelledby="how-it-works-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="section-shell brand-grid overflow-hidden px-6 py-10 sm:px-8 sm:py-12 lg:px-12">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <p className="section-overline mb-3">The Process</p>
@@ -117,7 +118,7 @@ export default function HowItWorksSection() {
           {steps.map((step, index) => (
             <div
               key={step.number}
-              className="relative flex flex-col items-center md:items-start text-center md:text-left"
+              className="relative rounded-2xl border border-brand-teal-100/70 bg-white/90 p-6 flex flex-col items-center md:items-start text-center md:text-left"
             >
               {/* Step number badge */}
               <div className="relative mb-5">
@@ -182,6 +183,7 @@ export default function HowItWorksSection() {
               />
             </svg>
           </a>
+        </div>
         </div>
       </div>
     </section>

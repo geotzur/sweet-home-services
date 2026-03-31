@@ -1,11 +1,23 @@
 "use client";
 
+import Image from "next/image";
+
 export default function HeroSection() {
   return (
     <section
       className="relative overflow-hidden bg-white pt-16"
       aria-label="Hero"
     >
+      {/* Background photo texture */}
+      <Image
+        src="/images/hero-bg.jpg"
+        alt=""
+        fill
+        className="object-cover opacity-[0.15] -z-20"
+        priority
+        aria-hidden="true"
+      />
+
       {/* Background gradient */}
       <div
         className="absolute inset-0 -z-10"
@@ -122,6 +134,18 @@ export default function HeroSection() {
               </a>
             </div>
 
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+              {["Google-ready SEO", "Mobile-first design", "Monthly optimization"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-brand-teal-100 bg-white/80 px-3 py-1.5 text-xs font-medium text-neutral-700"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+
             {/* Trust signal */}
             <p className="mt-6 text-sm text-neutral-500 flex items-center justify-center lg:justify-start gap-1.5">
               <svg
@@ -153,10 +177,10 @@ export default function HeroSection() {
 
 function HeroIllustration() {
   return (
-    <div className="relative w-full max-w-sm lg:max-w-md">
+    <div className="brand-glow relative w-full max-w-sm rounded-3xl p-3 lg:max-w-md">
       {/* Browser chrome mockup */}
       <div
-        className="rounded-2xl overflow-hidden shadow-2xl border border-neutral-200"
+        className="section-shell overflow-hidden rounded-2xl border border-neutral-200 bg-white"
         style={{ boxShadow: "0 25px 50px -12px rgb(26 107 107 / 0.25)" }}
       >
         {/* Browser bar */}

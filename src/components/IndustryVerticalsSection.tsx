@@ -1,55 +1,49 @@
+import Image from "next/image";
+
 const industries = [
   {
-    emoji: "🔧",
     name: "Contractors",
     examples: "Plumbers, HVAC, Electricians, Roofers",
     color: "#E6F3F3",
     slug: "contractors",
   },
   {
-    emoji: "✂️",
     name: "Salons & Spas",
     examples: "Hair, Nails, Massage, Skincare",
     color: "#FEF8EE",
     slug: "salons",
   },
   {
-    emoji: "🏥",
     name: "Medical & Dental",
     examples: "Dentists, Chiropractors, Urgent Care",
     color: "#E6F3F3",
     slug: "medical",
   },
   {
-    emoji: "🍕",
     name: "Restaurants",
     examples: "Diners, Catering, Food Trucks, Cafés",
     color: "#FEF8EE",
     slug: "restaurants",
   },
   {
-    emoji: "⚖️",
     name: "Legal & Finance",
     examples: "Attorneys, Accountants, Advisors",
     color: "#E6F3F3",
     slug: "legal",
   },
   {
-    emoji: "🐾",
     name: "Pet Services",
     examples: "Groomers, Vets, Boarding, Training",
     color: "#FEF8EE",
     slug: "pet-services",
   },
   {
-    emoji: "🏋️",
     name: "Fitness & Wellness",
     examples: "Gyms, Yoga Studios, Personal Trainers",
     color: "#E6F3F3",
     slug: "fitness",
   },
   {
-    emoji: "🏡",
     name: "Home Services",
     examples: "Cleaners, Landscapers, Pest Control",
     color: "#FEF8EE",
@@ -61,10 +55,11 @@ export default function IndustryVerticalsSection() {
   return (
     <section
       id="industries"
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24"
       aria-labelledby="industries-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="section-shell overflow-hidden px-6 py-10 sm:px-8 sm:py-12 lg:px-12">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="section-overline mb-3">Industries We Serve</p>
@@ -99,9 +94,13 @@ export default function IndustryVerticalsSection() {
               className="group rounded-xl p-5 flex flex-col gap-3 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border border-transparent hover:border-brand-teal-200"
               style={{ background: industry.color }}
             >
-              <span className="text-3xl leading-none" aria-hidden="true">
-                {industry.emoji}
-              </span>
+              <Image
+                src={`/icons/${industry.slug}.svg`}
+                width={40}
+                height={40}
+                alt=""
+                aria-hidden="true"
+              />
               <div>
                 <h3
                   className="text-neutral-900 leading-tight mb-1"
@@ -165,6 +164,7 @@ export default function IndustryVerticalsSection() {
             We likely serve it — ask us.
           </a>
         </p>
+        </div>
       </div>
     </section>
   );

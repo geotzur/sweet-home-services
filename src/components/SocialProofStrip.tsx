@@ -39,11 +39,7 @@ const stats = [
 
 export default function SocialProofStrip() {
   return (
-    <section
-      className="border-y border-neutral-100"
-      style={{ background: "#F9FAFB" }}
-      aria-label="Social proof statistics"
-    >
+    <section className="bg-transparent" aria-label="Social proof statistics">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((stat) => (

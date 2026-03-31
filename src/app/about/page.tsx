@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -151,7 +152,7 @@ export default function AboutPage() {
     <>
       <Navigation />
 
-      <main id="main-content" className="pt-16">
+      <main id="main-content" className="pt-16 pb-12">
         {/* ────────────────── HERO ────────────────── */}
         <section
           className="relative overflow-hidden"
@@ -271,52 +272,18 @@ export default function AboutPage() {
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-              {/* Decorative illustration */}
+              {/* Mission image */}
               <div className="relative" aria-hidden="true">
                 <div
-                  className="aspect-square max-w-md mx-auto rounded-2xl flex items-center justify-center"
+                  className="aspect-square max-w-md mx-auto rounded-2xl overflow-hidden relative"
                   style={{ backgroundColor: "#E6F3F3" }}
                 >
-                  {/* Stylized storefront illustration */}
-                  <svg
-                    width="240"
-                    height="240"
-                    viewBox="0 0 240 240"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    {/* Ground line */}
-                    <rect x="20" y="190" width="200" height="4" rx="2" fill="#C0E1E1" />
-                    {/* Building body */}
-                    <rect x="50" y="80" width="140" height="110" rx="4" fill="white" />
-                    <rect x="50" y="80" width="140" height="110" rx="4" stroke="#1A6B6B" strokeWidth="2" />
-                    {/* Awning */}
-                    <path d="M42 80 L120 30 L198 80 Z" fill="#1A6B6B" />
-                    <path d="M42 80 L120 30 L198 80" stroke="#155656" strokeWidth="2" strokeLinejoin="round" />
-                    {/* Door */}
-                    <rect x="100" y="140" width="40" height="50" rx="3" fill="#1A6B6B" />
-                    <circle cx="133" cy="165" r="3" fill="#F5A623" />
-                    {/* Windows */}
-                    <rect x="65" y="100" width="30" height="28" rx="2" fill="#E6F3F3" stroke="#1A6B6B" strokeWidth="1.5" />
-                    <rect x="145" y="100" width="30" height="28" rx="2" fill="#E6F3F3" stroke="#1A6B6B" strokeWidth="1.5" />
-                    {/* Window cross bars */}
-                    <line x1="80" y1="100" x2="80" y2="128" stroke="#1A6B6B" strokeWidth="1" />
-                    <line x1="65" y1="114" x2="95" y2="114" stroke="#1A6B6B" strokeWidth="1" />
-                    <line x1="160" y1="100" x2="160" y2="128" stroke="#1A6B6B" strokeWidth="1" />
-                    <line x1="145" y1="114" x2="175" y2="114" stroke="#1A6B6B" strokeWidth="1" />
-                    {/* WiFi arcs above building */}
-                    <circle cx="120" cy="18" r="3" fill="#F5A623" />
-                    <path d="M112 12C114.5 9 125.5 9 128 12" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" fill="none" />
-                    <path d="M107 7C111 3 129 3 133 7" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" fill="none" />
-                    {/* "OPEN" sign */}
-                    <rect x="155" y="150" width="36" height="16" rx="3" fill="#F5A623" />
-                    <text x="173" y="162" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold" style={{ fontFamily: "var(--font-heading)" }}>OPEN</text>
-                    {/* Decorative stars */}
-                    <circle cx="35" cy="50" r="2" fill="#F5A623" opacity="0.6" />
-                    <circle cx="205" cy="45" r="2.5" fill="#F5A623" opacity="0.5" />
-                    <circle cx="25" cy="120" r="1.5" fill="#1A6B6B" opacity="0.3" />
-                    <circle cx="215" cy="130" r="1.5" fill="#1A6B6B" opacity="0.3" />
-                  </svg>
+                  <Image
+                    src="/images/about-mission.jpg"
+                    alt="Small business owner standing proudly in front of their shop"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 {/* Floating accent shape */}
                 <svg
@@ -449,7 +416,7 @@ export default function AboutPage() {
               {valueProps.map((prop) => (
                 <article
                   key={prop.title}
-                  className="group relative rounded-2xl border p-8 transition-shadow duration-200 hover:shadow-lg"
+                  className="brand-glow group relative rounded-2xl border p-8 transition-shadow duration-200 hover:shadow-lg"
                   style={{ borderColor: "#E6F3F3", backgroundColor: "#FFFFFF" }}
                 >
                   {/* Accent corner */}
@@ -514,7 +481,7 @@ export default function AboutPage() {
             </div>
 
             {/* Comparison table */}
-            <div className="overflow-hidden rounded-2xl border shadow-sm" style={{ borderColor: "#E5E7EB" }}>
+            <div className="section-shell overflow-hidden rounded-2xl border shadow-sm" style={{ borderColor: "#E5E7EB" }}>
               <div className="overflow-x-auto">
                 <table className="w-full text-left" role="table">
                   <thead>
@@ -687,7 +654,7 @@ export default function AboutPage() {
 
         {/* ────────────────── CTA ────────────────── */}
         <section
-          className="relative overflow-hidden py-20 sm:py-28"
+          className="brand-grid relative overflow-hidden py-20 sm:py-28"
           style={{
             background: "linear-gradient(135deg, #1A6B6B 0%, #104040 100%)",
           }}

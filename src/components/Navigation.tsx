@@ -24,7 +24,7 @@ export default function Navigation() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-sm border-b border-neutral-100"
+          ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-brand-teal-100"
           : "bg-transparent"
       }`}
     >
@@ -66,10 +66,7 @@ export default function Navigation() {
                 fill="none"
               />
             </svg>
-            <span
-              className="text-neutral-900 leading-tight"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
+            <span className="text-neutral-900 leading-tight" style={{ fontFamily: "var(--font-heading)" }}>
               <span className="font-700 text-base block">Sweet Home</span>
               <span className="font-400 text-[10px] tracking-widest uppercase text-brand-teal-600 block -mt-0.5">
                 Services
@@ -78,12 +75,12 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-5 rounded-full border border-brand-teal-100 bg-white/75 px-4 py-2">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-neutral-600 hover:text-brand-teal-600 transition-colors duration-150"
+                className="text-sm font-medium text-neutral-700 hover:text-brand-teal-600 transition-colors duration-150"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 {link.label}
@@ -102,7 +99,7 @@ export default function Navigation() {
             </a>
             <a
               href="#pricing"
-              className="rounded-lg bg-brand-teal-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-teal-600 transition-colors duration-150 shadow-sm"
+              className="rounded-lg bg-brand-teal-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-teal-600 transition-colors duration-150 shadow-brand"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Get Started Free

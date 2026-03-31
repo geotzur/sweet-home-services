@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Main paw pad -->
+  <ellipse cx="24" cy="30" rx="10" ry="9" fill="#1A6B6B"/>
+  <!-- Inner paw detail -->
+  <ellipse cx="24" cy="30" rx="6" ry="5.5" fill="#1A6B6B" opacity="0.6"/>
+  <!-- Top left toe pad -->
+  <ellipse cx="13" cy="21" rx="4" ry="4.5" fill="#1A6B6B"/>
+  <!-- Top center-left toe pad -->
+  <ellipse cx="20" cy="18" rx="4" ry="4.5" fill="#1A6B6B"/>
+  <!-- Top center-right toe pad -->
+  <ellipse cx="28" cy="18" rx="4" ry="4.5" fill="#1A6B6B"/>
+  <!-- Top right toe pad -->
+  <ellipse cx="35" cy="21" rx="4" ry="4.5" fill="#1A6B6B"/>
+  <!-- Amber heart accent on main pad -->
+  <path d="M24 27 C24 27 20 24 20 26.5 C20 28 22 29.5 24 31 C26 29.5 28 28 28 26.5 C28 24 24 27 24 27Z" fill="#F5A623"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Dumbbell bar -->
+  <rect x="14" y="22" width="20" height="4" rx="2" fill="#1A6B6B"/>
+  <!-- Left outer weight -->
+  <rect x="6" y="17" width="6" height="14" rx="3" fill="#1A6B6B"/>
+  <!-- Left inner weight -->
+  <rect x="12" y="19" width="4" height="10" rx="2" fill="#F5A623"/>
+  <!-- Right inner weight -->
+  <rect x="32" y="19" width="4" height="10" rx="2" fill="#F5A623"/>
+  <!-- Right outer weight -->
+  <rect x="36" y="17" width="6" height="14" rx="3" fill="#1A6B6B"/>
+  <!-- Center bar accent -->
+  <rect x="21" y="22" width="6" height="4" rx="1" fill="#F5A623" opacity="0.6"/>
+</svg>

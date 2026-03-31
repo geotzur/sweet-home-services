@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -71,9 +72,10 @@ export default function BlogPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-16 pb-12">
         {/* Hero */}
-        <section className="py-20 text-center" style={{ background: "#1A6B6B" }}>
+        <section className="brand-grid relative overflow-hidden py-20 text-center" style={{ background: "#1A6B6B" }}>
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,166,35,0.28),transparent_58%)]" />
           <div className="mx-auto max-w-3xl px-4">
             <p
               className="text-sm font-bold uppercase tracking-widest mb-4"
@@ -94,26 +96,23 @@ export default function BlogPage() {
         </section>
 
         {/* Blog Grid */}
-        <section className="py-16" style={{ background: "#F9FAFB" }}>
+        <section className="py-16" style={{ background: "transparent" }}>
           <div className="mx-auto max-w-6xl px-4">
+            <div className="section-shell p-5 sm:p-8">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <article
                   key={post.title}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col"
+                  className="bg-white rounded-2xl overflow-hidden border border-brand-teal-100/60 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col"
                 >
-                  {/* Image placeholder */}
-                  <div
-                    className="h-48 flex items-center justify-center"
-                    style={{ background: "linear-gradient(135deg, #1A6B6B 0%, #2E9E7D 100%)" }}
-                  >
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                      <rect x="12" y="16" width="40" height="32" rx="4" stroke="white" strokeWidth="2" fill="none" />
-                      <line x1="12" y1="28" x2="52" y2="28" stroke="white" strokeWidth="2" />
-                      <rect x="18" y="34" width="12" height="3" rx="1.5" fill="white" opacity="0.6" />
-                      <rect x="18" y="40" width="20" height="2" rx="1" fill="white" opacity="0.4" />
-                      <rect x="18" y="44" width="16" height="2" rx="1" fill="white" opacity="0.3" />
-                    </svg>
+                  {/* Blog post image */}
+                  <div className="relative h-48">
+                    <Image
+                      src="/images/blog-placeholder.jpg"
+                      alt="Blog post illustration"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
 
                   <div className="p-6 flex-1 flex flex-col">
@@ -151,32 +150,35 @@ export default function BlogPage() {
                 </article>
               ))}
             </div>
+            </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="py-16 text-center" style={{ background: "#1A6B6B" }}>
+        <section className="py-16 text-center" style={{ background: "transparent" }}>
           <div className="mx-auto max-w-2xl px-4">
-            <h2
-              className="text-3xl font-bold text-white mb-4"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Ready to Get Found Online?
-            </h2>
-            <p className="text-lg mb-8" style={{ fontFamily: "var(--font-sans)", color: "#B2DFDB" }}>
-              Don&apos;t wait for customers to find you. Let us build your online presence.
-            </p>
-            <a
-              href="/pricing"
-              className="inline-block rounded-xl px-8 py-4 font-semibold text-base transition-colors duration-150"
-              style={{
-                fontFamily: "var(--font-heading)",
-                background: "#F5A623",
-                color: "#111827",
-              }}
-            >
-              View Plans &amp; Pricing
-            </a>
+            <div className="section-shell brand-glow px-6 py-10 sm:px-10">
+              <h2
+                className="text-3xl font-bold text-neutral-900 mb-4"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Ready to Get Found Online?
+              </h2>
+              <p className="text-lg mb-8" style={{ fontFamily: "var(--font-sans)", color: "#4B5563" }}>
+                Don&apos;t wait for customers to find you. Let us build your online presence.
+              </p>
+              <a
+                href="/pricing"
+                className="inline-block rounded-xl px-8 py-4 font-semibold text-base transition-colors duration-150"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  background: "#F5A623",
+                  color: "#111827",
+                }}
+              >
+                View Plans &amp; Pricing
+              </a>
+            </div>
           </div>
         </section>
       </main>

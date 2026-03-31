@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- House shape -->
+  <!-- Roof -->
+  <path d="M24 8 L6 22 L10 22 L10 40 L38 40 L38 22 L42 22 Z" fill="#1A6B6B"/>
+  <!-- Roof ridge line (lighter) -->
+  <path d="M24 8 L6 22 L42 22 Z" fill="#1A6B6B" opacity="0.8"/>
+  <!-- Door -->
+  <rect x="20" y="30" width="8" height="10" rx="1" fill="#F5A623"/>
+  <!-- Window left -->
+  <rect x="12" y="26" width="6" height="6" rx="1" fill="#F5A623" opacity="0.8"/>
+  <!-- Window right -->
+  <rect x="30" y="26" width="6" height="6" rx="1" fill="#F5A623" opacity="0.8"/>
+  <!-- Checkmark on roof -->
+  <path d="M17 17 L21 21 L31 14" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

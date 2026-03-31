@@ -26,6 +26,14 @@ export const metadata: Metadata = {
     description:
       "Done-for-you websites + SEO for local businesses. Starting at $149/mo.",
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sweet Home Services — Your Town. Found Online.",
+      },
+    ],
   },
 };
 
