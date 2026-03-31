@@ -5,23 +5,17 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "How It Works — Sweet Home Services",
   description:
-    "See how Sweet Home Services builds and optimizes your local business website in 48 hours. Simple 3-step process from discovery call to live site.",
-  openGraph: {
-    title: "How It Works — Sweet Home Services",
-    description:
-      "From discovery call to Google rankings in 3 simple steps. Your site live in 48 hours.",
-  },
+    "See how Sweet Home Services builds and optimizes your local business website in 48 hours. Simple 3-step process from discovery call to Google rankings.",
 };
 
-/* ─── Step Data ──────────────────────────────────────────────────── */
-
+/* ─── Step data ──────────────────────────────────────────────────── */
 const steps = [
   {
     number: 1,
     title: "Tell Us About Your Business",
-    subtitle: "Discovery call — just 15 minutes",
+    subtitle: "Free 15-minute discovery call",
     description:
-      "We hop on a quick call to learn about your business, your customers, and what makes you different. No tech jargon, no homework — just a friendly conversation so we can build something that actually sounds like you.",
+      "We hop on a quick call to learn about your business, your ideal customers, and what makes you different. No prep needed — just tell us what you do and where you serve.",
     icon: (
       <svg
         width="64"
@@ -30,35 +24,22 @@ const steps = [
         fill="none"
         aria-hidden="true"
       >
-        {/* Phone/chat bubble */}
-        <rect x="16" y="12" width="32" height="40" rx="4" fill="#E6F3F3" />
-        <rect x="20" y="20" width="24" height="4" rx="2" fill="#97CDCD" />
-        <rect x="20" y="28" width="18" height="4" rx="2" fill="#97CDCD" />
-        <rect x="20" y="36" width="14" height="4" rx="2" fill="#97CDCD" />
-        {/* Person silhouette */}
-        <circle cx="48" cy="18" r="6" fill="#1A6B6B" />
+        {/* Phone / chat bubble */}
+        <rect x="8" y="14" width="48" height="36" rx="8" fill="#E6F3F3" />
+        <rect x="14" y="22" width="24" height="3" rx="1.5" fill="#1A6B6B" />
+        <rect x="14" y="29" width="18" height="3" rx="1.5" fill="#97CDCD" />
+        <rect x="14" y="36" width="22" height="3" rx="1.5" fill="#97CDCD" />
+        {/* Chat dots */}
+        <circle cx="44" cy="29" r="2" fill="#F5A623" />
+        <circle cx="44" cy="35" r="2" fill="#F5A623" />
+        {/* Clock badge */}
+        <circle cx="50" cy="18" r="10" fill="#1A6B6B" />
         <path
-          d="M42 30C42 26.6863 44.6863 24 48 24C51.3137 24 54 26.6863 54 30V32H42V30Z"
-          fill="#1A6B6B"
-        />
-        {/* Speech lines */}
-        <path
-          d="M12 22L8 20"
-          stroke="#F5A623"
+          d="M50 13V18L53 20"
+          stroke="white"
           strokeWidth="2"
           strokeLinecap="round"
-        />
-        <path
-          d="M12 28L6 28"
-          stroke="#F5A623"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M12 34L8 36"
-          stroke="#F5A623"
-          strokeWidth="2"
-          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     ),
@@ -66,9 +47,9 @@ const steps = [
   {
     number: 2,
     title: "We Build Your Website + SEO",
-    subtitle: "Launched in 48 hours",
+    subtitle: "48 hours to launch",
     description:
-      "Our team designs a fast, mobile-first website tailored to your industry — then wires it for local SEO from day one. Google Business Profile, keywords, meta tags, schema markup, the works. You review, we revise, and you're live.",
+      "Our team designs a professional, mobile-first website tailored to your industry and optimizes every page for local search. Google Business Profile setup included.",
     icon: (
       <svg
         width="64"
@@ -78,30 +59,24 @@ const steps = [
         aria-hidden="true"
       >
         {/* Browser window */}
-        <rect x="8" y="10" width="48" height="36" rx="4" fill="#E6F3F3" />
-        <rect x="8" y="10" width="48" height="10" rx="4" fill="#1A6B6B" />
-        <circle cx="16" cy="15" r="2" fill="#F87171" />
-        <circle cx="22" cy="15" r="2" fill="#FBBF24" />
-        <circle cx="28" cy="15" r="2" fill="#34D399" />
-        {/* Code lines */}
-        <rect x="14" y="26" width="20" height="3" rx="1.5" fill="#97CDCD" />
-        <rect x="14" y="32" width="14" height="3" rx="1.5" fill="#97CDCD" />
-        <rect x="14" y="38" width="18" height="3" rx="1.5" fill="#97CDCD" />
+        <rect x="6" y="12" width="52" height="40" rx="6" fill="#E6F3F3" />
+        <rect x="6" y="12" width="52" height="10" rx="6" fill="#1A6B6B" />
+        <rect x="6" y="18" width="52" height="4" fill="#1A6B6B" />
+        {/* Browser dots */}
+        <circle cx="14" cy="17" r="2" fill="#F87171" />
+        <circle cx="21" cy="17" r="2" fill="#FBBF24" />
+        <circle cx="28" cy="17" r="2" fill="#34D399" />
+        {/* Code / content lines */}
+        <rect x="12" y="28" width="20" height="3" rx="1.5" fill="#1A6B6B" />
+        <rect x="12" y="34" width="28" height="2" rx="1" fill="#97CDCD" />
+        <rect x="12" y="39" width="24" height="2" rx="1" fill="#97CDCD" />
         {/* Rocket */}
+        <circle cx="48" cy="38" r="8" fill="#F5A623" />
         <path
-          d="M46 52L50 44L54 52H46Z"
-          fill="#F5A623"
+          d="M48 33L50 38H46L48 33Z"
+          fill="white"
         />
-        <circle cx="50" cy="42" r="4" fill="#F5A623" />
-        <path
-          d="M50 38V30"
-          stroke="#F5A623"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        {/* Speed lines */}
-        <path d="M44 48L40 50" stroke="#1A6B6B" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M56 48L60 50" stroke="#1A6B6B" strokeWidth="1.5" strokeLinecap="round" />
+        <rect x="46.5" y="38" width="3" height="4" rx="1" fill="white" />
       </svg>
     ),
   },
@@ -110,7 +85,7 @@ const steps = [
     title: "Watch Your Business Grow",
     subtitle: "Monthly reports + ongoing optimization",
     description:
-      "Every month we send you a clear report showing your rankings, traffic, and leads. We keep optimizing your SEO, updating your content, and making sure you stay ahead of competitors — so you can focus on running your business.",
+      "We track your Google rankings, send clear monthly reports, and continuously optimize your content and SEO so you keep climbing — and keep getting calls.",
     icon: (
       <svg
         width="64"
@@ -119,35 +94,36 @@ const steps = [
         fill="none"
         aria-hidden="true"
       >
-        {/* Chart background */}
-        <rect x="8" y="12" width="48" height="40" rx="4" fill="#E6F3F3" />
-        {/* Grid lines */}
-        <path d="M14 44H50" stroke="#C0E1E1" strokeWidth="1" />
-        <path d="M14 36H50" stroke="#C0E1E1" strokeWidth="1" />
-        <path d="M14 28H50" stroke="#C0E1E1" strokeWidth="1" />
-        {/* Growth line */}
+        {/* Chart bg */}
+        <rect x="6" y="12" width="52" height="40" rx="6" fill="#E6F3F3" />
+        {/* Growth chart */}
         <path
-          d="M14 42L24 34L34 36L44 24L50 18"
+          d="M14 44L24 34L32 38L50 20"
           stroke="#1A6B6B"
-          strokeWidth="2.5"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
-        {/* Area under line */}
+        {/* Chart area fill */}
         <path
-          d="M14 42L24 34L34 36L44 24L50 18V44H14V42Z"
+          d="M14 44L24 34L32 38L50 20V44H14Z"
           fill="#1A6B6B"
-          opacity="0.1"
+          opacity="0.12"
         />
-        {/* Data points */}
-        <circle cx="24" cy="34" r="3" fill="#1A6B6B" />
-        <circle cx="34" cy="36" r="3" fill="#1A6B6B" />
-        <circle cx="44" cy="24" r="3" fill="#1A6B6B" />
-        {/* Star / success indicator */}
-        <circle cx="50" cy="18" r="4" fill="#F5A623" />
+        {/* Arrow tip */}
         <path
-          d="M50 15L50.9 17.1L53.2 17.4L51.6 18.9L52 21.2L50 20.1L48 21.2L48.4 18.9L46.8 17.4L49.1 17.1L50 15Z"
+          d="M46 20H50V24"
+          stroke="#1A6B6B"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        {/* Star badge */}
+        <circle cx="50" cy="16" r="8" fill="#F5A623" />
+        <path
+          d="M50 11L51.5 14.5L55 15L52.5 17.5L53 21L50 19.5L47 21L47.5 17.5L45 15L48.5 14.5L50 11Z"
           fill="white"
         />
       </svg>
@@ -155,207 +131,174 @@ const steps = [
   },
 ];
 
-/* ─── Deliverables Checklist ─────────────────────────────────────── */
-
+/* ─── Deliverables checklist ─────────────────────────────────────── */
 const deliverables = [
   {
     category: "Website",
     items: [
       "Custom-designed, mobile-first website",
-      "Up to 7 pages (Home, About, Services, Contact, etc.)",
-      "Lightning-fast load times (Core Web Vitals optimized)",
-      "SSL certificate and security hardening",
-      "Contact forms and click-to-call buttons",
+      "Industry-specific copywriting",
+      "Click-to-call and contact forms",
+      "Photo gallery and testimonials section",
+      "Lightning-fast hosting included",
     ],
   },
   {
-    category: "SEO",
+    category: "SEO & Search",
     items: [
       "Google Business Profile setup and optimization",
       "Local keyword research and targeting",
-      "On-page SEO (meta tags, headings, schema markup)",
-      "Google Analytics and Search Console setup",
-      "Monthly SEO performance report",
+      "On-page SEO for every page",
+      "Schema markup for rich search results",
+      "Citation building across 50+ directories",
     ],
   },
   {
     category: "Ongoing Support",
     items: [
-      "Dedicated account manager",
-      "Unlimited content updates",
       "Monthly ranking and traffic reports",
-      "Competitor monitoring",
+      "Continuous SEO optimization",
+      "Dedicated account manager",
+      "Content updates as your business grows",
       "99.9% uptime guarantee",
     ],
   },
 ];
-
-/* ─── Page Component ─────────────────────────────────────────────── */
 
 export default function HowItWorksPage() {
   return (
     <>
       <Navigation />
       <main className="min-h-screen pt-16">
-        {/* ── Hero Section ───────────────────────────────────────── */}
+        {/* ── Hero ─────────────────────────────────────────────────── */}
         <section
           className="relative overflow-hidden py-20 sm:py-28"
-          aria-labelledby="hiw-hero-heading"
+          aria-label="How It Works hero"
         >
           {/* Background gradient */}
           <div
             className="absolute inset-0 -z-10"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 50% -10%, #C0E1E1 0%, transparent 70%)",
+                "radial-gradient(ellipse 80% 50% at 50% 0%, #C0E1E1 0%, transparent 70%)",
             }}
           />
 
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
             <p className="section-overline mb-4">The Process</p>
-
             <h1
-              id="hiw-hero-heading"
               className="text-neutral-900 leading-tight"
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2.25rem, 5vw, 3rem)",
+                fontSize: "clamp(2rem, 5vw, 3rem)",
                 fontWeight: 700,
                 letterSpacing: "-0.025em",
               }}
             >
-              From Phone Call to{" "}
-              <span
-                className="relative inline-block"
-                style={{ color: "#1A6B6B" }}
-              >
-                Google Rankings
-                <span
-                  className="absolute bottom-0 left-0 right-0 h-1 rounded-full"
-                  style={{ background: "#F5A623", bottom: "-4px" }}
-                  aria-hidden="true"
-                />
-              </span>
-              <br />
-              in Three Simple Steps
+              From First Call to First Page{" "}
+              <span style={{ color: "#1A6B6B" }}>in 48 Hours</span>
             </h1>
-
             <p
-              className="mt-6 text-neutral-600 leading-relaxed mx-auto"
+              className="mt-5 text-neutral-600 leading-relaxed mx-auto"
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "1.125rem",
                 maxWidth: "560px",
               }}
             >
-              No tech skills needed. No confusing dashboards. We do the heavy
-              lifting so you can focus on what you do best — running your
-              business.
+              We keep it simple. Three steps, no jargon, no contracts. You focus
+              on running your business while we get you found on Google.
             </p>
           </div>
         </section>
 
-        {/* ── 3-Step Process Section ─────────────────────────────── */}
+        {/* ── 3-Step Process ───────────────────────────────────────── */}
         <section
-          className="py-20 sm:py-24"
+          className="py-16 sm:py-20"
           style={{ background: "#F9FAFB" }}
           aria-labelledby="steps-heading"
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 id="steps-heading" className="sr-only">
-              Our three-step process
-            </h2>
+          <h2 id="steps-heading" className="sr-only">
+            Three-step process
+          </h2>
 
-            {/* Steps container with timeline */}
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="relative">
-              {/* ─ Desktop horizontal timeline line ─ */}
+              {/* ── Timeline connector line ── */}
+              {/* Vertical line (mobile) */}
               <div
-                className="hidden lg:block absolute top-[72px] left-[16.67%] right-[16.67%] h-0.5"
+                className="absolute left-8 top-12 bottom-12 w-0.5 md:hidden"
+                style={{ background: "#C0E1E1" }}
+                aria-hidden="true"
+              />
+              {/* Horizontal line (desktop) */}
+              <div
+                className="hidden md:block absolute top-[72px] left-[calc(16.67%+32px)] right-[calc(16.67%+32px)] h-0.5"
                 style={{ background: "#C0E1E1" }}
                 aria-hidden="true"
               />
 
-              {/* ─ Mobile vertical timeline line ─ */}
-              <div
-                className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5"
-                style={{ background: "#C0E1E1" }}
-                aria-hidden="true"
-              />
-
-              <div className="grid lg:grid-cols-3 gap-12 lg:gap-8">
+              {/* ── Steps grid ── */}
+              <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
                 {steps.map((step) => (
-                  <div
-                    key={step.number}
-                    className="relative flex lg:flex-col items-start lg:items-center gap-6 lg:gap-0"
-                  >
-                    {/* Numbered circle */}
-                    <div className="relative z-10 flex-shrink-0">
-                      <div
-                        className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg"
-                        style={{
-                          background: "#1A6B6B",
-                          fontFamily: "var(--font-heading)",
-                          boxShadow:
-                            "0 4px 14px 0 rgb(26 107 107 / 0.3), inset 0 2px 4px rgb(255 255 255 / 0.15)",
-                        }}
-                        aria-hidden="true"
-                      >
-                        {step.number}
-                      </div>
-                    </div>
-
-                    {/* Card content */}
-                    <div className="lg:mt-8 lg:text-center flex-1">
-                      {/* Illustration */}
-                      <div
-                        className="hidden lg:flex items-center justify-center w-32 h-32 mx-auto mb-6 rounded-2xl"
-                        style={{ background: "white" }}
-                      >
-                        {step.icon}
+                  <div key={step.number} className="relative">
+                    <div className="flex md:flex-col items-start md:items-center md:text-center gap-5 md:gap-0">
+                      {/* Numbered circle */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div
+                          className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl"
+                          style={{
+                            background: "#1A6B6B",
+                            fontFamily: "var(--font-heading)",
+                            boxShadow: "0 4px 14px 0 rgb(26 107 107 / 0.30)",
+                          }}
+                          aria-hidden="true"
+                        >
+                          {step.number}
+                        </div>
                       </div>
 
-                      {/* Mobile illustration (smaller) */}
-                      <div
-                        className="lg:hidden flex items-center justify-center w-16 h-16 mb-4 rounded-xl"
-                        style={{ background: "white" }}
-                      >
-                        <div className="scale-75">{step.icon}</div>
+                      <div className="md:mt-6 flex-1">
+                        {/* Illustration */}
+                        <div className="hidden md:flex justify-center mb-5">
+                          {step.icon}
+                        </div>
+
+                        {/* Title */}
+                        <h3
+                          className="text-neutral-900 mb-1"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            fontSize: "1.25rem",
+                            fontWeight: 700,
+                          }}
+                        >
+                          {step.title}
+                        </h3>
+
+                        {/* Subtitle badge */}
+                        <span
+                          className="inline-block rounded-full px-3 py-0.5 text-xs font-semibold mb-3"
+                          style={{
+                            background: "#FEF8EE",
+                            color: "#B36B12",
+                            fontFamily: "var(--font-heading)",
+                          }}
+                        >
+                          {step.subtitle}
+                        </span>
+
+                        {/* Description */}
+                        <p
+                          className="text-neutral-600 leading-relaxed"
+                          style={{
+                            fontFamily: "var(--font-sans)",
+                            fontSize: "0.9375rem",
+                          }}
+                        >
+                          {step.description}
+                        </p>
                       </div>
-
-                      <h3
-                        className="text-neutral-900 mb-1"
-                        style={{
-                          fontFamily: "var(--font-heading)",
-                          fontSize: "1.375rem",
-                          fontWeight: 700,
-                        }}
-                      >
-                        {step.title}
-                      </h3>
-
-                      <p
-                        className="mb-3 font-semibold"
-                        style={{
-                          fontFamily: "var(--font-heading)",
-                          fontSize: "0.8125rem",
-                          color: "#F5A623",
-                          letterSpacing: "0.02em",
-                        }}
-                      >
-                        {step.subtitle}
-                      </p>
-
-                      <p
-                        className="text-neutral-600 leading-relaxed"
-                        style={{
-                          fontFamily: "var(--font-sans)",
-                          fontSize: "0.9375rem",
-                          maxWidth: "360px",
-                          margin: "0 auto",
-                        }}
-                      >
-                        {step.description}
-                      </p>
                     </div>
                   </div>
                 ))}
@@ -364,15 +307,15 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* ── What You Get Section ───────────────────────────────── */}
+        {/* ── What You Get ─────────────────────────────────────────── */}
         <section
-          className="py-20 sm:py-24 bg-white"
+          className="py-16 sm:py-24 bg-white"
           aria-labelledby="deliverables-heading"
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             {/* Section header */}
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <p className="section-overline mb-3">What You Get</p>
+              <p className="section-overline mb-3">Everything Included</p>
               <h2
                 id="deliverables-heading"
                 className="text-neutral-900 leading-tight"
@@ -383,8 +326,8 @@ export default function HowItWorksPage() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Everything Your Business Needs to{" "}
-                <span style={{ color: "#1A6B6B" }}>Get Found Online</span>
+                What You Get{" "}
+                <span style={{ color: "#1A6B6B" }}>with Every Plan</span>
               </h2>
               <p
                 className="mt-4 text-neutral-600 leading-relaxed"
@@ -393,133 +336,137 @@ export default function HowItWorksPage() {
                   fontSize: "1.0625rem",
                 }}
               >
-                Every plan includes a full suite of tools and services — no
-                surprise add-ons.
+                No hidden fees, no modules to unlock. Every plan includes a
+                fully built website, local SEO, and ongoing support.
               </p>
             </div>
 
             {/* Deliverables grid */}
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
               {deliverables.map((group) => (
                 <div
                   key={group.category}
-                  className="rounded-2xl border border-neutral-100 p-8"
-                  style={{ background: "#F9FAFB" }}
+                  className="rounded-2xl border p-6 lg:p-8"
+                  style={{ borderColor: "#E6F3F3", background: "#FAFEFE" }}
                 >
-                  {/* Category icon badge */}
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                    style={{ background: "#E6F3F3" }}
-                  >
-                    {group.category === "Website" && (
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <rect
-                          x="2"
-                          y="3"
-                          width="20"
-                          height="14"
-                          rx="2"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M8 21H16"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M12 17V21"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    )}
-                    {group.category === "SEO" && (
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <circle
-                          cx="11"
-                          cy="11"
-                          r="7"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                          fill="none"
-                        />
-                        <path
-                          d="M16 16L21 21"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    )}
-                    {group.category === "Ongoing Support" && (
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M12 22C12 22 4 18 4 11V5L12 2L20 5V11C20 18 12 22 12 22Z"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                          strokeLinejoin="round"
-                          fill="none"
-                        />
-                        <path
-                          d="M9 12L11 14L15 10"
-                          stroke="#1A6B6B"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    )}
-                  </div>
-
-                  <h3
-                    className="text-neutral-900 mb-5"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "1.25rem",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {group.category}
-                  </h3>
-
-                  <ul className="space-y-3.5" role="list">
-                    {group.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        {/* Checkmark */}
+                  {/* Category icon + title */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: "#1A6B6B" }}
+                    >
+                      {group.category === "Website" && (
                         <svg
                           width="20"
                           height="20"
                           viewBox="0 0 20 20"
                           fill="none"
                           aria-hidden="true"
-                          className="flex-shrink-0 mt-0.5"
                         >
-                          <circle cx="10" cy="10" r="10" fill="#1A6B6B" />
-                          <path
-                            d="M6.5 10.5L8.5 12.5L13.5 7.5"
+                          <rect
+                            x="2"
+                            y="3"
+                            width="16"
+                            height="12"
+                            rx="2"
                             stroke="white"
                             strokeWidth="1.5"
+                          />
+                          <path
+                            d="M2 7H18"
+                            stroke="white"
+                            strokeWidth="1.5"
+                          />
+                          <path
+                            d="M8 17H12"
+                            stroke="white"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M10 15V17"
+                            stroke="white"
+                            strokeWidth="1.5"
+                          />
+                        </svg>
+                      )}
+                      {group.category === "SEO & Search" && (
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <circle
+                            cx="9"
+                            cy="9"
+                            r="5.5"
+                            stroke="white"
+                            strokeWidth="1.5"
+                          />
+                          <path
+                            d="M13.5 13.5L17 17"
+                            stroke="white"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      )}
+                      {group.category === "Ongoing Support" && (
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M10 2V5M10 15V18M18 10H15M5 10H2M15.66 4.34L13.54 6.46M6.46 13.54L4.34 15.66M15.66 15.66L13.54 13.54M6.46 6.46L4.34 4.34"
+                            stroke="white"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                          <circle
+                            cx="10"
+                            cy="10"
+                            r="3"
+                            stroke="white"
+                            strokeWidth="1.5"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                    <h3
+                      className="text-neutral-900"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        fontSize: "1.125rem",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {group.category}
+                    </h3>
+                  </div>
+
+                  {/* Checklist */}
+                  <ul className="space-y-3" role="list">
+                    {group.items.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        {/* Check icon */}
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          className="flex-shrink-0 mt-0.5"
+                          aria-hidden="true"
+                        >
+                          <circle cx="10" cy="10" r="10" fill="#E6F3F3" />
+                          <path
+                            d="M6.5 10.5L9 13L13.5 7.5"
+                            stroke="#1A6B6B"
+                            strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
@@ -542,14 +489,14 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* ── Bottom CTA Section ─────────────────────────────────── */}
+        {/* ── Bottom CTA ───────────────────────────────────────────── */}
         <section
           className="py-20 sm:py-24"
           style={{ background: "#1A6B6B" }}
-          aria-labelledby="hiw-cta-heading"
+          aria-labelledby="cta-heading"
         >
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            {/* Badge */}
+            {/* Decorative badge */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8"
               style={{ background: "rgb(255 255 255 / 0.12)" }}
@@ -561,18 +508,18 @@ export default function HowItWorksPage() {
                 fill="#F5A623"
                 aria-hidden="true"
               >
-                <path d="M8 0L10.2 5.8L16 6.2L11.6 10L13 16L8 12.8L3 16L4.4 10L0 6.2L5.8 5.8L8 0Z" />
+                <path d="M8 0L10 5.5H16L11 9L13 15L8 11.5L3 15L5 9L0 5.5H6L8 0Z" />
               </svg>
               <span
                 className="text-white text-sm font-medium"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                Join 500+ local businesses
+                500+ local businesses served
               </span>
             </div>
 
             <h2
-              id="hiw-cta-heading"
+              id="cta-heading"
               className="text-white leading-tight mb-5"
               style={{
                 fontFamily: "var(--font-heading)",
@@ -585,22 +532,21 @@ export default function HowItWorksPage() {
             </h2>
 
             <p
-              className="mb-9 leading-relaxed"
+              className="mb-9 leading-relaxed mx-auto"
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "1.125rem",
                 color: "#97CDCD",
                 maxWidth: "520px",
-                margin: "0 auto 2.25rem",
               }}
             >
-              Book your free 15-minute discovery call and we&apos;ll have your site
-              live within 48 hours. No setup fees, no contracts.
+              Book your free 15-minute discovery call today. No commitments, no
+              pressure — just a quick chat about how we can help your business
+              get found online.
             </p>
 
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              {/* Primary: amber */}
               <a
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold transition-all duration-150 w-full sm:w-auto"
@@ -611,7 +557,7 @@ export default function HowItWorksPage() {
                   boxShadow: "0 4px 20px 0 rgb(245 166 35 / 0.40)",
                 }}
               >
-                Book Your Free Call
+                Book Free Discovery Call
                 <svg
                   width="16"
                   height="16"
@@ -627,13 +573,12 @@ export default function HowItWorksPage() {
                 </svg>
               </a>
 
-              {/* Secondary: white outline */}
               <a
                 href="/pricing"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-150 hover:border-white/60 w-full sm:w-auto"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                See Plans &amp; Pricing
+                View Pricing
               </a>
             </div>
 
@@ -643,7 +588,7 @@ export default function HowItWorksPage() {
                 "No setup fees",
                 "No contracts",
                 "48hr launch",
-                "Dedicated manager",
+                "Cancel anytime",
               ].map((item) => (
                 <span
                   key={item}
@@ -660,10 +605,9 @@ export default function HowItWorksPage() {
                     fill="none"
                     aria-hidden="true"
                   >
-                    <circle cx="7" cy="7" r="7" fill="rgb(255 255 255 / 0.2)" />
                     <path
-                      d="M4 7.5L6 9.5L10 5.5"
-                      stroke="white"
+                      d="M3.5 7L6 9.5L10.5 4.5"
+                      stroke="#97CDCD"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
