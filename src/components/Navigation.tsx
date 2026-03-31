@@ -101,7 +101,7 @@ export default function Navigation() {
               See Plans
             </a>
             <a
-              href="#get-started"
+              href="#pricing"
               className="rounded-lg bg-brand-teal-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-teal-600 transition-colors duration-150 shadow-sm"
               style={{ fontFamily: "var(--font-heading)" }}
             >
@@ -154,7 +154,7 @@ export default function Navigation() {
             ))}
             <div className="pt-3 border-t border-neutral-100">
               <a
-                href="#get-started"
+                href="#pricing"
                 className="block w-full rounded-lg bg-brand-teal-500 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-brand-teal-600"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

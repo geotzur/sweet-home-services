@@ -6,6 +6,13 @@ type Plan = (typeof VALID_PLANS)[number];
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json(
+        { error: "Missing Stripe configuration" },
+        { status: 503 },
+      );
+    }
+
     const body = (await request.json()) as { planId?: string };
 
     if (!body.planId || !VALID_PLANS.includes(body.planId as Plan)) {
@@ -18,8 +25,8 @@ export async function POST(request: NextRequest) {
     const priceId = PLAN_PRICE_MAP[body.planId];
     if (!priceId) {
       return NextResponse.json(
-        { error: `Stripe price not configured for plan: ${body.planId}` },
-        { status: 500 },
+        { error: "Missing Stripe configuration" },
+        { status: 503 },
       );
     }
 
