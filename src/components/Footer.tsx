@@ -2,19 +2,19 @@ const footerNav = {
   services: {
     title: "Services",
     links: [
-      { label: "Starter Plan", href: "#pricing" },
-      { label: "Growth Plan", href: "#pricing" },
-      { label: "Authority Plan", href: "#pricing" },
-      { label: "SEO Services", href: "#how-it-works" },
+      { label: "Basic Plan", href: "/pricing" },
+      { label: "Starter Plan", href: "/pricing" },
+      { label: "Growth Plan", href: "/pricing" },
+      { label: "Authority Plan", href: "/pricing" },
     ],
   },
   industries: {
     title: "Industries",
     links: [
-      { label: "Contractors", href: "#industries/contractors" },
-      { label: "Salons & Spas", href: "#industries/salons" },
-      { label: "Medical & Dental", href: "#industries/medical" },
-      { label: "Restaurants", href: "#industries/restaurants" },
+      { label: "Contractors", href: "/examples/contractors" },
+      { label: "Salons & Spas", href: "/examples/salons" },
+      { label: "Medical & Dental", href: "/examples/medical" },
+      { label: "Restaurants", href: "/examples/restaurants" },
     ],
   },
   company: {
@@ -88,9 +88,9 @@ export default function Footer() {
                 color: "#6B7280",
               }}
             >
-              Websites + SEO for local businesses.
+              Smart websites for local businesses.
               <br />
-              Your town. Found online.
+              Built to grow with you.
             </p>
 
             {/* Social links */}

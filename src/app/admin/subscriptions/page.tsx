@@ -1,19 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { getSupabase } from "@/lib/supabase-browser";
+
+const PLAN_PRICES: Record<string, number> = {
+  basic: 89,
+  starter: 149,
+  growth: 299,
+  authority: 499,
+};
+
+const planLabels: Record<string, string> = {
+  basic: "Basic",
+  starter: "Starter",
+  growth: "Growth",
+  authority: "Authority",
+};
 
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     active: "bg-emerald-50 text-emerald-700 border-emerald-200",
     past_due: "bg-amber-50 text-amber-700 border-amber-200",
     canceled: "bg-red-50 text-red-700 border-red-200",
-    trialing: "bg-blue-50 text-blue-700 border-blue-200",
+    incomplete: "bg-neutral-50 text-neutral-600 border-neutral-200",
   };
   const labels: Record<string, string> = {
     active: "Active",
     past_due: "Past Due",
     canceled: "Canceled",
-    trialing: "Trialing",
+    incomplete: "Incomplete",
   };
   return (
     <span
@@ -36,91 +51,64 @@ function PlanBadge({ plan }: { plan: string }) {
         fontFamily: "var(--font-heading)",
       }}
     >
-      {plan}
+      {planLabels[plan] ?? plan}
     </span>
   );
 }
 
-const subscriptions = [
-  {
-    id: "sub_1",
-    client: "Mountain View Plumbing",
-    email: "mike@mountainviewplumbing.com",
-    plan: "Growth",
-    status: "active",
-    amount: "$299",
-    started: "2025-11-14",
-    nextBilling: "2026-04-14",
-    stripeId: "sub_1MowQVLk...hJ7p",
-  },
-  {
-    id: "sub_2",
-    client: "Studio Diane",
-    email: "diane@studiodiane.com",
-    plan: "Starter",
-    status: "active",
-    amount: "$149",
-    started: "2025-12-03",
-    nextBilling: "2026-04-03",
-    stripeId: "sub_1NpqRWMl...kL2q",
-  },
-  {
-    id: "sub_3",
-    client: "Millbrook Family Dental",
-    email: "greg@millbrookdental.com",
-    plan: "Authority",
-    status: "active",
-    amount: "$499",
-    started: "2026-01-10",
-    nextBilling: "2026-04-10",
-    stripeId: "sub_1OqrSXNm...mM3r",
-  },
-  {
-    id: "sub_4",
-    client: "Austin AC Pros",
-    email: "carlos@austinacpros.com",
-    plan: "Growth",
-    status: "past_due",
-    amount: "$299",
-    started: "2025-10-22",
-    nextBilling: "2026-03-22",
-    stripeId: "sub_1PrsTYOn...nN4s",
-  },
-  {
-    id: "sub_5",
-    client: "Paws & Claws Grooming",
-    email: "jen@pawsandclaws.com",
-    plan: "Basic",
-    status: "active",
-    amount: "$89",
-    started: "2026-02-18",
-    nextBilling: "2026-04-18",
-    stripeId: "sub_1QstUZPo...oO5t",
-  },
-  {
-    id: "sub_6",
-    client: "Sunrise Yoga Studio",
-    email: "amy@sunriseyoga.com",
-    plan: "Starter",
-    status: "canceled",
-    amount: "$149",
-    started: "2025-09-05",
-    nextBilling: "—",
-    stripeId: "sub_1RtuVAQp...pP6u",
-  },
-];
+interface Subscription {
+  id: string;
+  stripe_customer_id: string;
+  stripe_subscription_id: string;
+  plan: string;
+  status: string;
+  customer_email: string | null;
+  order_id: string | null;
+  created_at: string;
+  updated_at: string;
+  orders: { business_name: string; email: string } | null;
+}
 
 export default function SubscriptionsPage() {
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("all");
+
+  const fetchSubscriptions = useCallback(async () => {
+    const { data: { session } } = await getSupabase().auth.getSession();
+    if (!session) return;
+
+    const res = await fetch("/api/admin/subscriptions", {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      setSubscriptions(data.subscriptions ?? []);
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchSubscriptions(); }, [fetchSubscriptions]);
 
   const filtered =
     filter === "all"
       ? subscriptions
       : subscriptions.filter((s) => s.status === filter);
 
-  const totalMRR = subscriptions
-    .filter((s) => s.status === "active")
-    .reduce((sum, s) => sum + parseInt(s.amount.replace("$", "").replace(",", "")), 0);
+  const activeSubs = subscriptions.filter((s) => s.status === "active");
+  const totalMRR = activeSubs.reduce(
+    (sum, s) => sum + (PLAN_PRICES[s.plan] || 0),
+    0,
+  );
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-teal-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -146,7 +134,7 @@ export default function SubscriptionsPage() {
             Active Subscriptions
           </p>
           <p className="mt-1 text-2xl font-bold text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
-            {subscriptions.filter((s) => s.status === "active").length}
+            {activeSubs.length}
           </p>
         </div>
         <div className="rounded-xl border border-neutral-200 bg-white p-5">
@@ -191,7 +179,7 @@ export default function SubscriptionsPage() {
         <table className="min-w-full divide-y divide-neutral-200">
           <thead>
             <tr className="bg-neutral-50">
-              {["Client", "Plan", "Amount", "Status", "Started", "Next Billing", ""].map((h) => (
+              {["Client", "Plan", "Amount", "Status", "Started", "Stripe ID"].map((h) => (
                 <th
                   key={h}
                   className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-neutral-500"
@@ -203,44 +191,48 @@ export default function SubscriptionsPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-100">
-            {filtered.map((sub) => (
-              <tr key={sub.id} className="hover:bg-neutral-50 transition-colors">
-                <td className="px-5 py-4">
-                  <p className="text-sm font-semibold text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
-                    {sub.client}
-                  </p>
-                  <p className="text-xs text-neutral-400" style={{ fontFamily: "var(--font-sans)" }}>
-                    {sub.email}
-                  </p>
-                </td>
-                <td className="px-5 py-4">
-                  <PlanBadge plan={sub.plan} />
-                </td>
-                <td className="px-5 py-4">
-                  <span className="text-sm font-semibold text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
-                    {sub.amount}
-                  </span>
-                  <span className="text-xs text-neutral-400">/mo</span>
-                </td>
-                <td className="px-5 py-4">
-                  <StatusBadge status={sub.status} />
-                </td>
-                <td className="px-5 py-4 text-sm text-neutral-500" style={{ fontFamily: "var(--font-sans)" }}>
-                  {sub.started}
-                </td>
-                <td className="px-5 py-4 text-sm text-neutral-500" style={{ fontFamily: "var(--font-sans)" }}>
-                  {sub.nextBilling}
-                </td>
-                <td className="px-5 py-4 text-right">
-                  <button
-                    className="text-xs font-medium transition-colors hover:text-brand-teal-600"
-                    style={{ fontFamily: "var(--font-heading)", color: "#1A6B6B" }}
-                  >
-                    Manage
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {filtered.map((sub) => {
+              const clientName = sub.orders?.business_name ?? "Unknown";
+              const clientEmail = sub.orders?.email ?? sub.customer_email ?? "—";
+              const amount = PLAN_PRICES[sub.plan] ?? 0;
+
+              return (
+                <tr key={sub.id} className="hover:bg-neutral-50 transition-colors">
+                  <td className="px-5 py-4">
+                    <p className="text-sm font-semibold text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
+                      {clientName}
+                    </p>
+                    <p className="text-xs text-neutral-400" style={{ fontFamily: "var(--font-sans)" }}>
+                      {clientEmail}
+                    </p>
+                  </td>
+                  <td className="px-5 py-4">
+                    <PlanBadge plan={sub.plan} />
+                  </td>
+                  <td className="px-5 py-4">
+                    <span className="text-sm font-semibold text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
+                      ${amount}
+                    </span>
+                    <span className="text-xs text-neutral-400">/mo</span>
+                  </td>
+                  <td className="px-5 py-4">
+                    <StatusBadge status={sub.status} />
+                  </td>
+                  <td className="px-5 py-4 text-sm text-neutral-500" style={{ fontFamily: "var(--font-sans)" }}>
+                    {new Date(sub.created_at).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </td>
+                  <td className="px-5 py-4">
+                    <span className="text-xs font-mono text-neutral-400">
+                      {sub.stripe_subscription_id.slice(0, 20)}...
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         {filtered.length === 0 && (

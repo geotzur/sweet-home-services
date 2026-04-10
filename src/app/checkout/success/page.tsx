@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 const PLAN_LABELS: Record<string, string> = {
+  basic: "Basic",
   starter: "Starter",
   growth: "Growth",
   authority: "Authority",

@@ -3,8 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navigation() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -14,17 +17,27 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: "#how-it-works", label: "How It Works" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#industries", label: "Industries" },
-    { href: "#faq", label: "FAQ" },
-  ];
+  // On subpages, always use solid (scrolled) style
+  const useSolid = !isHome || isScrolled;
+
+  const navLinks = isHome
+    ? [
+        { href: "#how-it-works", label: "How It Works" },
+        { href: "#pricing", label: "Pricing" },
+        { href: "#industries", label: "Industries" },
+        { href: "#faq", label: "FAQ" },
+      ]
+    : [
+        { href: "/how-it-works", label: "How It Works" },
+        { href: "/pricing", label: "Pricing" },
+        { href: "/examples", label: "Examples" },
+        { href: "/faq", label: "FAQ" },
+      ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        isScrolled
+        useSolid
           ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-brand-teal-100"
           : "bg-transparent"
       }`}
@@ -34,7 +47,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
             <Image
-              src={isScrolled ? "/assets/logo-header.png" : "/assets/logo-header-white.png"}
+              src={useSolid ? "/assets/logo-header.png" : "/assets/logo-header-white.png"}
               alt="Sweet Home Services"
               width={200}
               height={56}
@@ -46,7 +59,7 @@ export default function Navigation() {
           {/* Desktop Nav Links */}
           <nav
             className={`hidden md:flex items-center gap-5 rounded-full px-4 py-2 transition-all duration-200 ${
-              isScrolled
+              useSolid
                 ? "border border-brand-teal-100 bg-white/75"
                 : "border border-white/15 bg-white/8 backdrop-blur-sm"
             }`}
@@ -56,7 +69,7 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-medium transition-colors duration-150 ${
-                  isScrolled
+                  useSolid
                     ? "text-neutral-700 hover:text-brand-teal-600"
                     : "text-white/80 hover:text-white"
                 }`}
@@ -70,16 +83,16 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="#pricing"
+              href={isHome ? "#pricing" : "/pricing"}
               className={`text-sm font-semibold transition-colors ${
-                isScrolled ? "text-brand-teal-600 hover:text-brand-teal-700" : "text-white/80 hover:text-white"
+                useSolid ? "text-brand-teal-600 hover:text-brand-teal-700" : "text-white/80 hover:text-white"
               }`}
               style={{ fontFamily: "var(--font-heading)" }}
             >
               See Plans
             </a>
             <a
-              href="#pricing"
+              href={isHome ? "#pricing" : "/pricing"}
               className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors duration-150"
               style={{
                 fontFamily: "var(--font-heading)",
@@ -95,7 +108,7 @@ export default function Navigation() {
           <button
             type="button"
             className={`md:hidden rounded-md p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors ${
-              isScrolled
+              useSolid
                 ? "text-neutral-600 hover:bg-neutral-100"
                 : "text-white hover:bg-white/10"
             }`}

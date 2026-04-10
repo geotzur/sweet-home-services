@@ -1,6 +1,7 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
+import { getSupabase } from "@/lib/supabase-browser";
 
 /* ─── Status types & styling ──────────────────────────────────────── */
 type OrderStatus =
@@ -48,232 +49,70 @@ const filterTabs: { label: string; value: OrderStatus | "all" }[] = [
 /* ─── Order interface ─────────────────────────────────────────────── */
 interface Order {
   id: string;
-  businessName: string;
+  business_name: string;
   email: string;
-  phone: string;
+  phone: string | null;
   plan: string;
   status: OrderStatus;
-  industry: string;
-  address: string;
-  website: string;
-  services: string;
-  serviceAreas: string;
-  logoUrl: string;
-  requirements: string;
-  brandColors: string;
-  createdAt: string;
+  industry: string | null;
+  address: string | null;
+  website_url: string | null;
+  services: string | null;
+  areas_covered: string | null;
+  logo_url: string | null;
+  requirements: string | null;
+  brand_colors: string | null;
+  created_at: string;
 }
 
-/* ─── Placeholder data ────────────────────────────────────────────── */
-const orders: Order[] = [
-  {
-    id: "ORD-001",
-    businessName: "Mountain View Plumbing",
-    email: "mike@mountainviewplumbing.com",
-    phone: "(303) 555-0142",
-    plan: "Growth",
-    status: "completed",
-    industry: "Home Services",
-    address: "1420 Alpine Dr, Boulder, CO 80302",
-    website: "mountainviewplumbing.com",
-    services: "Emergency plumbing, drain cleaning, water heater installation",
-    serviceAreas: "Boulder, Longmont, Lafayette, Louisville",
-    logoUrl: "/uploads/mvp-logo.png",
-    requirements: "Emphasis on 24/7 emergency service. Needs online booking.",
-    brandColors: "#1B4D8E, #F5A623",
-    createdAt: "2026-01-15",
-  },
-  {
-    id: "ORD-002",
-    businessName: "Bella Vista Salon",
-    email: "info@bellavistasalon.com",
-    phone: "(512) 555-0198",
-    plan: "Authority",
-    status: "in_progress",
-    industry: "Beauty & Wellness",
-    address: "88 Congress Ave, Austin, TX 78701",
-    website: "bellavistasalon.com",
-    services: "Haircuts, coloring, extensions, bridal styling",
-    serviceAreas: "Austin, Round Rock, Cedar Park",
-    logoUrl: "/uploads/bvs-logo.png",
-    requirements: "Luxurious feel, Instagram feed integration, online booking.",
-    brandColors: "#9B2C6E, #F0D4E8",
-    createdAt: "2026-02-03",
-  },
-  {
-    id: "ORD-003",
-    businessName: "Sunrise Dental Care",
-    email: "admin@sunrisedental.com",
-    phone: "(407) 555-0234",
-    plan: "Starter",
-    status: "paid",
-    industry: "Healthcare",
-    address: "2200 Lake Eola Dr, Orlando, FL 32801",
-    website: "",
-    services: "General dentistry, cosmetic dentistry, orthodontics",
-    serviceAreas: "Orlando, Winter Park, Kissimmee",
-    logoUrl: "",
-    requirements: "Clean, professional look. Patient portal link needed.",
-    brandColors: "#2196F3, #FFFFFF",
-    createdAt: "2026-02-18",
-  },
-  {
-    id: "ORD-004",
-    businessName: "Peak Fitness Studio",
-    email: "hello@peakfitness.com",
-    phone: "(720) 555-0311",
-    plan: "Growth",
-    status: "pending_payment",
-    industry: "Fitness & Wellness",
-    address: "550 Broadway, Denver, CO 80203",
-    website: "peakfitnessstudio.com",
-    services: "Personal training, group classes, nutrition coaching",
-    serviceAreas: "Denver Metro",
-    logoUrl: "/uploads/pf-logo.png",
-    requirements: "Energetic design, class schedule integration, membership CTA.",
-    brandColors: "#FF5722, #212121",
-    createdAt: "2026-03-01",
-  },
-  {
-    id: "ORD-005",
-    businessName: "Oakwood Legal Group",
-    email: "contact@oakwoodlegal.com",
-    phone: "(617) 555-0455",
-    plan: "Authority",
-    status: "completed",
-    industry: "Legal Services",
-    address: "100 Federal St, Boston, MA 02110",
-    website: "oakwoodlegal.com",
-    services: "Family law, estate planning, business formation",
-    serviceAreas: "Greater Boston, Cambridge, Brookline",
-    logoUrl: "/uploads/olg-logo.png",
-    requirements: "Professional and trustworthy feel. Attorney bios needed.",
-    brandColors: "#1A3A5C, #C5975B",
-    createdAt: "2026-01-22",
-  },
-  {
-    id: "ORD-006",
-    businessName: "Green Thumb Landscaping",
-    email: "jobs@greenthumblandscaping.com",
-    phone: "(503) 555-0567",
-    plan: "Starter",
-    status: "in_progress",
-    industry: "Landscaping",
-    address: "789 Division St, Portland, OR 97202",
-    website: "",
-    services: "Lawn care, garden design, tree trimming, hardscaping",
-    serviceAreas: "Portland, Beaverton, Lake Oswego, Tigard",
-    logoUrl: "",
-    requirements: "Showcase portfolio of completed projects. Before/after gallery.",
-    brandColors: "#4CAF50, #795548",
-    createdAt: "2026-03-10",
-  },
-  {
-    id: "ORD-007",
-    businessName: "Harbor View Restaurant",
-    email: "mgr@harborviewrestaurant.com",
-    phone: "(206) 555-0678",
-    plan: "Growth",
-    status: "pending_payment",
-    industry: "Restaurant & Food",
-    address: "45 Waterfront Way, Seattle, WA 98101",
-    website: "harborviewseattle.com",
-    services: "Fine dining, private events, catering",
-    serviceAreas: "Seattle, Bellevue",
-    logoUrl: "/uploads/hvr-logo.png",
-    requirements: "Menu integration, reservation system, event booking page.",
-    brandColors: "#1A1A2E, #D4AF37",
-    createdAt: "2026-03-15",
-  },
-  {
-    id: "ORD-008",
-    businessName: "Riverside Auto Repair",
-    email: "service@riversideauto.com",
-    phone: "(916) 555-0789",
-    plan: "Basic",
-    status: "canceled",
-    industry: "Automotive",
-    address: "3300 Riverside Blvd, Sacramento, CA 95820",
-    website: "riversideautorepair.com",
-    services: "Oil changes, brake service, engine diagnostics, tires",
-    serviceAreas: "Sacramento, West Sacramento, Elk Grove",
-    logoUrl: "/uploads/rar-logo.png",
-    requirements: "Service pricing page, appointment scheduling.",
-    brandColors: "#B71C1C, #EEEEEE",
-    createdAt: "2026-02-28",
-  },
-  {
-    id: "ORD-009",
-    businessName: "Sunshine Daycare",
-    email: "director@sunshinedaycare.com",
-    phone: "(480) 555-0891",
-    plan: "Starter",
-    status: "paid",
-    industry: "Childcare",
-    address: "1025 E Camelback Rd, Phoenix, AZ 85014",
-    website: "",
-    services: "Infant care, toddler programs, preschool, after-school",
-    serviceAreas: "Phoenix, Scottsdale, Tempe",
-    logoUrl: "",
-    requirements: "Warm, inviting design. Parent testimonials section. Tour booking.",
-    brandColors: "#FF9800, #4FC3F7",
-    createdAt: "2026-03-20",
-  },
-  {
-    id: "ORD-010",
-    businessName: "Elite Roofing Solutions",
-    email: "info@eliteroofing.com",
-    phone: "(972) 555-0923",
-    plan: "Growth",
-    status: "in_progress",
-    industry: "Home Services",
-    address: "4500 Preston Rd, Dallas, TX 75205",
-    website: "eliteroofingdallas.com",
-    services: "Roof repair, replacement, storm damage, inspections",
-    serviceAreas: "Dallas, Fort Worth, Plano, Frisco, McKinney",
-    logoUrl: "/uploads/ers-logo.png",
-    requirements: "Storm damage CTA, free inspection form, financing info page.",
-    brandColors: "#0D47A1, #FF6F00",
-    createdAt: "2026-03-25",
-  },
-];
-
-/* ─── Summary stats computation ───────────────────────────────────── */
-function getStats(data: Order[]) {
-  return {
-    total: data.length,
-    pendingPayment: data.filter((o) => o.status === "pending_payment").length,
-    inProgress: data.filter((o) => o.status === "in_progress").length,
-    completed: data.filter((o) => o.status === "completed").length,
-  };
-}
+const planLabels: Record<string, string> = {
+  basic: "Basic",
+  starter: "Starter",
+  growth: "Growth",
+  authority: "Authority",
+};
 
 export default function AdminOrdersPage() {
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<OrderStatus | "all">("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const fetchOrders = useCallback(async () => {
+    const { data: { session } } = await getSupabase().auth.getSession();
+    if (!session) return;
+
+    const res = await fetch("/api/admin/orders", {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      setOrders(data.orders ?? []);
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchOrders(); }, [fetchOrders]);
 
   const filtered =
     activeFilter === "all"
       ? orders
       : orders.filter((o) => o.status === activeFilter);
 
-  const stats = getStats(orders);
+  const stats = {
+    total: orders.length,
+    pendingPayment: orders.filter((o) => o.status === "pending_payment").length,
+    inProgress: orders.filter((o) => o.status === "in_progress").length,
+    completed: orders.filter((o) => o.status === "completed").length,
+  };
 
   const summaryCards = [
     {
       label: "Total Orders",
       value: stats.total,
       icon: (
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="2" width="14" height="17" rx="2" />
           <path d="M7 6h6M7 10h6M7 14h4" />
         </svg>
@@ -285,16 +124,7 @@ export default function AdminOrdersPage() {
       label: "Pending Payment",
       value: stats.pendingPayment,
       icon: (
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="10" cy="10" r="7.5" />
           <path d="M10 6v4.5L13 13" />
         </svg>
@@ -306,16 +136,7 @@ export default function AdminOrdersPage() {
       label: "In Progress",
       value: stats.inProgress,
       icon: (
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 17l4-4 3 3 7-8" />
           <path d="M14 8h3v3" />
         </svg>
@@ -327,16 +148,7 @@ export default function AdminOrdersPage() {
       label: "Completed",
       value: stats.completed,
       icon: (
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="10" cy="10" r="7.5" />
           <path d="M7 10l2 2 4-4" />
         </svg>
@@ -345,6 +157,14 @@ export default function AdminOrdersPage() {
       color: "text-emerald-500",
     },
   ];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-teal-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -418,15 +238,7 @@ export default function AdminOrdersPage() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-neutral-200 bg-neutral-50">
-                {[
-                  "Business Name",
-                  "Email",
-                  "Plan",
-                  "Status",
-                  "Industry",
-                  "Created",
-                  "Actions",
-                ].map((heading) => (
+                {["Business Name", "Email", "Plan", "Status", "Industry", "Created", "Actions"].map((heading) => (
                   <th
                     key={heading}
                     className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
@@ -440,19 +252,11 @@ export default function AdminOrdersPage() {
             <tbody className="divide-y divide-neutral-100">
               {filtered.map((order) => (
                 <Fragment key={order.id}>
-                  <tr
-                    className="transition-colors hover:bg-neutral-50/60"
-                  >
-                    <td
-                      className="whitespace-nowrap px-5 py-4 font-medium text-neutral-900"
-                      style={{ fontFamily: "var(--font-sans)" }}
-                    >
-                      {order.businessName}
+                  <tr className="transition-colors hover:bg-neutral-50/60">
+                    <td className="whitespace-nowrap px-5 py-4 font-medium text-neutral-900" style={{ fontFamily: "var(--font-sans)" }}>
+                      {order.business_name}
                     </td>
-                    <td
-                      className="whitespace-nowrap px-5 py-4 text-neutral-600"
-                      style={{ fontFamily: "var(--font-sans)" }}
-                    >
+                    <td className="whitespace-nowrap px-5 py-4 text-neutral-600" style={{ fontFamily: "var(--font-sans)" }}>
                       {order.email}
                     </td>
                     <td className="whitespace-nowrap px-5 py-4">
@@ -460,23 +264,17 @@ export default function AdminOrdersPage() {
                         className="inline-flex items-center rounded-md bg-brand-teal-50 px-2 py-0.5 text-xs font-medium text-brand-teal-700"
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
-                        {order.plan}
+                        {planLabels[order.plan] ?? order.plan}
                       </span>
                     </td>
                     <td className="whitespace-nowrap px-5 py-4">
                       <StatusBadge status={order.status} />
                     </td>
-                    <td
-                      className="whitespace-nowrap px-5 py-4 text-neutral-600"
-                      style={{ fontFamily: "var(--font-sans)" }}
-                    >
-                      {order.industry}
+                    <td className="whitespace-nowrap px-5 py-4 text-neutral-600" style={{ fontFamily: "var(--font-sans)" }}>
+                      {order.industry ?? "—"}
                     </td>
-                    <td
-                      className="whitespace-nowrap px-5 py-4 text-neutral-500"
-                      style={{ fontFamily: "var(--font-sans)" }}
-                    >
-                      {new Date(order.createdAt).toLocaleDateString("en-US", {
+                    <td className="whitespace-nowrap px-5 py-4 text-neutral-500" style={{ fontFamily: "var(--font-sans)" }}>
+                      {new Date(order.created_at).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
                         year: "numeric",
@@ -484,11 +282,7 @@ export default function AdminOrdersPage() {
                     </td>
                     <td className="whitespace-nowrap px-5 py-4">
                       <button
-                        onClick={() =>
-                          setExpandedId(
-                            expandedId === order.id ? null : order.id,
-                          )
-                        }
+                        onClick={() => setExpandedId(expandedId === order.id ? null : order.id)}
                         className="text-sm font-medium text-brand-teal-500 transition-colors hover:text-brand-teal-700"
                         style={{ fontFamily: "var(--font-sans)" }}
                       >
@@ -497,7 +291,6 @@ export default function AdminOrdersPage() {
                     </td>
                   </tr>
 
-                  {/* ── Expanded detail row ── */}
                   {expandedId === order.id && (
                     <tr key={`${order.id}-detail`} className="bg-neutral-50/50">
                       <td colSpan={7} className="px-5 py-6">
@@ -505,27 +298,12 @@ export default function AdminOrdersPage() {
                           {[
                             { label: "Phone", value: order.phone },
                             { label: "Address", value: order.address },
-                            {
-                              label: "Website",
-                              value: order.website || "Not provided",
-                            },
+                            { label: "Website", value: order.website_url || "Not provided" },
                             { label: "Services", value: order.services },
-                            {
-                              label: "Service Areas",
-                              value: order.serviceAreas,
-                            },
-                            {
-                              label: "Logo",
-                              value: order.logoUrl || "Not uploaded",
-                            },
-                            {
-                              label: "Requirements",
-                              value: order.requirements,
-                            },
-                            {
-                              label: "Brand Colors",
-                              value: order.brandColors,
-                            },
+                            { label: "Service Areas", value: order.areas_covered },
+                            { label: "Logo", value: order.logo_url || "Not uploaded" },
+                            { label: "Requirements", value: order.requirements },
+                            { label: "Brand Colors", value: order.brand_colors },
                           ].map((field) => (
                             <div key={field.label}>
                               <p
@@ -534,11 +312,8 @@ export default function AdminOrdersPage() {
                               >
                                 {field.label}
                               </p>
-                              <p
-                                className="text-sm text-neutral-700"
-                                style={{ fontFamily: "var(--font-sans)" }}
-                              >
-                                {field.value}
+                              <p className="text-sm text-neutral-700" style={{ fontFamily: "var(--font-sans)" }}>
+                                {field.value || "—"}
                               </p>
                             </div>
                           ))}

@@ -29,40 +29,39 @@ const categories: FeatureCategory[] = [
   {
     name: "Website & Design",
     features: [
-      { label: "Website pages", basic: "3 pages", starter: "5 pages", growth: "Up to 15 pages", authority: "Unlimited" },
+      { label: "Website pages", basic: "Up to 30", starter: "Up to 100", growth: "Up to 500", authority: "Up to 1,500" },
+      { label: "Location + service pages", basic: true, starter: true, growth: true, authority: true },
       { label: "Mobile-responsive design", basic: true, starter: true, growth: true, authority: true },
-      { label: "Custom branded design", basic: null, starter: true, growth: true, authority: true },
       { label: "SSL certificate + hosting", basic: true, starter: true, growth: true, authority: true },
       { label: "Contact form + click-to-call", basic: true, starter: true, growth: true, authority: true },
-      { label: "Monthly revisions", basic: null, starter: "1 per month", growth: "Unlimited", authority: "Unlimited" },
+      { label: "Monthly revisions", basic: null, starter: "1 per month", growth: "Up to 4", authority: "Up to 4" },
+      { label: "Full creative (icons, images, branding)", basic: null, starter: null, growth: null, authority: true },
     ],
   },
   {
-    name: "Local SEO",
+    name: "SEO & Optimization",
     features: [
-      { label: "Google Business Profile claim", basic: true, starter: true, growth: true, authority: true },
-      { label: "Basic on-page SEO", basic: true, starter: true, growth: true, authority: true },
-      { label: "Local keyword optimization", basic: null, starter: true, growth: true, authority: true },
-      { label: "Monthly keyword ranking report", basic: null, starter: true, growth: true, authority: true },
+      { label: "On-page SEO optimization", basic: true, starter: true, growth: true, authority: true },
+      { label: "Local SEO optimization", basic: null, starter: true, growth: true, authority: true },
+      { label: "Monthly website performance report", basic: null, starter: true, growth: true, authority: true },
       { label: "Schema markup + rich snippets", basic: null, starter: null, growth: true, authority: true },
-      { label: "Competitor rank tracking", basic: null, starter: null, growth: true, authority: true },
+      { label: "Competitor website analysis", basic: null, starter: null, growth: true, authority: true },
+      { label: "Monthly improvements (pages, keywords, services)", basic: null, starter: null, growth: true, authority: true },
       { label: "Backlink building", basic: null, starter: null, growth: null, authority: true },
     ],
   },
   {
     name: "Content",
     features: [
-      { label: "Copywriting (all pages)", basic: null, starter: true, growth: true, authority: true },
+      { label: "Content creation (all pages)", basic: true, starter: true, growth: true, authority: true },
       { label: "Blog posts per month", basic: null, starter: null, growth: "2 posts", authority: "4 posts" },
-      { label: "Review management + responses", basic: null, starter: null, growth: true, authority: true },
-      { label: "Reputation campaigns", basic: null, starter: null, growth: null, authority: true },
     ],
   },
   {
-    name: "Analytics & Ads",
+    name: "Analytics & Integrations",
     features: [
-      { label: "Google Analytics dashboard", basic: null, starter: null, growth: true, authority: true },
-      { label: "Google Ads management", basic: null, starter: null, growth: null, authority: "Up to $1k/mo" },
+      { label: "Google Analytics + Search Console", basic: null, starter: null, growth: true, authority: true },
+      { label: "CRM / lead management integration", basic: null, starter: null, growth: null, authority: true },
     ],
   },
   {
@@ -70,7 +69,6 @@ const categories: FeatureCategory[] = [
     features: [
       { label: "Dedicated account manager", basic: null, starter: true, growth: true, authority: true },
       { label: "Response time", basic: null, starter: "2 business days", growth: "1 business day", authority: "Same day" },
-      { label: "Quarterly strategy call", basic: null, starter: null, growth: null, authority: true },
     ],
   },
 ];

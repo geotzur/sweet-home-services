@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Our Services — Sweet Home Services",
     description:
-      "Everything your local business needs to get found online. From custom websites to SEO and beyond.",
+      "Everything your local business needs to grow online. From custom websites to SEO and beyond.",
   },
 };
 
@@ -71,7 +71,7 @@ const services = [
   {
     title: "Local SEO Optimization",
     description:
-      "Dominate local search results with targeted keyword strategies, optimized meta data, schema markup, and citation building — so customers in your area find you first.",
+      "Strengthen your web presence with targeted keyword strategies, optimized meta data, schema markup, and citation building — so your website works harder for your business.",
     icon: (
       <svg
         width="40"
@@ -186,7 +186,7 @@ const services = [
   {
     title: "Performance Monitoring & Reports",
     description:
-      "Monthly reports covering traffic, rankings, conversions, and site health. We track what matters and provide clear, actionable insights so you always know your ROI.",
+      "Monthly reports covering traffic, conversions, and site health. We track what matters and provide clear, actionable insights so you always know your ROI.",
     icon: (
       <svg
         width="40"
@@ -277,7 +277,7 @@ const processSteps = [
     number: "03",
     title: "Launch & Grow",
     description:
-      "Your site goes live and we continuously optimize, report, and improve your rankings.",
+      "Your site goes live and we continuously optimize, report, and improve your web presence.",
   },
 ];
 
@@ -342,7 +342,7 @@ export default function ServicesPage() {
               >
                 Everything Your Local Business Needs to{" "}
                 <span className="relative inline-block">
-                  Get Found Online
+                  Grow Online
                   {/* Amber underline */}
                   <span
                     className="absolute left-0 right-0 h-1 rounded-full"

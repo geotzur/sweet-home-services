@@ -1,18 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { getSupabase } from "@/lib/supabase-browser";
 
-/* ─── Status badge component ───────────────────────────────────────── */
+/* ─── Status badge ────────────────────────────────────────────────── */
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     active: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    past_due: "bg-amber-50 text-amber-700 border-amber-200",
+    paid: "bg-blue-50 text-blue-700 border-blue-200",
+    in_progress: "bg-teal-50 text-teal-700 border-teal-200",
+    completed: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    pending_payment: "bg-amber-50 text-amber-700 border-amber-200",
     canceled: "bg-red-50 text-red-700 border-red-200",
   };
 
   const labels: Record<string, string> = {
     active: "Active",
-    past_due: "Past Due",
+    paid: "Paid",
+    in_progress: "In Progress",
+    completed: "Completed",
+    pending_payment: "Pending",
     canceled: "Canceled",
   };
 
@@ -27,82 +34,95 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-/* ─── Placeholder client data ──────────────────────────────────────── */
-const clients = [
-  {
-    id: "1",
-    name: "Mountain View Plumbing",
-    email: "mike@mountainviewplumbing.com",
-    plan: "Pro",
-    status: "active",
-    joined: "2025-11-14",
-  },
-  {
-    id: "2",
-    name: "Bella Vista Salon",
-    email: "info@bellavistasalon.com",
-    plan: "Growth",
-    status: "active",
-    joined: "2025-12-02",
-  },
-  {
-    id: "3",
-    name: "Sunrise Dental Care",
-    email: "admin@sunrisedental.com",
-    plan: "Starter",
-    status: "active",
-    joined: "2026-01-09",
-  },
-  {
-    id: "4",
-    name: "Peak Fitness Studio",
-    email: "hello@peakfitness.com",
-    plan: "Growth",
-    status: "active",
-    joined: "2026-01-22",
-  },
-  {
-    id: "5",
-    name: "Oakwood Legal Group",
-    email: "contact@oakwoodlegal.com",
-    plan: "Growth",
-    status: "past_due",
-    joined: "2025-10-05",
-  },
-  {
-    id: "6",
-    name: "Riverside Auto Repair",
-    email: "service@riversideauto.com",
-    plan: "Starter",
-    status: "canceled",
-    joined: "2025-08-18",
-  },
-  {
-    id: "7",
-    name: "Green Thumb Landscaping",
-    email: "jobs@greenthumblandscaping.com",
-    plan: "Pro",
-    status: "active",
-    joined: "2026-02-11",
-  },
-  {
-    id: "8",
-    name: "Harbor View Restaurant",
-    email: "mgr@harborviewrestaurant.com",
-    plan: "Starter",
-    status: "active",
-    joined: "2026-03-01",
-  },
-];
+const planLabels: Record<string, string> = {
+  basic: "Basic",
+  starter: "Starter",
+  growth: "Growth",
+  authority: "Authority",
+};
+
+/* ─── Client interface (derived from orders) ──────────────────────── */
+interface ClientRow {
+  email: string;
+  name: string;
+  totalOrders: number;
+  plans: string[];
+  latestStatus: string;
+  firstOrder: string;
+}
+
+interface Order {
+  email: string;
+  business_name: string;
+  plan: string;
+  status: string;
+  created_at: string;
+}
+
+function deriveClients(orders: Order[]): ClientRow[] {
+  const byEmail = new Map<string, Order[]>();
+  for (const o of orders) {
+    const key = o.email.toLowerCase();
+    if (!byEmail.has(key)) byEmail.set(key, []);
+    byEmail.get(key)!.push(o);
+  }
+
+  const clients: ClientRow[] = [];
+  for (const [email, group] of byEmail) {
+    const sorted = [...group].sort(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    );
+    const uniquePlans = [...new Set(group.map((o) => o.plan))];
+    clients.push({
+      email,
+      name: sorted[0].business_name,
+      totalOrders: group.length,
+      plans: uniquePlans,
+      latestStatus: sorted[0].status,
+      firstOrder: sorted[sorted.length - 1].created_at,
+    });
+  }
+
+  return clients.sort(
+    (a, b) => new Date(b.firstOrder).getTime() - new Date(a.firstOrder).getTime(),
+  );
+}
 
 export default function AdminClientsPage() {
+  const [clients, setClients] = useState<ClientRow[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
+  const fetchClients = useCallback(async () => {
+    const { data: { session } } = await getSupabase().auth.getSession();
+    if (!session) return;
+
+    const res = await fetch("/api/admin/orders", {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      setClients(deriveClients(data.orders ?? []));
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchClients(); }, [fetchClients]);
 
   const filtered = clients.filter(
     (c) =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
       c.email.toLowerCase().includes(search.toLowerCase()),
   );
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-teal-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -156,90 +176,54 @@ export default function AdminClientsPage() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-neutral-200 bg-neutral-50">
-                <th
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Name
-                </th>
-                <th
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Email
-                </th>
-                <th
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Plan
-                </th>
-                <th
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Status
-                </th>
-                <th
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Joined
-                </th>
-                <th
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Actions
-                </th>
+                {["Name", "Email", "Orders", "Plans", "Latest Status", "First Order"].map((h) => (
+                  <th
+                    key={h}
+                    className="px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-500"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
               {filtered.map((client) => (
                 <tr
-                  key={client.id}
+                  key={client.email}
                   className="transition-colors hover:bg-neutral-50/60"
                 >
-                  <td
-                    className="whitespace-nowrap px-5 py-4 font-medium text-neutral-900"
-                    style={{ fontFamily: "var(--font-sans)" }}
-                  >
+                  <td className="whitespace-nowrap px-5 py-4 font-medium text-neutral-900" style={{ fontFamily: "var(--font-sans)" }}>
                     {client.name}
                   </td>
-                  <td
-                    className="whitespace-nowrap px-5 py-4 text-neutral-600"
-                    style={{ fontFamily: "var(--font-sans)" }}
-                  >
+                  <td className="whitespace-nowrap px-5 py-4 text-neutral-600" style={{ fontFamily: "var(--font-sans)" }}>
                     {client.email}
                   </td>
-                  <td className="whitespace-nowrap px-5 py-4">
-                    <span
-                      className="inline-flex items-center rounded-md bg-brand-teal-50 px-2 py-0.5 text-xs font-medium text-brand-teal-700"
-                      style={{ fontFamily: "var(--font-heading)" }}
-                    >
-                      {client.plan}
-                    </span>
+                  <td className="whitespace-nowrap px-5 py-4 text-neutral-900 font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
+                    {client.totalOrders}
                   </td>
                   <td className="whitespace-nowrap px-5 py-4">
-                    <StatusBadge status={client.status} />
+                    <div className="flex gap-1.5 flex-wrap">
+                      {client.plans.map((p) => (
+                        <span
+                          key={p}
+                          className="inline-flex items-center rounded-md bg-brand-teal-50 px-2 py-0.5 text-xs font-medium text-brand-teal-700"
+                          style={{ fontFamily: "var(--font-heading)" }}
+                        >
+                          {planLabels[p] ?? p}
+                        </span>
+                      ))}
+                    </div>
                   </td>
-                  <td
-                    className="whitespace-nowrap px-5 py-4 text-neutral-500"
-                    style={{ fontFamily: "var(--font-sans)" }}
-                  >
-                    {new Date(client.joined).toLocaleDateString("en-US", {
+                  <td className="whitespace-nowrap px-5 py-4">
+                    <StatusBadge status={client.latestStatus} />
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-4 text-neutral-500" style={{ fontFamily: "var(--font-sans)" }}>
+                    {new Date(client.firstOrder).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
-                  </td>
-                  <td className="whitespace-nowrap px-5 py-4">
-                    <button
-                      className="text-sm font-medium text-brand-teal-500 transition-colors hover:text-brand-teal-700"
-                      style={{ fontFamily: "var(--font-sans)" }}
-                    >
-                      View
-                    </button>
                   </td>
                 </tr>
               ))}

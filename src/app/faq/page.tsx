@@ -31,7 +31,7 @@ const faqs = [
     items: [
       {
         q: "What's included in the monthly fee?",
-        a: "Every plan includes your website, hosting, SSL certificate, basic SEO optimization, and monthly performance reports. Higher-tier plans add blog content, advanced SEO, and Google Business Profile management.",
+        a: "Every plan includes your website, hosting, SSL certificate, content creation, on-page SEO optimization, and a dedicated account manager. Higher-tier plans add blog content, monthly improvements, analytics dashboards, and advanced integrations.",
       },
       {
         q: "Are there any setup fees or contracts?",
@@ -47,16 +47,16 @@ const faqs = [
     category: "SEO & Results",
     items: [
       {
-        q: "How long until I see results from SEO?",
-        a: "Local SEO typically shows measurable improvement within 30–90 days. You'll start appearing in more local searches, Google Maps results, and may see increased calls and form submissions.",
+        q: "What does SEO optimization mean for my website?",
+        a: "We build every website with SEO best practices baked in — proper structure, meta tags, fast loading, mobile-first design, and keyword-optimized content. For Growth and Authority plans, we continuously improve your site each month with new pages, updated keywords, and expanded service coverage.",
       },
       {
         q: "Do you guarantee first-page rankings?",
-        a: "No one can honestly guarantee specific rankings — Google's algorithm changes constantly. What we do guarantee is best-practice optimization, consistent effort, and transparent monthly reporting so you can see exactly what's happening.",
+        a: "We don't make ranking promises — no one honestly can. What we deliver is a professionally built, SEO-optimized website with quality content that gives you the best possible foundation. Growth and Authority plans include ongoing monthly improvements to keep your site competitive.",
       },
       {
         q: "What kind of reports do I get?",
-        a: "Monthly reports include keyword rankings, website traffic, Google Business Profile insights, and actionable recommendations. Growth and Authority plans include more detailed analytics.",
+        a: "Starter plans and above include monthly website performance reports. Growth and Authority plans add Google Analytics and Search Console dashboards so you can track traffic, user behavior, and site performance.",
       },
     ],
   },

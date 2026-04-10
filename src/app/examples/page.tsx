@@ -13,14 +13,14 @@ const examples = [
     business: "Austin Elite Plumbing",
     industry: "Plumbing",
     location: "Austin, TX",
-    result: "+340% organic traffic in 90 days",
+    result: "30-page website with 12 service area pages delivered",
     gradient: "linear-gradient(135deg, #1A6B6B 0%, #2E9E7D 100%)",
   },
   {
     business: "Bella Luxe Salon & Spa",
     industry: "Beauty & Wellness",
     location: "Denver, CO",
-    result: "#1 Google Maps for 'salon near me'",
+    result: "Stunning website with integrated booking system",
     gradient: "linear-gradient(135deg, #F5A623 0%, #D4881A 100%)",
   },
   {
@@ -41,14 +41,14 @@ const examples = [
     business: "Summit Roofing Co.",
     industry: "Roofing",
     location: "Nashville, TN",
-    result: "12 qualified leads per week from organic search",
+    result: "Storm damage landing page with instant quote form",
     gradient: "linear-gradient(135deg, #1F2937 0%, #374151 100%)",
   },
   {
     business: "Parker & Associates Law",
     industry: "Legal",
     location: "Charlotte, NC",
-    result: "+180% visibility for local legal keywords",
+    result: "Practice area pages with consultation booking system",
     gradient: "linear-gradient(135deg, #1A6B6B 0%, #2E9E7D 100%)",
   },
 ];

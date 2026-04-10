@@ -25,8 +25,8 @@ export const caseStudies: CaseStudy[] = [
     solution:
       "Sweet Home Services built Marcus a fast, mobile-first website with local SEO targeting Austin plumbing searches and a click-to-call button that worked on every device.",
     results: [
-      "Ranked #1 for 'plumber Austin TX' within 90 days",
-      "22 new monthly leads from Google search",
+      "Full 15-page website with service area pages for 8 Austin neighborhoods",
+      "22 new monthly leads from website contact forms",
       "Site live and indexed in 48 hours",
     ],
     quote:
@@ -46,7 +46,7 @@ export const caseStudies: CaseStudy[] = [
     solution:
       "Sweet Home Services refreshed her brand online with a polished, photo-forward website, an optimized Google Business Profile, and a booking link front and center.",
     results: [
-      "Google profile views up 3x in the first month",
+      "Polished website with integrated online booking system",
       "18 new client bookings in the first 6 weeks",
       "Average booking value increased by 24%",
     ],
@@ -69,7 +69,7 @@ export const caseStudies: CaseStudy[] = [
     results: [
       "Page load time cut from 6.2s to 1.4s",
       "31 new patient inquiries in the first quarter",
-      "Top 3 ranking for 'family dentist Columbus OH'",
+      "Patient-friendly site with online forms and neighborhood service pages",
     ],
     quote:
       "We went from invisible online to booked out three weeks in advance — the new site made all the difference.",

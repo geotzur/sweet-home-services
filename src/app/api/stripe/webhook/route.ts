@@ -51,6 +51,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const customerId = session.customer as string;
   const subscriptionId = session.subscription as string;
   const plan = session.metadata?.plan;
+  const orderId = session.metadata?.order_id || null;
 
   if (!plan || !customerId || !subscriptionId) {
     console.error("[stripe/webhook] Missing data in checkout.session.completed", {
@@ -61,35 +62,21 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
-  // Retrieve the customer email to look up Supabase user
+  // Retrieve the customer email from Stripe
   const customer = await getStripe().customers.retrieve(customerId);
   if (customer.deleted) return;
 
-  const email = customer.email;
-  if (!email) {
-    console.error("[stripe/webhook] Customer has no email:", customerId);
-    return;
-  }
+  const customerEmail = customer.email || null;
 
-  // Find user by email in profiles table
-  const { data: profile } = await getSupabaseAdmin()
-    .from("profiles")
-    .select("id")
-    .eq("email", email)
-    .single();
-
-  if (!profile) {
-    console.error("[stripe/webhook] No Supabase user found for email:", email);
-    return;
-  }
-
+  // Create/update subscription — no user account required
   const { error } = await getSupabaseAdmin().from("subscriptions").upsert(
     {
-      user_id: profile.id,
       stripe_customer_id: customerId,
       stripe_subscription_id: subscriptionId,
       plan,
       status: "active",
+      customer_email: customerEmail,
+      order_id: orderId,
     },
     { onConflict: "stripe_subscription_id" },
   );
@@ -99,10 +86,9 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     throw error;
   }
 
-  console.log(`[stripe/webhook] Subscription activated: ${subscriptionId} (${plan})`);
+  console.log(`[stripe/webhook] Subscription activated: ${subscriptionId} (${plan}) for ${customerEmail}`);
 
   // Link payment back to the onboarding order if present
-  const orderId = session.metadata?.order_id;
   if (orderId) {
     await getSupabaseAdmin().from("orders").update({
       status: "paid",

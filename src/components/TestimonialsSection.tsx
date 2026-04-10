@@ -1,7 +1,7 @@
 const testimonials = [
   {
     quote:
-      "Before Sweet Home Services, I was invisible online. Six months later I'm getting 15–20 new calls a month from Google. It paid for itself in the first week.",
+      "Before Sweet Home Services, I had no real online presence. Now I have a professional website that brings in 15–20 new calls a month. It paid for itself in the first week.",
     name: "Marcus T.",
     business: "Marcus's Plumbing Co.",
     location: "Austin, TX",
@@ -12,7 +12,7 @@ const testimonials = [
   },
   {
     quote:
-      "The site they built for my salon is stunning. Clients comment on it all the time. And we show up first when people search 'hair salon near me' in our area.",
+      "The site they built for my salon is stunning. Clients comment on it all the time. The booking system and automated follow-ups have completely streamlined how we get new clients.",
     name: "Diane R.",
     business: "Studio Diane",
     location: "Nashville, TN",
@@ -23,7 +23,7 @@ const testimonials = [
   },
   {
     quote:
-      "I was paying $800/mo to an agency with nothing to show for it. Sweet Home Services costs a third of that and I rank higher. Wish I'd found them sooner.",
+      "I was paying $800/mo to an agency with nothing to show for it. Sweet Home Services costs a third of that and my website actually works for my business. Wish I'd switched sooner.",
     name: "Greg M.",
     business: "Millbrook Family Dental",
     location: "Columbus, OH",
@@ -110,7 +110,7 @@ export default function TestimonialsSection() {
             }}
           >
             Local Businesses{" "}
-            <span style={{ color: "#1A6B6B" }}>Getting Found Every Day</span>
+            <span style={{ color: "#1A6B6B" }}>Growing Smarter Every Day</span>
           </h2>
         </div>
 

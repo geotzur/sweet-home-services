@@ -49,8 +49,8 @@ export default function PricingHero() {
             letterSpacing: "-0.025em",
           }}
         >
-          Your town&apos;s website + SEO,{" "}
-          <span style={{ color: "#F5A623" }}>done for you.</span>
+          A smart website built to{" "}
+          <span style={{ color: "#F5A623" }}>grow with you.</span>
         </h1>
 
         {/* Subheadline */}
@@ -62,9 +62,9 @@ export default function PricingHero() {
             color: "#C0E1E1",
           }}
         >
-          One monthly fee. We build your site, optimize it for Google, and keep
-          it ranking — so you can focus on running your business. No contracts.
-          Cancel anytime.
+          One monthly fee. We build your website, create your content, and
+          optimize it with SEO best practices — so you can focus on running
+          your business. No contracts. Cancel anytime.
         </p>
 
         {/* CTAs */}

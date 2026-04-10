@@ -57,7 +57,7 @@ export default function HeroSection() {
                 className="text-xs font-semibold uppercase tracking-widest"
                 style={{ fontFamily: "var(--font-heading)", color: "#97CDCD" }}
               >
-                Websites + SEO for Local Business
+                Smart Websites for Local Business
               </span>
             </div>
 
@@ -72,10 +72,10 @@ export default function HeroSection() {
                 color: "#FFFFFF",
               }}
             >
-              Your Town.
+              Your Business.
               <br />
               <span className="relative inline-block" style={{ color: "#F5A623" }}>
-                Found Online.
+                Built Smart.
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
                   viewBox="0 0 280 12"
@@ -105,8 +105,8 @@ export default function HeroSection() {
                 color: "#C0E1E1",
               }}
             >
-              We build your website, handle your SEO, and get your business
-              ranking on Google — so you can focus on the work that matters.
+              We build smart, SEO-optimized websites with content, automations,
+              and the tools your business needs to grow — so you can focus on the work that matters.
               Starting at{" "}
               <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>$89/month.</strong>
             </p>
@@ -161,7 +161,7 @@ export default function HeroSection() {
             {/* Trust badges row */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               {[
-                { icon: "M9 12l2 2 4-4", label: "Google-ready SEO" },
+                { icon: "M9 12l2 2 4-4", label: "SEO-optimized" },
                 { icon: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z", label: "Mobile-first" },
                 { icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15", label: "Monthly updates" },
               ].map((item) => (
@@ -244,7 +244,7 @@ function HeroDashboard() {
           {/* Stats row */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {[
-              { label: "Google Rank", value: "#1", sub: "plumber near me", color: "#F5A623" },
+              { label: "SEO Score", value: "94", sub: "all pages optimized", color: "#F5A623" },
               { label: "Calls Today", value: "12", sub: "+34% this week", color: "#22C55E" },
               { label: "Site Visits", value: "847", sub: "this month", color: "#6DB8B8" },
             ].map((stat) => (
@@ -291,7 +291,7 @@ function HeroDashboard() {
                 className="text-xs font-medium"
                 style={{ fontFamily: "var(--font-sans)", color: "#22C55E" }}
               >
-                +127% growth
+                Trending up
               </span>
             </div>
             {/* Simplified bar chart */}
@@ -327,7 +327,7 @@ function HeroDashboard() {
           <div className="space-y-2">
             {[
               { name: "Sarah M.", action: "Requested a quote", time: "2 min ago", icon: "quote" },
-              { name: "Mike R.", action: "Called from Google", time: "8 min ago", icon: "phone" },
+              { name: "Mike R.", action: "Called from website", time: "8 min ago", icon: "phone" },
               { name: "Lisa T.", action: "Booked online", time: "23 min ago", icon: "calendar" },
             ].map((lead) => (
               <div
@@ -361,7 +361,7 @@ function HeroDashboard() {
         </div>
       </div>
 
-      {/* Floating badge: Google ranking */}
+      {/* Floating badge: SEO optimized */}
       <div
         className="absolute -top-4 right-0 sm:-right-4 rounded-xl px-3 py-2 sm:px-3.5 sm:py-2.5 flex items-center gap-2 sm:gap-2.5 hero-float max-w-[calc(100%-1rem)]"
         style={{
@@ -371,17 +371,17 @@ function HeroDashboard() {
         }}
       >
         <div
-          className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold"
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
           style={{ background: "linear-gradient(135deg, #1A6B6B, #104040)" }}
         >
-          #1
+          &#10003;
         </div>
         <div>
           <p className="text-xs font-bold text-neutral-800" style={{ fontFamily: "var(--font-heading)" }}>
-            Ranking on Google
+            SEO Optimized
           </p>
           <p className="text-xs text-neutral-400" style={{ fontFamily: "var(--font-sans)" }}>
-            &ldquo;plumber near me&rdquo;
+            All pages scored A+
           </p>
         </div>
       </div>
@@ -408,7 +408,7 @@ function HeroDashboard() {
             New Lead Received
           </p>
           <p className="text-xs text-neutral-400" style={{ fontFamily: "var(--font-sans)" }}>
-            Just now &middot; Google Search
+            Just now &middot; Website form
           </p>
         </div>
       </div>

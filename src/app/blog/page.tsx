@@ -19,9 +19,9 @@ const posts = [
     readTime: "5 min read",
   },
   {
-    title: "Local SEO 101: How to Rank in Google Maps",
+    title: "Local SEO 101: How to Optimize Your Website for Local Search",
     excerpt:
-      "A beginner-friendly guide to appearing in the Google Map Pack — the #1 way local customers find service providers near them.",
+      "A beginner-friendly guide to local SEO best practices — structure, content, and technical optimizations that help your business stand out online.",
     category: "SEO",
     date: "Coming Soon",
     readTime: "8 min read",
@@ -162,7 +162,7 @@ export default function BlogPage() {
                 className="text-3xl font-bold text-neutral-900 mb-4"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                Ready to Get Found Online?
+                Ready to Build Something Smart?
               </h2>
               <p className="text-lg mb-8" style={{ fontFamily: "var(--font-sans)", color: "#4B5563" }}>
                 Don&apos;t wait for customers to find you. Let us build your online presence.

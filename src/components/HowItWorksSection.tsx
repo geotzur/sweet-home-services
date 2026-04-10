@@ -43,7 +43,7 @@ const steps = [
     number: "02",
     title: "We Handle Your SEO",
     description:
-      "Our team optimizes every page for local search, builds your Google Business Profile, and creates content that ranks for the keywords your customers actually use.",
+      "Our team optimizes every page with SEO best practices, creates quality content, and structures your site so search engines and customers can find what they need.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <rect width="28" height="28" rx="8" fill="#1A6B6B" />
@@ -81,9 +81,9 @@ const steps = [
   },
   {
     number: "03",
-    title: "You Get Found",
+    title: "Your Site Gets Smarter",
     description:
-      "Watch your phone ring with local customers who found you on Google. We track your rankings, send monthly reports, and keep your site updated as your business grows.",
+      "Every month we improve your site — new pages, updated content, better keywords. With analytics, CRM connections, and smart automations, your website becomes the engine that powers your business.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <rect width="28" height="28" rx="8" fill="#1A6B6B" />
@@ -137,7 +137,7 @@ export default function HowItWorksSection() {
               letterSpacing: "-0.01em",
             }}
           >
-            From Zero to Google-Ranked
+            From Idea to Smart Website
             <br />
             <span style={{ color: "#1A6B6B" }}>in Three Simple Steps</span>
           </h2>

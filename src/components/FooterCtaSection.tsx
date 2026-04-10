@@ -81,9 +81,9 @@ export default function FooterCtaSection() {
                 letterSpacing: "-0.025em",
               }}
             >
-              Ready to Get Found
+              Ready to Build
               <br />
-              in Your Town?
+              Something Smart?
             </h2>
 
             <p
@@ -95,9 +95,8 @@ export default function FooterCtaSection() {
                 maxWidth: "520px",
               }}
             >
-              Join 500+ local businesses that show up when customers are
-              searching. No setup fees. No contracts. Your site live in 48
-              hours.
+              Join 500+ local businesses with smart, SEO-optimized websites.
+              No setup fees. No contracts. Your site live in 48 hours.
             </p>
 
             {/* CTA buttons */}
@@ -190,244 +189,48 @@ export default function FooterCtaSection() {
                   fill="rgb(255 255 255 / 0.3)"
                 />
 
-                {/* ---- Screen content: Google-like search results ---- */}
-                {/* Search bar */}
-                <rect
-                  x="28"
-                  y="60"
-                  width="224"
-                  height="36"
-                  rx="18"
-                  fill="#F3F4F6"
-                  stroke="#E5E7EB"
-                  strokeWidth="1"
-                />
-                {/* Search icon */}
-                <circle
-                  cx="46"
-                  cy="78"
-                  r="6"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <line
-                  x1="50.5"
-                  y1="82.5"
-                  x2="54"
-                  y2="86"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                {/* Search text */}
-                <text
-                  x="60"
-                  y="82"
-                  fill="#6B7280"
-                  fontSize="10"
-                  fontFamily="sans-serif"
-                >
-                  plumber near me
-                </text>
-
-                {/* Result 1 - Featured / #1 */}
-                <rect
-                  x="28"
-                  y="110"
-                  width="224"
-                  height="88"
-                  rx="8"
-                  fill="#F0FDF4"
-                  stroke="#BBF7D0"
-                  strokeWidth="1"
-                />
-                {/* #1 badge */}
-                <rect
-                  x="36"
-                  y="118"
-                  width="26"
-                  height="18"
-                  rx="4"
-                  fill="#F5A623"
-                />
-                <text
-                  x="41"
-                  y="131"
-                  fill="#111827"
-                  fontSize="10"
-                  fontWeight="bold"
-                  fontFamily="sans-serif"
-                >
-                  #1
-                </text>
-                {/* Business name */}
-                <text
-                  x="68"
-                  y="131"
-                  fill="#1A6B6B"
-                  fontSize="11"
-                  fontWeight="bold"
-                  fontFamily="sans-serif"
-                >
+                {/* ---- Screen content: Smart website dashboard ---- */}
+                {/* Header bar */}
+                <rect x="28" y="60" width="224" height="36" rx="8" fill="#1A6B6B" />
+                <text x="44" y="83" fill="white" fontSize="10" fontWeight="bold" fontFamily="sans-serif">
                   {"Marcus's Plumbing Co."}
                 </text>
-                {/* URL */}
-                <text
-                  x="36"
-                  y="148"
-                  fill="#6B7280"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  www.marcusplumbing.com
-                </text>
-                {/* Stars */}
-                <text
-                  x="36"
-                  y="163"
-                  fill="#F5A623"
-                  fontSize="10"
-                  fontFamily="sans-serif"
-                >
-                  ★★★★★
-                </text>
-                <text
-                  x="80"
-                  y="163"
-                  fill="#6B7280"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  4.9 (127 reviews)
-                </text>
-                {/* Snippet */}
-                <text
-                  x="36"
-                  y="180"
-                  fill="#374151"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  Licensed plumber in Austin, TX. 24/7
-                </text>
-                <text
-                  x="36"
-                  y="191"
-                  fill="#374151"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  emergency service. Free estimates...
-                </text>
+                <circle cx="236" cy="78" r="4" fill="#22C55E" />
 
-                {/* Result 2 */}
-                <rect
-                  x="28"
-                  y="210"
-                  width="224"
-                  height="64"
-                  rx="8"
-                  fill="white"
-                  stroke="#E5E7EB"
-                  strokeWidth="1"
-                />
-                <text
-                  x="36"
-                  y="233"
-                  fill="#1E40AF"
-                  fontSize="10"
-                  fontFamily="sans-serif"
-                >
-                  Big Chain Plumbing Inc.
-                </text>
-                <text
-                  x="36"
-                  y="248"
-                  fill="#6B7280"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  www.bigchainplumbing.com
-                </text>
-                <text
-                  x="36"
-                  y="263"
-                  fill="#374151"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  National plumbing services...
-                </text>
+                {/* Stats row */}
+                <rect x="28" y="106" width="108" height="56" rx="8" fill="#F0FDF4" stroke="#BBF7D0" strokeWidth="1" />
+                <text x="40" y="124" fill="#6B7280" fontSize="8" fontFamily="sans-serif">Site Visitors</text>
+                <text x="40" y="146" fill="#1A6B6B" fontSize="18" fontWeight="bold" fontFamily="sans-serif">847</text>
 
-                {/* Result 3 */}
-                <rect
-                  x="28"
-                  y="286"
-                  width="224"
-                  height="64"
-                  rx="8"
-                  fill="white"
-                  stroke="#E5E7EB"
-                  strokeWidth="1"
-                />
-                <text
-                  x="36"
-                  y="309"
-                  fill="#1E40AF"
-                  fontSize="10"
-                  fontFamily="sans-serif"
-                >
-                  QuickFix Plumbing Services
-                </text>
-                <text
-                  x="36"
-                  y="324"
-                  fill="#6B7280"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  www.quickfixplumbing.com
-                </text>
-                <text
-                  x="36"
-                  y="339"
-                  fill="#374151"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  Affordable plumbing repairs...
-                </text>
+                <rect x="144" y="106" width="108" height="56" rx="8" fill="#FFFBEB" stroke="#FDE68A" strokeWidth="1" />
+                <text x="156" y="124" fill="#6B7280" fontSize="8" fontFamily="sans-serif">New Leads</text>
+                <text x="156" y="146" fill="#D97706" fontSize="18" fontWeight="bold" fontFamily="sans-serif">32</text>
 
-                {/* Result 4 (partial / cut off) */}
-                <rect
-                  x="28"
-                  y="362"
-                  width="224"
-                  height="64"
-                  rx="8"
-                  fill="white"
-                  stroke="#E5E7EB"
-                  strokeWidth="1"
-                />
-                <text
-                  x="36"
-                  y="385"
-                  fill="#1E40AF"
-                  fontSize="10"
-                  fontFamily="sans-serif"
-                >
-                  Hometown Pipes & Drains
-                </text>
-                <text
-                  x="36"
-                  y="400"
-                  fill="#6B7280"
-                  fontSize="8"
-                  fontFamily="sans-serif"
-                >
-                  www.hometownpipes.com
-                </text>
+                {/* SEO Score card */}
+                <rect x="28" y="172" width="224" height="56" rx="8" fill="white" stroke="#E5E7EB" strokeWidth="1" />
+                <text x="40" y="194" fill="#374151" fontSize="10" fontWeight="bold" fontFamily="sans-serif">SEO Score</text>
+                <rect x="40" y="204" width="196" height="8" rx="4" fill="#E5E7EB" />
+                <rect x="40" y="204" width="184" height="8" rx="4" fill="#1A6B6B" />
+                <text x="196" y="224" fill="#1A6B6B" fontSize="9" fontWeight="bold" fontFamily="sans-serif">94/100</text>
+
+                {/* Recent activity */}
+                <rect x="28" y="240" width="224" height="44" rx="8" fill="white" stroke="#E5E7EB" strokeWidth="1" />
+                <circle cx="48" cy="262" r="10" fill="#F5A623" opacity="0.15" />
+                <text x="43" y="266" fill="#F5A623" fontSize="10" fontFamily="sans-serif">&#9993;</text>
+                <text x="64" y="258" fill="#374151" fontSize="9" fontWeight="bold" fontFamily="sans-serif">New quote request</text>
+                <text x="64" y="272" fill="#9CA3AF" fontSize="8" fontFamily="sans-serif">Sarah M. — 2 min ago</text>
+
+                <rect x="28" y="292" width="224" height="44" rx="8" fill="white" stroke="#E5E7EB" strokeWidth="1" />
+                <circle cx="48" cy="314" r="10" fill="#22C55E" opacity="0.15" />
+                <text x="43" y="318" fill="#22C55E" fontSize="10" fontFamily="sans-serif">&#9742;</text>
+                <text x="64" y="310" fill="#374151" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Incoming call</text>
+                <text x="64" y="324" fill="#9CA3AF" fontSize="8" fontFamily="sans-serif">Mike R. — 8 min ago</text>
+
+                <rect x="28" y="344" width="224" height="44" rx="8" fill="white" stroke="#E5E7EB" strokeWidth="1" />
+                <circle cx="48" cy="366" r="10" fill="#6366F1" opacity="0.15" />
+                <text x="43" y="370" fill="#6366F1" fontSize="10" fontFamily="sans-serif">&#10003;</text>
+                <text x="64" y="362" fill="#374151" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Booking confirmed</text>
+                <text x="64" y="376" fill="#9CA3AF" fontSize="8" fontFamily="sans-serif">Lisa T. — 23 min ago</text>
               </svg>
 
               {/* Glow effect behind the phone */}

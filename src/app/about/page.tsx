@@ -7,11 +7,11 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "About — Sweet Home Services",
   description:
-    "Sweet Home Services helps local businesses get found online with AI-powered websites and SEO. Learn about our mission, values, and what makes us different from traditional agencies.",
+    "Sweet Home Services builds smart, SEO-optimized websites for local businesses. Learn about our mission, values, and what makes us different from traditional agencies.",
   openGraph: {
     title: "About — Sweet Home Services",
     description:
-      "We help local businesses get found online with AI-powered websites and SEO. Learn our story.",
+      "We build smart websites for local businesses — with content, SEO, and the tools to grow. Learn our story.",
     type: "website",
   },
 };
@@ -84,7 +84,7 @@ const valueProps = [
   {
     title: "Ongoing Support",
     description:
-      "Your site is never set-and-forget. We monitor performance, update content, and continuously optimize so you keep climbing the rankings.",
+      "Your site is never set-and-forget. We monitor performance, update content, and continuously optimize so your website keeps delivering results.",
     icon: (
       <svg
         width="28"
@@ -212,7 +212,7 @@ export default function AboutPage() {
                 style={{ fontFamily: "var(--font-heading)", color: "#1F2937" }}
               >
                 We help local businesses{" "}
-                <span style={{ color: "#1A6B6B" }}>get found</span> online
+                <span style={{ color: "#1A6B6B" }}>grow smarter</span> online
               </h1>
               <p
                 className="mt-6 text-lg sm:text-xl leading-relaxed max-w-2xl"

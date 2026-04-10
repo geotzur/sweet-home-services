@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "How It Works — Sweet Home Services",
   description:
-    "See how Sweet Home Services builds and optimizes your local business website in 48 hours. Simple 3-step process from discovery call to Google rankings.",
+    "See how Sweet Home Services builds and optimizes your local business website in 48 hours. Simple 3-step process from discovery call to a professional web presence.",
 };
 
 /* ─── Step data ──────────────────────────────────────────────────── */
@@ -85,7 +85,7 @@ const steps = [
     title: "Watch Your Business Grow",
     subtitle: "Monthly reports + ongoing optimization",
     description:
-      "We track your Google rankings, send clear monthly reports, and continuously optimize your content and SEO so you keep climbing — and keep getting calls.",
+      "We send clear monthly reports, continuously optimize your content and SEO, and keep your website performing so you keep getting calls.",
     icon: (
       <svg
         width="64"
@@ -156,7 +156,7 @@ const deliverables = [
   {
     category: "Ongoing Support",
     items: [
-      "Monthly ranking and traffic reports",
+      "Monthly performance and traffic reports",
       "Continuous SEO optimization",
       "Dedicated account manager",
       "Content updates as your business grows",
@@ -542,7 +542,7 @@ export default function HowItWorksPage() {
             >
               Book your free 15-minute discovery call today. No commitments, no
               pressure — just a quick chat about how we can help your business
-              get found online.
+              grow online.
             </p>
 
             {/* CTA buttons */}

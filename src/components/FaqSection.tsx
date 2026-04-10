@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "How does the SEO actually work?",
     answer:
-      "We optimize your site for local search — targeting keywords your customers use like 'plumber in [your city]' or 'hair salon near me.' We set up your Google Business Profile, build citations across local directories, and create content that earns rankings over time. You'll see monthly reports showing your keyword positions and traffic.",
+      "We optimize your site for local search — targeting keywords your customers use like 'plumber in [your city]' or 'hair salon near me.' We set up your Google Business Profile, build citations across local directories, and create quality content following SEO best practices. You'll see monthly reports showing your site performance and traffic.",
   },
   {
     question: "Can I use my own domain name?",
@@ -31,7 +31,7 @@ const faqs = [
   {
     question: "What if I already have a website?",
     answer:
-      "We can either redesign your existing site or build fresh. Either way, we'll audit what you have, preserve your SEO equity, and migrate any content worth keeping. We won't throw away work that's already ranking.",
+      "We can either redesign your existing site or build fresh. Either way, we'll audit what you have, preserve your SEO equity, and migrate any content worth keeping. We won't throw away work that's already performing.",
   },
 ];
 

@@ -8,13 +8,13 @@ import PricingContactCta from "@/components/PricingContactCta";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Pricing — Sweet Home Services | Websites & SEO for Local Businesses",
+  title: "Pricing — Sweet Home Services | Smart Websites for Local Businesses",
   description:
-    "Simple, transparent pricing for local business websites and SEO. Starter from $149/mo. No setup fees, no contracts. Launch in 48 hours.",
+    "Simple, transparent pricing for SEO-optimized local business websites. Plans from $89/mo. Content creation included. No setup fees, no contracts.",
   openGraph: {
-    title: "Pricing — Sweet Home Services | Starter from $149/mo",
+    title: "Pricing — Sweet Home Services | Plans from $89/mo",
     description:
-      "Professional website + local SEO done for you. Starter $149/mo · Growth $299/mo · Authority $499/mo. No contracts. Cancel anytime.",
+      "Smart, SEO-optimized websites built for local businesses. Basic $89/mo · Starter $149/mo · Growth $299/mo · Authority $499/mo. No contracts.",
     type: "website",
   },
 };

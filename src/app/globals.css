@@ -42,11 +42,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
     @apply text-neutral-800 antialiased;
     font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background:
       radial-gradient(1000px 500px at 10% -10%, rgb(230 243 243 / 0.75), transparent 70%),
       radial-gradient(900px 420px at 100% 5%, rgb(254 248 238 / 0.85), transparent 72%),
@@ -55,12 +60,47 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Ensure images never overflow */
+  img, svg, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Minimum tap target size for standalone buttons and form controls */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  select {
+    min-height: 44px;
+  }
+
+  /* Form inputs get adequate height */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
   }
 
   /* Focus visible ring using brand color */
   :focus-visible {
     outline: 2px solid var(--color-brand-teal-500);
     outline-offset: 3px;
+  }
+
+  /* Prevent horizontal scroll on the page */
+  #__next, main {
+    overflow-x: hidden;
   }
 }
 

@@ -4,9 +4,9 @@ import { useState } from "react";
 
 const pricingFaqs = [
   {
-    question: "What's the difference between the Starter, Growth, and Authority plans?",
+    question: "What's the difference between the plans?",
     answer:
-      "Starter gives you a professional 5-page website with local SEO — everything you need to get found. Growth adds more pages, monthly blog content, review management, and competitor tracking to help you dominate your zip code. Authority is the full-service package: unlimited pages, Google Ads management, backlink building, reputation campaigns, and same-day support for businesses competing in tough local markets.",
+      "Basic gives you a professional website with up to 30 pages, on-page SEO, and content creation — a solid foundation. Starter scales to 100 pages with local SEO and monthly keyword reports. Growth adds monthly improvements, blog content, analytics, and up to 500 pages. Authority is the full package: up to 1,500 pages, backlink building, CRM integration, full creative, and same-day priority support.",
   },
   {
     question: "Can I upgrade or downgrade my plan at any time?",
