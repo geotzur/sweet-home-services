@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { getSupabase } from "@/lib/supabase-browser";
 import { submitToNetlifyForm } from "@/lib/netlify-forms";
+import { WhatsAppInlineLink } from "@/components/WhatsAppButton";
 
 const labelStyle: React.CSSProperties = {
   fontFamily: "var(--font-heading)",
@@ -156,7 +157,8 @@ export default function HomeContactSection() {
             </ul>
 
             {/* Quick contact info */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-8">
+            <div className="mt-8 flex flex-wrap gap-4 sm:gap-6">
+              <WhatsAppInlineLink />
               <a
                 href="tel:+18182306619"
                 className="flex items-center gap-2 transition-colors hover:underline"
