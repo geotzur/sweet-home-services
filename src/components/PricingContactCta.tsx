@@ -79,7 +79,7 @@ export default function PricingContactCta() {
               Book a free 15-min call
             </a>
             <a
-              href="mailto:hello@sweethomeservices.org"
+              href="mailto:seo@sweethomeservices.org"
               className="w-full sm:w-auto rounded-xl px-7 py-3.5 font-semibold text-sm transition-colors duration-150"
               style={{
                 fontFamily: "var(--font-heading)",

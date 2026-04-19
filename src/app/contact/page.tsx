@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getSupabase } from "@/lib/supabase-browser";
+import { submitToNetlifyForm } from "@/lib/netlify-forms";
 
 /* ─── Plan options for the dropdown ────────────────────────────────── */
 const planOptions = [
@@ -156,16 +157,29 @@ export default function ContactPage() {
 
     try {
       const supabase = getSupabase();
-      const { error: insertError } = await supabase.from("contacts").insert({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || null,
-        business_name: formData.businessName || null,
-        message: formData.message || null,
-        plan_interest: formData.planInterest || null,
-      });
 
-      if (insertError) throw insertError;
+      const [supabaseResult] = await Promise.all([
+        supabase.from("contacts").insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          business_name: formData.businessName || null,
+          message: formData.message || null,
+          plan_interest: formData.planInterest || null,
+        }),
+        submitToNetlifyForm("contact", {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          businessName: formData.businessName,
+          planInterest: formData.planInterest,
+          message: formData.message,
+        }).catch((err) => {
+          console.warn("Netlify form submission failed:", err);
+        }),
+      ]);
+
+      if (supabaseResult.error) throw supabaseResult.error;
       setSubmitted(true);
     } catch (err: unknown) {
       const message =
@@ -575,7 +589,7 @@ export default function ContactPage() {
                           Email
                         </p>
                         <a
-                          href="mailto:hello@sweethomeservices.org"
+                          href="mailto:seo@sweethomeservices.org"
                           className="font-medium transition-colors hover:underline"
                           style={{
                             fontFamily: "var(--font-sans)",
@@ -583,7 +597,7 @@ export default function ContactPage() {
                             color: "#1A6B6B",
                           }}
                         >
-                          hello@sweethomeservices.org
+                          seo@sweethomeservices.org
                         </a>
                       </div>
                     </div>
@@ -618,7 +632,7 @@ export default function ContactPage() {
                           Phone
                         </p>
                         <a
-                          href="tel:+18005551234"
+                          href="tel:+18182306619"
                           className="font-medium transition-colors hover:underline"
                           style={{
                             fontFamily: "var(--font-sans)",
@@ -626,8 +640,56 @@ export default function ContactPage() {
                             color: "#1A6B6B",
                           }}
                         >
-                          (800) 555-1234
+                          (818) 230-6619
                         </a>
+                      </div>
+                    </div>
+
+                    {/* Location */}
+                    <div className="flex items-start gap-3">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                        style={{ background: "#E6F3F3" }}
+                      >
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M9 16.5C9 16.5 14.5 11.5 14.5 7.5C14.5 4.46 12.04 2 9 2C5.96 2 3.5 4.46 3.5 7.5C3.5 11.5 9 16.5 9 16.5Z"
+                            stroke="#1A6B6B"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <circle
+                            cx="9"
+                            cy="7.5"
+                            r="2"
+                            stroke="#1A6B6B"
+                            strokeWidth="1.5"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p
+                          className="text-neutral-500 text-xs font-medium mb-0.5"
+                          style={{ fontFamily: "var(--font-heading)" }}
+                        >
+                          Location
+                        </p>
+                        <p
+                          className="text-neutral-800 font-medium"
+                          style={{
+                            fontFamily: "var(--font-sans)",
+                            fontSize: "0.9375rem",
+                          }}
+                        >
+                          Los Angeles, California
+                        </p>
                       </div>
                     </div>
 
@@ -674,7 +736,7 @@ export default function ContactPage() {
                             fontSize: "0.9375rem",
                           }}
                         >
-                          Mon - Fri: 9am - 6pm EST
+                          Mon - Fri: 9am - 6pm PT
                         </p>
                         <p
                           className="text-neutral-500"
@@ -683,7 +745,7 @@ export default function ContactPage() {
                             fontSize: "0.8125rem",
                           }}
                         >
-                          Sat: 10am - 2pm EST
+                          Sat: 10am - 2pm PT
                         </p>
                       </div>
                     </div>
@@ -883,7 +945,7 @@ export default function ContactPage() {
               through everything and answer any questions.
             </p>
             <a
-              href="tel:+18005551234"
+              href="tel:+18182306619"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold transition-all duration-150 w-full sm:w-auto"
               style={{
                 fontFamily: "var(--font-heading)",
@@ -901,7 +963,7 @@ export default function ContactPage() {
               >
                 <path d="M2.5 3.5C2.5 2.95 2.95 2.5 3.5 2.5H6.5L8 6L6.25 7.25C7.15 9.05 8.95 10.85 10.75 11.75L12 10L15.5 11.5V14.5C15.5 15.05 15.05 15.5 14.5 15.5C7.87 15.5 2.5 10.13 2.5 3.5Z" />
               </svg>
-              Call (800) 555-1234
+              Call (818) 230-6619
             </a>
 
             {/* Trust strip */}

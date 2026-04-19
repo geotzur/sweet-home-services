@@ -142,9 +142,9 @@ export default function HeroSection() {
                 </svg>
               </a>
 
-              {/* Secondary CTA — frosted glass */}
+              {/* Secondary CTA — frosted glass, scrolls to contact */}
               <a
-                href="#how-it-works"
+                href="#contact"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-4 text-base font-semibold transition-all duration-200 w-full sm:w-auto hover:bg-white/15"
                 style={{
                   fontFamily: "var(--font-heading)",
@@ -154,7 +154,20 @@ export default function HeroSection() {
                   background: "rgba(255,255,255,0.06)",
                 }}
               >
-                See How It Works
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M2.5 3.5C2.5 2.95 2.95 2.5 3.5 2.5H6L7.25 5.5L5.75 6.75C6.5 8.25 8.25 10 9.75 10.75L11 9.25L14 10.5V13C14 13.55 13.55 14 13 14C7.2 14 2.5 9.3 2.5 3.5Z" />
+                </svg>
+                Get a Free Consultation
               </a>
             </div>
 

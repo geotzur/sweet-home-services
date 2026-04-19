@@ -9,6 +9,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import FaqSection from "@/components/FaqSection";
 import FooterCtaSection from "@/components/FooterCtaSection";
+import HomeContactSection from "@/components/HomeContactSection";
 import Footer from "@/components/Footer";
 
 export default function HomePage() {
@@ -53,7 +54,10 @@ export default function HomePage() {
         {/* ⑧ FAQ — 6 questions */}
         <FaqSection />
 
-        {/* ⑨ Footer CTA — secondary conversion */}
+        {/* ⑨ Contact form — primary conversion */}
+        <HomeContactSection />
+
+        {/* ⑩ Footer CTA — secondary conversion */}
         <FooterCtaSection />
       </main>
 

@@ -1,14 +1,77 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { getSupabase } from "@/lib/supabase-browser";
+
+interface SiteSettings {
+  company_name: string;
+  support_email: string;
+  phone_number: string;
+}
+
+const DEFAULTS: SiteSettings = {
+  company_name: "Sweet Home Services",
+  support_email: "seo@sweethomeservices.org",
+  phone_number: "(818) 230-6619",
+};
 
 export default function SettingsPage() {
+  const [form, setForm] = useState<SiteSettings>(DEFAULTS);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSave(e: React.FormEvent) {
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const supabase = getSupabase();
+      const { data, error: loadErr } = await supabase
+        .from("site_settings")
+        .select("company_name, support_email, phone_number")
+        .eq("id", 1)
+        .maybeSingle();
+
+      if (cancelled) return;
+      if (loadErr) {
+        setError(loadErr.message);
+      } else if (data) {
+        setForm(data);
+      }
+      setLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  async function handleSave(e: FormEvent) {
     e.preventDefault();
+    setSaving(true);
+    setSaved(false);
+    setError(null);
+
+    const supabase = getSupabase();
+    const { error: saveErr } = await supabase
+      .from("site_settings")
+      .update({
+        company_name: form.company_name,
+        support_email: form.support_email,
+        phone_number: form.phone_number,
+      })
+      .eq("id", 1);
+
+    setSaving(false);
+    if (saveErr) {
+      setError(saveErr.message);
+      return;
+    }
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
+  }
+
+  function update<K extends keyof SiteSettings>(key: K, value: SiteSettings[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   return (
@@ -50,8 +113,10 @@ export default function SettingsPage() {
                 </label>
                 <input
                   type="text"
-                  defaultValue="Sweet Home Services"
-                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-sm text-neutral-900 focus:border-brand-teal-500 focus:outline-none focus:ring-1 focus:ring-brand-teal-500"
+                  value={form.company_name}
+                  onChange={(e) => update("company_name", e.target.value)}
+                  disabled={loading}
+                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-sm text-neutral-900 focus:border-brand-teal-500 focus:outline-none focus:ring-1 focus:ring-brand-teal-500 disabled:opacity-60"
                   style={{ fontFamily: "var(--font-sans)" }}
                 />
               </div>
@@ -64,8 +129,10 @@ export default function SettingsPage() {
                 </label>
                 <input
                   type="email"
-                  defaultValue="hello@sweethomeservices.com"
-                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-sm text-neutral-900 focus:border-brand-teal-500 focus:outline-none focus:ring-1 focus:ring-brand-teal-500"
+                  value={form.support_email}
+                  onChange={(e) => update("support_email", e.target.value)}
+                  disabled={loading}
+                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-sm text-neutral-900 focus:border-brand-teal-500 focus:outline-none focus:ring-1 focus:ring-brand-teal-500 disabled:opacity-60"
                   style={{ fontFamily: "var(--font-sans)" }}
                 />
               </div>
@@ -78,25 +145,37 @@ export default function SettingsPage() {
                 </label>
                 <input
                   type="tel"
-                  defaultValue="(555) 123-4567"
-                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-sm text-neutral-900 focus:border-brand-teal-500 focus:outline-none focus:ring-1 focus:ring-brand-teal-500"
+                  value={form.phone_number}
+                  onChange={(e) => update("phone_number", e.target.value)}
+                  disabled={loading}
+                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-sm text-neutral-900 focus:border-brand-teal-500 focus:outline-none focus:ring-1 focus:ring-brand-teal-500 disabled:opacity-60"
                   style={{ fontFamily: "var(--font-sans)" }}
                 />
               </div>
+              {error && (
+                <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                  {error}
+                </div>
+              )}
             </div>
             <div className="px-6 py-4 bg-neutral-50 border-t border-neutral-100 flex items-center justify-between">
-              {saved && (
-                <p className="text-sm font-medium text-emerald-600" style={{ fontFamily: "var(--font-sans)" }}>
+              {saved ? (
+                <p
+                  className="text-sm font-medium text-emerald-600"
+                  style={{ fontFamily: "var(--font-sans)" }}
+                >
                   Settings saved successfully
                 </p>
+              ) : (
+                <span />
               )}
-              {!saved && <span />}
               <button
                 type="submit"
-                className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-teal-600"
+                disabled={loading || saving}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-teal-600 disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-heading)", background: "#1A6B6B" }}
               >
-                Save Changes
+                {saving ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </div>
@@ -139,12 +218,21 @@ export default function SettingsPage() {
                 connected: false,
               },
             ].map((integration) => (
-              <div key={integration.name} className="px-6 py-4 flex items-center justify-between">
+              <div
+                key={integration.name}
+                className="px-6 py-4 flex items-center justify-between"
+              >
                 <div>
-                  <p className="text-sm font-semibold text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
+                  <p
+                    className="text-sm font-semibold text-neutral-900"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
                     {integration.name}
                   </p>
-                  <p className="text-xs text-neutral-500 mt-0.5" style={{ fontFamily: "var(--font-sans)" }}>
+                  <p
+                    className="text-xs text-neutral-500 mt-0.5"
+                    style={{ fontFamily: "var(--font-sans)" }}
+                  >
                     {integration.description}
                   </p>
                 </div>
@@ -179,10 +267,16 @@ export default function SettingsPage() {
           </div>
           <div className="px-6 py-5 flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-900" style={{ fontFamily: "var(--font-heading)" }}>
+              <p
+                className="text-sm font-medium text-neutral-900"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
                 Delete Account
               </p>
-              <p className="text-xs text-neutral-500 mt-0.5" style={{ fontFamily: "var(--font-sans)" }}>
+              <p
+                className="text-xs text-neutral-500 mt-0.5"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
                 Permanently remove your account and all associated data
               </p>
             </div>
