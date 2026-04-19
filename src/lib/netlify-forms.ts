@@ -19,7 +19,10 @@ export async function submitToNetlifyForm(
 
   const body = new URLSearchParams(payload).toString();
 
-  const res = await fetch("/", {
+  // POST to the static HTML file that contains the form (not "/") — on
+  // Next.js / Netlify deployments, POSTing to "/" is handled by the serverless
+  // handler and never reaches Netlify's form processor.
+  const res = await fetch("/__forms.html", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body,
