@@ -4,8 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const WHATSAPP_NUMBER = "18182306619";
-const DEFAULT_MESSAGE =
-  "Hi, I'm interested in a website plan for my business.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 function WhatsAppIcon({ size = 24 }: { size?: number }) {
   return (
@@ -30,11 +29,9 @@ export function WhatsAppFab() {
     return null;
   }
 
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
-
   return (
     <Link
-      href={href}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
@@ -56,16 +53,10 @@ export function WhatsAppFab() {
 }
 
 /* ─── Inline link (for contact info lists) ───────────────────────── */
-export function WhatsAppInlineLink({
-  message = DEFAULT_MESSAGE,
-}: {
-  message?: string;
-}) {
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
+export function WhatsAppInlineLink() {
   return (
     <Link
-      href={href}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center gap-2 transition-colors hover:underline"
