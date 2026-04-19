@@ -13,6 +13,7 @@ interface Example {
   result: string;
   features: string[];
   gradient: string;
+  url?: string;
 }
 
 interface IndustryData {
@@ -355,48 +356,96 @@ const industries: Record<string, IndustryData> = {
     name: "Home Services",
     tagline: "Websites That Keep Your Phone Ringing",
     description:
-      "Cleaners, landscapers, and pest control pros need websites that convert visitors into calls. We build trust-focused sites with service area coverage, instant quote forms, and SEO-optimized pages that keep your phone ringing.",
+      "Cleaners, landscapers, duct cleaners, and pest control pros need websites that convert visitors into calls. We build trust-focused sites with service area coverage, instant quote forms, and SEO-optimized pages that keep your phone ringing.",
     icon: "/icons/home-services.svg",
     examples: [
       {
-        business: "Sparkle Clean Co.",
-        location: "Portland, OR",
-        result: "Smart website with instant quote calculator and service packages",
+        business: "Fresh Flow Air Duct Cleaning",
+        location: "Lantana, FL",
+        result:
+          "Local-SEO site with service area pages across South Florida",
         features: [
-          "Instant quote calculator",
-          "Recurring service packages",
-          "Service area coverage map",
-          "Before/after cleaning gallery",
+          "Service area pages for multiple cities",
+          "Click-to-call in the header",
+          "Instant quote request form",
+          "Trust badges and reviews section",
         ],
         gradient: "linear-gradient(135deg, #1A6B6B 0%, #2E9E7D 100%)",
+        url: "https://freshflowairductcleaning.services/",
       },
       {
-        business: "Green Thumb Landscaping",
-        location: "Portland, OR",
-        result: "18 new monthly contracts in first quarter",
+        business: "The Air Duct Guys",
+        location: "South Florida",
+        result: "Conversion-focused site with instant quote form",
         features: [
-          "Project portfolio with filters",
-          "Seasonal service promotions",
-          "Free estimate request form",
-          "Service area zip code lookup",
+          "Branded home page with bold CTA",
+          "Services breakdown with pricing signals",
+          "Mobile-first layout for on-the-go leads",
+          "Fast, SEO-optimized pages",
+        ],
+        gradient: "linear-gradient(135deg, #155656 0%, #1A6B6B 100%)",
+        url: "https://airductcleaning.services/",
+      },
+      {
+        business: "Lint Savers Dryer Cleaning",
+        location: "South Florida",
+        result:
+          "Dryer-vent cleaning site with click-to-call and booking",
+        features: [
+          "Dedicated dryer-vent service pages",
+          "Before/after imagery for trust",
+          "Click-to-call and WhatsApp buttons",
+          "Booking and quote-request forms",
+        ],
+        gradient: "linear-gradient(135deg, #F5A623 0%, #D4881A 100%)",
+        url: "https://dryercleaningservices.com/",
+      },
+      {
+        business: "ClingPool",
+        location: "Miami, FL",
+        result: "Pool cleaning & maintenance site with booking flow",
+        features: [
+          "Service packages with clear pricing signals",
+          "Online booking and quote request",
+          "Service area coverage for Miami metro",
+          "Before/after imagery for trust",
         ],
         gradient: "linear-gradient(135deg, #2E9E7D 0%, #1A6B6B 100%)",
+        url: "https://astounding-scone-95741c.netlify.app/",
       },
       {
-        business: "Shield Pest Solutions",
-        location: "Houston, TX",
-        result: "Pest identification guide with treatment plan builder",
+        business: "Locksmith Luz",
+        location: "Los Angeles, CA",
+        result: "24/7 locksmith site with emergency service callout",
         features: [
-          "Pest identification guide",
-          "Emergency service callout",
-          "Treatment plan pricing page",
-          "Customer satisfaction guarantee badge",
+          "Emergency callout CTA in the header",
+          "Residential, commercial, and auto service pages",
+          "Click-to-call optimized for mobile",
+          "Trust badges and fast-response messaging",
         ],
         gradient: "linear-gradient(135deg, #1F2937 0%, #374151 100%)",
+        url: "https://magenta-boba-a630b1.netlify.app/",
+      },
+      {
+        business: "Locksmith Luck",
+        location: "Los Angeles, CA",
+        result: "Locksmith site with fast-response positioning",
+        features: [
+          "Clean hero with single primary CTA",
+          "Service breakdown with price transparency",
+          "Service area pages across Greater LA",
+          "Review and testimonial section",
+        ],
+        gradient: "linear-gradient(135deg, #155656 0%, #1A6B6B 100%)",
+        url: "https://willowy-babka-a0c492.netlify.app/",
       },
     ],
   },
 };
+
+function screenshotUrl(target: string): string {
+  return `https://api.microlink.io/?url=${encodeURIComponent(target)}&screenshot=true&meta=false&embed=screenshot.url`;
+}
 
 const ALL_SLUGS = Object.keys(industries);
 
@@ -475,7 +524,7 @@ export default async function IndustryExamplesPage(props: {
                   key={ex.business}
                   className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 items-center`}
                 >
-                  {/* Browser mockup */}
+                  {/* Browser preview — real screenshot if url, otherwise CSS mock */}
                   <div className="w-full lg:w-1/2">
                     <div
                       className="rounded-2xl overflow-hidden shadow-lg"
@@ -488,31 +537,76 @@ export default async function IndustryExamplesPage(props: {
                             <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
                             <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
                             <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                            <div className="ml-2 flex-1 rounded-full bg-white/20 px-3 py-1 text-[11px] text-white/70">
-                              {ex.business
-                                .toLowerCase()
-                                .replace(/[^a-z0-9]+/g, "")}.com
+                            <div className="ml-2 flex-1 truncate rounded-full bg-white/20 px-3 py-1 text-[11px] text-white/70">
+                              {ex.url
+                                ? ex.url.replace(/^https?:\/\//, "").replace(/\/$/, "")
+                                : `${ex.business.toLowerCase().replace(/[^a-z0-9]+/g, "")}.com`}
                             </div>
                           </div>
-                          {/* Mock page content */}
-                          <div className="p-6 space-y-3">
-                            <div className="h-4 w-3/4 rounded bg-white/30" />
-                            <div className="h-3 w-full rounded bg-white/20" />
-                            <div className="h-3 w-5/6 rounded bg-white/20" />
-                            <div className="h-3 w-2/3 rounded bg-white/15" />
-                            <div className="mt-4 flex gap-2">
-                              <div className="h-8 w-28 rounded-md bg-white/30" />
-                              <div className="h-8 w-24 rounded-md bg-white/15" />
+
+                          {ex.url ? (
+                            /* Live screenshot via Microlink */
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={screenshotUrl(ex.url)}
+                              alt={`Screenshot of ${ex.business} website`}
+                              loading="lazy"
+                              className="block w-full h-auto"
+                              style={{ background: "#fff" }}
+                            />
+                          ) : (
+                            /* CSS mock for unreleased examples */
+                            <div className="p-6 space-y-3">
+                              <div className="h-4 w-3/4 rounded bg-white/30" />
+                              <div className="h-3 w-full rounded bg-white/20" />
+                              <div className="h-3 w-5/6 rounded bg-white/20" />
+                              <div className="h-3 w-2/3 rounded bg-white/15" />
+                              <div className="mt-4 flex gap-2">
+                                <div className="h-8 w-28 rounded-md bg-white/30" />
+                                <div className="h-8 w-24 rounded-md bg-white/15" />
+                              </div>
+                              <div className="mt-3 grid grid-cols-3 gap-2">
+                                <div className="h-16 rounded bg-white/10" />
+                                <div className="h-16 rounded bg-white/10" />
+                                <div className="h-16 rounded bg-white/10" />
+                              </div>
                             </div>
-                            <div className="mt-3 grid grid-cols-3 gap-2">
-                              <div className="h-16 rounded bg-white/10" />
-                              <div className="h-16 rounded bg-white/10" />
-                              <div className="h-16 rounded bg-white/10" />
-                            </div>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>
+
+                    {ex.url && (
+                      <div className="mt-3 text-center lg:text-left">
+                        <a
+                          href={ex.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm font-semibold transition-colors hover:underline"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            color: "#1A6B6B",
+                          }}
+                        >
+                          Visit live site
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M4 2h6v6M10 2L3 9"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    )}
                   </div>
 
                   {/* Info */}

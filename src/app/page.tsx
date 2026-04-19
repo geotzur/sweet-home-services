@@ -5,8 +5,8 @@ import PartnerLogosSection from "@/components/PartnerLogosSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingSection from "@/components/PricingSection";
 import IndustryVerticalsSection from "@/components/IndustryVerticalsSection";
+import WhatYouGetSection from "@/components/WhatYouGetSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import CaseStudiesSection from "@/components/CaseStudiesSection";
 import FaqSection from "@/components/FaqSection";
 import FooterCtaSection from "@/components/FooterCtaSection";
 import HomeContactSection from "@/components/HomeContactSection";
@@ -41,17 +41,13 @@ export default function HomePage() {
         {/* ⑥ Industry Verticals — supported niches */}
         <IndustryVerticalsSection />
 
-        {/* ⑦ Testimonials — client quotes */}
+        {/* ⑦ What You Get — visual tour of every page + dashboard */}
+        <WhatYouGetSection />
+
+        {/* ⑧ Testimonials — client quotes */}
         <TestimonialsSection />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Case Studies — real results */}
-          <div className="section-shell overflow-hidden">
-            <CaseStudiesSection />
-          </div>
-        </div>
-
-        {/* ⑧ FAQ — 6 questions */}
+        {/* ⑨ FAQ — 6 questions */}
         <FaqSection />
 
         {/* ⑨ Contact form — primary conversion */}

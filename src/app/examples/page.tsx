@@ -43,6 +43,30 @@ const examples: Example[] = [
     gradient: "linear-gradient(135deg, #F5A623 0%, #D4881A 100%)",
     url: "https://dryercleaningservices.com/",
   },
+  {
+    business: "ClingPool",
+    industry: "Home Services",
+    location: "Miami, FL",
+    result: "Pool cleaning & maintenance site with booking flow",
+    gradient: "linear-gradient(135deg, #2E9E7D 0%, #1A6B6B 100%)",
+    url: "https://astounding-scone-95741c.netlify.app/",
+  },
+  {
+    business: "Locksmith Luz",
+    industry: "Home Services",
+    location: "Los Angeles, CA",
+    result: "24/7 locksmith site with emergency service callout",
+    gradient: "linear-gradient(135deg, #1F2937 0%, #374151 100%)",
+    url: "https://magenta-boba-a630b1.netlify.app/",
+  },
+  {
+    business: "Locksmith Luck",
+    industry: "Home Services",
+    location: "Los Angeles, CA",
+    result: "Locksmith site with fast-response positioning",
+    gradient: "linear-gradient(135deg, #155656 0%, #1A6B6B 100%)",
+    url: "https://willowy-babka-a0c492.netlify.app/",
+  },
 
   // ─── Sample portfolio ──────────────────────────────────────────
   {
