@@ -444,7 +444,17 @@ const industries: Record<string, IndustryData> = {
 };
 
 function screenshotUrl(target: string): string {
-  return `https://api.microlink.io/?url=${encodeURIComponent(target)}&screenshot=true&meta=false&embed=screenshot.url`;
+  const params = new URLSearchParams({
+    url: target,
+    screenshot: "true",
+    meta: "false",
+    embed: "screenshot.url",
+    waitUntil: "networkidle0",
+    waitFor: "2500",
+    "viewport.width": "1280",
+    "viewport.height": "800",
+  });
+  return `https://api.microlink.io/?${params.toString()}`;
 }
 
 const ALL_SLUGS = Object.keys(industries);
