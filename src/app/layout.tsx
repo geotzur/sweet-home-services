@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sweet Home Services — Smart Websites for Local Businesses",
     description:
-      "Done-for-you websites + SEO for local businesses. Starting at $89/mo.",
+      "Done-for-you websites + SEO for local businesses. Starting at $149/mo.",
     type: "website",
     images: [
       {

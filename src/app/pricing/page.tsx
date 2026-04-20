@@ -10,11 +10,11 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Pricing — Sweet Home Services | Smart Websites for Local Businesses",
   description:
-    "Simple, transparent pricing for SEO-optimized local business websites. Plans from $89/mo. Content creation included. No setup fees, no contracts.",
+    "Simple, transparent pricing for SEO-optimized local business websites. Plans from $149/mo. Content creation included. No setup fees, no contracts.",
   openGraph: {
-    title: "Pricing — Sweet Home Services | Plans from $89/mo",
+    title: "Pricing — Sweet Home Services | Plans from $149/mo",
     description:
-      "Smart, SEO-optimized websites built for local businesses. Basic $89/mo · Starter $149/mo · Growth $299/mo · Authority $499/mo. No contracts.",
+      "Smart, SEO-optimized websites built for local businesses. Starter $149/mo · Growth $299/mo · Authority $499/mo. No contracts.",
     type: "website",
   },
 };

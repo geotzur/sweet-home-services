@@ -4,7 +4,7 @@ import SocialProofStrip from "@/components/SocialProofStrip";
 import PartnerLogosSection from "@/components/PartnerLogosSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingSection from "@/components/PricingSection";
-import IndustryVerticalsSection from "@/components/IndustryVerticalsSection";
+import WebsiteExamplesSection from "@/components/WebsiteExamplesSection";
 import WhatYouGetSection from "@/components/WhatYouGetSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FaqSection from "@/components/FaqSection";
@@ -38,8 +38,8 @@ export default function HomePage() {
         {/* ⑤ Pricing — 3-tier cards */}
         <PricingSection />
 
-        {/* ⑥ Industry Verticals — supported niches */}
-        <IndustryVerticalsSection />
+        {/* ⑥ Website Examples — real client sites with previews */}
+        <WebsiteExamplesSection />
 
         {/* ⑦ What You Get — visual tour of every page + dashboard */}
         <WhatYouGetSection />

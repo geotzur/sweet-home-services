@@ -108,7 +108,7 @@ export default function HeroSection() {
               We build smart, SEO-optimized websites with content, automations,
               and the tools your business needs to grow — so you can focus on the work that matters.
               Starting at{" "}
-              <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>$89/month.</strong>
+              <strong style={{ color: "#FFFFFF", fontWeight: 600 }}>$149/month.</strong>
             </p>
 
             {/* CTA Buttons */}

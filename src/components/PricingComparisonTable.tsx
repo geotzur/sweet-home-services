@@ -6,7 +6,6 @@ type CellValue = string | boolean | null;
 
 interface FeatureRow {
   label: string;
-  basic: CellValue;
   starter: CellValue;
   growth: CellValue;
   authority: CellValue;
@@ -19,7 +18,6 @@ interface FeatureCategory {
 }
 
 const tiers = [
-  { id: "basic", name: "Basic", price: "$89/mo", color: "#1A6B6B" },
   { id: "starter", name: "Starter", price: "$149/mo", color: "#1A6B6B" },
   { id: "growth", name: "Growth", price: "$299/mo", color: "#1A6B6B", featured: true },
   { id: "authority", name: "Authority", price: "$499/mo", color: "#1A6B6B" },
@@ -29,46 +27,46 @@ const categories: FeatureCategory[] = [
   {
     name: "Website & Design",
     features: [
-      { label: "Website pages", basic: "Up to 30", starter: "Up to 100", growth: "Up to 500", authority: "Up to 1,500" },
-      { label: "Location + service pages", basic: true, starter: true, growth: true, authority: true },
-      { label: "Mobile-responsive design", basic: true, starter: true, growth: true, authority: true },
-      { label: "SSL certificate + hosting", basic: true, starter: true, growth: true, authority: true },
-      { label: "Contact form + click-to-call", basic: true, starter: true, growth: true, authority: true },
-      { label: "Monthly revisions", basic: null, starter: "1 per month", growth: "Up to 4", authority: "Up to 4" },
-      { label: "Full creative (icons, images, branding)", basic: null, starter: null, growth: null, authority: true },
+      { label: "Website pages", starter: "Up to 100", growth: "Up to 500", authority: "Up to 1,500" },
+      { label: "Location + service pages", starter: true, growth: true, authority: true },
+      { label: "Mobile-responsive design", starter: true, growth: true, authority: true },
+      { label: "SSL certificate + hosting", starter: true, growth: true, authority: true },
+      { label: "Contact form + click-to-call", starter: true, growth: true, authority: true },
+      { label: "Monthly revisions", starter: "1 per month", growth: "Up to 2", authority: "Up to 4" },
+      { label: "Full creative (icons, images, branding)", starter: null, growth: null, authority: true },
     ],
   },
   {
     name: "SEO & Optimization",
     features: [
-      { label: "On-page SEO optimization", basic: true, starter: true, growth: true, authority: true },
-      { label: "Local SEO optimization", basic: null, starter: true, growth: true, authority: true },
-      { label: "Monthly website performance report", basic: null, starter: true, growth: true, authority: true },
-      { label: "Schema markup + rich snippets", basic: null, starter: null, growth: true, authority: true },
-      { label: "Competitor website analysis", basic: null, starter: null, growth: true, authority: true },
-      { label: "Monthly improvements (pages, keywords, services)", basic: null, starter: null, growth: true, authority: true },
-      { label: "Backlink building", basic: null, starter: null, growth: null, authority: true },
+      { label: "On-page SEO optimization", starter: true, growth: true, authority: true },
+      { label: "Local SEO optimization", starter: true, growth: true, authority: true },
+      { label: "Monthly website performance report", starter: true, growth: true, authority: true },
+      { label: "Schema markup + rich snippets", starter: null, growth: true, authority: true },
+      { label: "Competitor website analysis", starter: null, growth: true, authority: true },
+      { label: "Monthly improvements (pages, keywords, services)", starter: null, growth: true, authority: true },
+      { label: "Backlink building", starter: null, growth: null, authority: true },
     ],
   },
   {
     name: "Content",
     features: [
-      { label: "Content creation (all pages)", basic: true, starter: true, growth: true, authority: true },
-      { label: "Blog posts per month", basic: null, starter: null, growth: "2 posts", authority: "4 posts" },
+      { label: "Content creation (all pages)", starter: true, growth: true, authority: true },
+      { label: "Blog posts per month", starter: "Included", growth: "1 post", authority: "4 posts" },
     ],
   },
   {
     name: "Analytics & Integrations",
     features: [
-      { label: "Google Analytics + Search Console", basic: null, starter: null, growth: true, authority: true },
-      { label: "CRM / lead management integration", basic: null, starter: null, growth: null, authority: true },
+      { label: "Google Analytics + Search Console", starter: null, growth: true, authority: true },
+      { label: "CRM / lead management integration", starter: null, growth: null, authority: true },
     ],
   },
   {
     name: "Support",
     features: [
-      { label: "Dedicated account manager", basic: null, starter: true, growth: true, authority: true },
-      { label: "Response time", basic: null, starter: "2 business days", growth: "1 business day", authority: "Same day" },
+      { label: "Dedicated account manager", starter: true, growth: true, authority: true },
+      { label: "Response time", starter: "2 business days", growth: "1 business day", authority: "Same day" },
     ],
   },
 ];
@@ -248,7 +246,7 @@ export default function PricingComparisonTable() {
                   {/* Category header row */}
                   <tr>
                     <td
-                      colSpan={5}
+                      colSpan={4}
                       className="px-6 py-3 border-t"
                       style={{ background: "#F3F4F6", borderColor: "#E5E7EB" }}
                     >
@@ -296,7 +294,6 @@ export default function PricingComparisonTable() {
 
                         {/* Tier cells */}
                         {[
-                          { key: "basic", value: row.basic },
                           { key: "starter", value: row.starter },
                           { key: "growth", value: row.growth, featured: true },
                           { key: "authority", value: row.authority },
@@ -456,9 +453,7 @@ export default function PricingComparisonTable() {
                         <ul className="space-y-2.5">
                           {cat.features.map((row) => {
                             const val =
-                              tier.id === "basic"
-                                ? row.basic
-                                : tier.id === "starter"
+                              tier.id === "starter"
                                 ? row.starter
                                 : tier.id === "growth"
                                 ? row.growth

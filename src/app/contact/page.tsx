@@ -10,7 +10,6 @@ import { WhatsAppInlineLink } from "@/components/WhatsAppButton";
 /* ─── Plan options for the dropdown ────────────────────────────────── */
 const planOptions = [
   "Not sure",
-  "Basic",
   "Starter",
   "Growth",
   "Authority",

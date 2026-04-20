@@ -2,29 +2,6 @@ import CheckoutButton from "./CheckoutButton";
 
 const plans = [
   {
-    id: "basic",
-    name: "Basic",
-    price: "$89",
-    tagline: "Your smart website. Ready to grow.",
-    description: "A professional, SEO-ready website with location and service pages — the smart foundation every local business needs.",
-    cta: "Start with Basic",
-    featured: false,
-    features: [
-      "Up to 30-page website",
-      "Location + service pages",
-      "Mobile-responsive design",
-      "On-page SEO optimization",
-      "Content creation included",
-      "SSL certificate + hosting",
-      "Contact form + click-to-call",
-    ],
-    notIncluded: [
-      "Monthly keyword reports",
-      "Blog content",
-      "Analytics dashboards",
-    ],
-  },
-  {
     id: "starter",
     name: "Starter",
     price: "$149",
@@ -38,12 +15,12 @@ const plans = [
       "Local SEO optimization",
       "Monthly website performance report",
       "Content creation included",
+      "Blog content included",
       "SSL certificate + hosting",
       "Contact form + click-to-call",
       "1 revision per month",
     ],
     notIncluded: [
-      "Blog content",
       "Analytics dashboards",
       "Competitor tracking",
     ],
@@ -60,12 +37,12 @@ const plans = [
     features: [
       "Everything in Starter",
       "Up to 500-page website",
-      "2 blog posts per month",
+      "1 blog post per month",
       "Google Analytics + Search Console",
       "Competitor website analysis",
       "Schema markup + rich snippets",
       "Monthly improvements (pages, keywords, services)",
-      "Up to 4 revisions per month",
+      "Up to 2 revisions per month",
     ],
     notIncluded: [
       "CRM / lead management integration",
@@ -126,7 +103,7 @@ export default function PricingSection() {
         </div>
 
         {/* Pricing cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {plans.map((plan) => (
             <PricingCard key={plan.name} plan={plan} />
           ))}

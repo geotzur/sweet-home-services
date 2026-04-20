@@ -2,7 +2,6 @@ const footerNav = {
   services: {
     title: "Services",
     links: [
-      { label: "Basic Plan", href: "/pricing" },
       { label: "Starter Plan", href: "/pricing" },
       { label: "Growth Plan", href: "/pricing" },
       { label: "Authority Plan", href: "/pricing" },

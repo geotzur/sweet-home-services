@@ -6,7 +6,7 @@ const pricingFaqs = [
   {
     question: "What's the difference between the plans?",
     answer:
-      "Basic gives you a professional website with up to 30 pages, on-page SEO, and content creation — a solid foundation. Starter scales to 100 pages with local SEO and monthly keyword reports. Growth adds monthly improvements, blog content, analytics, and up to 500 pages. Authority is the full package: up to 1,500 pages, backlink building, CRM integration, full creative, and same-day priority support.",
+      "Starter gives you a professional website with up to 100 pages, local SEO, monthly performance reports, and blog content — a solid foundation every local business needs. Growth adds monthly improvements, 1 blog post per month, analytics, competitor analysis, up to 500 pages, and up to 2 revisions per month. Authority is the full package: up to 1,500 pages, 4 blog posts per month, backlink building, CRM integration, full creative, and same-day priority support.",
   },
   {
     question: "Can I upgrade or downgrade my plan at any time?",
